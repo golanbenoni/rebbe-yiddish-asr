@@ -5,6 +5,7 @@ Clip-level WER/CER on the fixed dev/test days (`data/splits.json`) and on test_b
 | model | clip dev WER | clip test WER | clip test CER | clip test_b WER | long-form test WER | long-form test CER | test clips / lf days |
 |---|---:|---:|---:|---:|---:|---:|---|
 | hf-large-full-lr2e5-3ep | 0.077 | 0.083 | 0.048 |  | 0.082 | 0.047 | 488 / 20 |
+| hf-large-full-lr3e5-4ep | 0.080 | 0.086 | 0.051 |  | 0.081 | 0.047 | 488 / 20 |
 | hf-turbo-full-lr3e5-4ep | 0.080 | 0.087 | 0.050 |  | 0.081 | 0.045 | 488 / 20 |
 | hf-turbo-full-v4-lr3e5self-lr1e5-2ep | 0.079 | 0.087 | 0.050 |  | 0.081 | 0.045 | 488 / 20 |
 | hf-turbo-full-lr3e5-4ep-seed7 | 0.081 | 0.087 | 0.050 |  | 0.080 | 0.045 | 488 / 20 |
@@ -26,8 +27,10 @@ Clip-level WER/CER on the fixed dev/test days (`data/splits.json`) and on test_b
 | aq-turbo-full-lr1e5-3ep | 0.093 | 0.101 | 0.057 |  | 0.121 | 0.075 | 488 / 20 |
 | turbo-full-lr5e5-4ep | 0.091 | 0.102 | 0.056 |  | 0.132 | 0.085 | 488 / 20 |
 | turbo-full-pseudo-self-lr1e5-2ep | 0.089 | 0.102 | 0.056 |  | 0.131 | 0.083 | 488 / 20 |
+| turbo-full-lr3e5-4ep-seed7 | 0.089 | 0.102 | 0.056 |  | 0.136 | 0.089 | 488 / 20 |
 | turbo-full-pseudo-cont-lr1e5-2ep | 0.088 | 0.103 | 0.058 |  | 0.135 | 0.086 | 488 / 20 |
 | turbo-full-lr2e5-3ep | 0.092 | 0.105 | 0.057 |  | 0.132 | 0.084 | 488 / 20 |
+| turbo-full-lr4e5-4ep | 0.092 | 0.106 | 0.059 |  | 0.137 | 0.089 | 488 / 20 |
 | turbo-full-cont-lr1e5-3ep | 0.094 | 0.108 | 0.061 |  | 0.145 | 0.098 | 488 / 20 |
 | turbo-full-lr1e5-3ep | 0.100 | 0.110 | 0.060 |  | 0.128 | 0.076 | 488 / 20 |
 | large-full-lr1e5-3ep | 0.094 | 0.111 | 0.063 |  | 0.120 | 0.073 | 488 / 20 |

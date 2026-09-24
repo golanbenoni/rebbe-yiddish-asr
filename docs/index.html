@@ -55,7 +55,7 @@ footer{margin-top:56px;border-top:1px solid var(--hair);padding-top:12px;font-si
  figure,.callout,.tablewrap,.figures,.flow div,.two>*,.three>*{break-inside:avoid} .chart{max-width:100%} a{color:inherit;text-decoration:none} .export{display:none} @page{size:A4;margin:14mm}}
 </style>
 </head><body><div class="wrap">
-<header class="top"><span class="eyebrow">Training-data sheet · snapshot 2026-09-24 05:45 EDT (v4 complete, v5 data building)</span><span class="eyebrow">Sichos / asr · prepared for the training scientist</span></header>
+<header class="top"><span class="eyebrow">Training-data sheet · snapshot 2026-09-24 07:20 EDT (v4 complete, v5 data building)</span><span class="eyebrow">Sichos / asr · prepared for the training scientist</span></header>
 <p class="export note">Export: this page prints cleanly (File → Print → Save as PDF; the layout has print styles). A PDF, the standalone HTML, every chart as SVG and PNG, and the underlying tables as CSV are in <code>asr/reports/corpus-datasheet-export.zip</code>.</p>
 <h1>Rebbe Yiddish ASR Corpus</h1>
 <p class="lede">Everything the speech-recognition models in this project train and test on, updated 2026-09-24 with the new source data, the v4 results, the audit of the delivered transcripts and the plan for v5: where the audio and text come from, how they were paired and cut into clips, what was filtered, how the fixed evaluation sets were chosen, the pseudo-labeled extension, and what each training run did with it. All figures are computed from the manifests in <code>asr/data/manifests/</code> and the evaluation reports in <code>asr/reports/</code>; nothing here is estimated.</p>
@@ -688,164 +688,169 @@ footer{margin-top:56px;border-top:1px solid var(--hair);padding-top:12px;font-si
 <h2>Results on the fixed test set</h2>
 <p>Two metrics, both against the human hanacha of the 20 test days: <b>clip WER</b> on the 488 test clips (audio cut on known timings) and <b>whole-file WER</b> where each day's full recording is decoded with voice-activity chunking and scored against the whole hanacha — the number that matters for the product. Decoder matters as much as model: the same weights score 0.132, 0.124 and 0.088 whole-file under the three decoders tried. The v2 winner on whole files is the turbo model trained at lr 3e-5 for 4 epochs (0.081, CER 0.045); large-v3 at lr 2e-5 is best on clips (0.083) but decodes three times slower and is a hair worse on whole files (0.082).</p>
 <div class="keys"><span class="k-train">clip test WER</span><span class="k-test">whole-file test WER</span></div>
-<figure><svg viewBox="0 0 980 900" class="chart" role="img" aria-label="word error rate on the 20 fixed test days (lower is better)" style="max-width:100%;height:auto">
-<line y1="20" y2="866" x1="400.0" x2="400.0" class="grid"/>
-<text y="882" x="400.0" class="ax" text-anchor="middle">0</text>
-<line y1="20" y2="866" x1="485.0" x2="485.0" class="grid"/>
-<text y="882" x="485.0" class="ax" text-anchor="middle">0.1</text>
-<line y1="20" y2="866" x1="570.0" x2="570.0" class="grid"/>
-<text y="882" x="570.0" class="ax" text-anchor="middle">0.2</text>
-<line y1="20" y2="866" x1="655.0" x2="655.0" class="grid"/>
-<text y="882" x="655.0" class="ax" text-anchor="middle">0.3</text>
-<line y1="20" y2="866" x1="740.0" x2="740.0" class="grid"/>
-<text y="882" x="740.0" class="ax" text-anchor="middle">0.4</text>
-<line y1="20" y2="866" x1="825.0" x2="825.0" class="grid"/>
-<text y="882" x="825.0" class="ax" text-anchor="middle">0.5</text>
-<line y1="20" y2="866" x1="910.0" x2="910.0" class="grid"/>
-<text y="882" x="910.0" class="ax" text-anchor="middle">0.6</text>
-<text x="910" y="896" class="axlabel" text-anchor="end">word error rate on the 20 fixed test days (lower is better)</text>
+<figure><svg viewBox="0 0 980 930" class="chart" role="img" aria-label="word error rate on the 20 fixed test days (lower is better)" style="max-width:100%;height:auto">
+<line y1="20" y2="896" x1="400.0" x2="400.0" class="grid"/>
+<text y="912" x="400.0" class="ax" text-anchor="middle">0</text>
+<line y1="20" y2="896" x1="485.0" x2="485.0" class="grid"/>
+<text y="912" x="485.0" class="ax" text-anchor="middle">0.1</text>
+<line y1="20" y2="896" x1="570.0" x2="570.0" class="grid"/>
+<text y="912" x="570.0" class="ax" text-anchor="middle">0.2</text>
+<line y1="20" y2="896" x1="655.0" x2="655.0" class="grid"/>
+<text y="912" x="655.0" class="ax" text-anchor="middle">0.3</text>
+<line y1="20" y2="896" x1="740.0" x2="740.0" class="grid"/>
+<text y="912" x="740.0" class="ax" text-anchor="middle">0.4</text>
+<line y1="20" y2="896" x1="825.0" x2="825.0" class="grid"/>
+<text y="912" x="825.0" class="ax" text-anchor="middle">0.5</text>
+<line y1="20" y2="896" x1="910.0" x2="910.0" class="grid"/>
+<text y="912" x="910.0" class="ax" text-anchor="middle">0.6</text>
+<text x="910" y="926" class="axlabel" text-anchor="end">word error rate on the 20 fixed test days (lower is better)</text>
 <text x="390" y="45.0" class="rowlab " text-anchor="end">v2: large-v3 full lr 2e-5, 3 ep · GPU path</text>
 <rect x="400" y="30.0" width="70.8" height="10.0" class="s-train"><title>clip test WER: 0.083</title></rect>
 <text x="475.8" y="39.0" class="val">0.083</text>
 <rect x="400" y="41.0" width="69.9" height="10.0" class="s-test"><title>whole-file test WER: 0.082</title></rect>
 <text x="474.9" y="50.0" class="val">0.082</text>
-<text x="390" y="75.0" class="rowlab prod" text-anchor="end">v2: turbo full lr 3e-5, 4 ep · <tspan font-weight="600">GPU path</tspan> (production since 09-22)</text>
-<rect x="400" y="60.0" width="73.8" height="10.0" class="s-train"><title>clip test WER: 0.087</title></rect>
-<text x="478.8" y="69.0" class="val">0.087</text>
-<rect x="400" y="71.0" width="68.9" height="10.0" class="s-test"><title>whole-file test WER: 0.081</title></rect>
-<text x="473.9" y="80.0" class="val">0.081</text>
-<text x="390" y="105.0" class="rowlab " text-anchor="end">v4: production model self-trained on pass-3 labels · GPU path</text>
-<rect x="400" y="90.0" width="74.1" height="10.0" class="s-train"><title>clip test WER: 0.087</title></rect>
-<text x="479.1" y="99.0" class="val">0.087</text>
-<rect x="400" y="101.0" width="68.8" height="10.0" class="s-test"><title>whole-file test WER: 0.081</title></rect>
-<text x="473.8" y="110.0" class="val">0.081</text>
-<text x="390" y="135.0" class="rowlab " text-anchor="end">v4: production recipe, seed 7 (repeat) · GPU path</text>
-<rect x="400" y="120.0" width="74.2" height="10.0" class="s-train"><title>clip test WER: 0.087</title></rect>
-<text x="479.2" y="129.0" class="val">0.087</text>
-<rect x="400" y="131.0" width="67.7" height="10.0" class="s-test"><title>whole-file test WER: 0.080</title></rect>
-<text x="472.7" y="140.0" class="val">0.080</text>
-<text x="390" y="165.0" class="rowlab " text-anchor="end">v4: turbo full lr 5e-5, 4 ep · GPU path</text>
-<rect x="400" y="150.0" width="75.9" height="10.0" class="s-train"><title>clip test WER: 0.089</title></rect>
-<text x="480.9" y="159.0" class="val">0.089</text>
-<rect x="400" y="161.0" width="69.7" height="10.0" class="s-test"><title>whole-file test WER: 0.082</title></rect>
-<text x="474.7" y="170.0" class="val">0.082</text>
-<text x="390" y="195.0" class="rowlab " text-anchor="end">v4: large-v3 lr 2e-5 model + pass-3 pseudo-labels · GPU path</text>
-<rect x="400" y="180.0" width="76.0" height="10.0" class="s-train"><title>clip test WER: 0.089</title></rect>
-<text x="481.0" y="189.0" class="val">0.089</text>
-<rect x="400" y="191.0" width="72.1" height="10.0" class="s-test"><title>whole-file test WER: 0.085</title></rect>
-<text x="477.1" y="200.0" class="val">0.085</text>
-<text x="390" y="225.0" class="rowlab " text-anchor="end">v3: turbo lr 1e-5 model + 2 ep on real + pseudo · GPU path</text>
-<rect x="400" y="210.0" width="76.3" height="10.0" class="s-train"><title>clip test WER: 0.090</title></rect>
-<text x="481.3" y="219.0" class="val">0.090</text>
-<rect x="400" y="221.0" width="70.0" height="10.0" class="s-test"><title>whole-file test WER: 0.082</title></rect>
-<text x="475.0" y="230.0" class="val">0.082</text>
-<text x="390" y="255.0" class="rowlab " text-anchor="end">v4: turbo full lr 4e-5, 4 ep · GPU path</text>
-<rect x="400" y="240.0" width="76.5" height="10.0" class="s-train"><title>clip test WER: 0.090</title></rect>
-<text x="481.5" y="249.0" class="val">0.090</text>
-<rect x="400" y="251.0" width="74.7" height="10.0" class="s-test"><title>whole-file test WER: 0.088</title></rect>
-<text x="479.7" y="260.0" class="val">0.088</text>
-<text x="390" y="285.0" class="rowlab " text-anchor="end">v3: turbo lr 2e-5 model + 2 ep on real + pseudo · GPU path</text>
-<rect x="400" y="270.0" width="76.7" height="10.0" class="s-train"><title>clip test WER: 0.090</title></rect>
-<text x="481.7" y="279.0" class="val">0.090</text>
-<rect x="400" y="281.0" width="71.1" height="10.0" class="s-test"><title>whole-file test WER: 0.084</title></rect>
-<text x="476.1" y="290.0" class="val">0.084</text>
-<text x="390" y="315.0" class="rowlab " text-anchor="end">v2: continue turbo lr 2e-5 at lr 1e-5, 3 ep · GPU path</text>
-<rect x="400" y="300.0" width="77.3" height="10.0" class="s-train"><title>clip test WER: 0.091</title></rect>
-<text x="482.3" y="309.0" class="val">0.091</text>
-<rect x="400" y="311.0" width="72.9" height="10.0" class="s-test"><title>whole-file test WER: 0.086</title></rect>
-<text x="477.9" y="320.0" class="val">0.086</text>
-<text x="390" y="345.0" class="rowlab " text-anchor="end">v2: large-v3 full lr 1e-5, 3 ep · GPU path</text>
-<rect x="400" y="330.0" width="77.5" height="10.0" class="s-train"><title>clip test WER: 0.091</title></rect>
-<text x="482.5" y="339.0" class="val">0.091</text>
-<rect x="400" y="341.0" width="73.6" height="10.0" class="s-test"><title>whole-file test WER: 0.087</title></rect>
-<text x="478.6" y="350.0" class="val">0.087</text>
-<text x="390" y="375.0" class="rowlab " text-anchor="end">v3: fresh turbo lr 2e-5, 2 ep on real + pseudo · GPU path</text>
-<rect x="400" y="360.0" width="77.8" height="10.0" class="s-train"><title>clip test WER: 0.092</title></rect>
-<text x="482.8" y="369.0" class="val">0.092</text>
-<rect x="400" y="371.0" width="72.8" height="10.0" class="s-test"><title>whole-file test WER: 0.086</title></rect>
-<text x="477.8" y="380.0" class="val">0.086</text>
-<text x="390" y="405.0" class="rowlab " text-anchor="end">turbo full lr 2e-5 · GPU path (production 09-21)</text>
-<rect x="400" y="390.0" width="78.8" height="10.0" class="s-train"><title>clip test WER: 0.093</title></rect>
-<text x="483.8" y="399.0" class="val">0.093</text>
-<rect x="400" y="401.0" width="74.8" height="10.0" class="s-test"><title>whole-file test WER: 0.088</title></rect>
-<text x="479.8" y="410.0" class="val">0.088</text>
-<text x="390" y="435.0" class="rowlab " text-anchor="end">turbo full lr 2e-5 · CT2 int8, quotes freed</text>
-<rect x="400" y="420.0" width="80.9" height="10.0" class="s-train"><title>clip test WER: 0.095</title></rect>
-<text x="485.9" y="429.0" class="val">0.095</text>
-<rect x="400" y="431.0" width="105.1" height="10.0" class="s-test"><title>whole-file test WER: 0.124</title></rect>
-<text x="510.1" y="440.0" class="val">0.124</text>
-<text x="390" y="465.0" class="rowlab " text-anchor="end">turbo full lr 1e-5 · GPU path</text>
-<rect x="400" y="450.0" width="83.2" height="10.0" class="s-train"><title>clip test WER: 0.098</title></rect>
-<text x="488.2" y="459.0" class="val">0.098</text>
-<rect x="400" y="461.0" width="79.0" height="10.0" class="s-test"><title>whole-file test WER: 0.093</title></rect>
-<text x="484.0" y="470.0" class="val">0.093</text>
-<text x="390" y="495.0" class="rowlab " text-anchor="end">turbo full lr 1e-5 · CT2 int8, quotes freed</text>
-<rect x="400" y="480.0" width="86.2" height="10.0" class="s-train"><title>clip test WER: 0.101</title></rect>
-<text x="491.2" y="489.0" class="val">0.101</text>
-<rect x="400" y="491.0" width="103.1" height="10.0" class="s-test"><title>whole-file test WER: 0.121</title></rect>
-<text x="508.1" y="500.0" class="val">0.121</text>
-<text x="390" y="525.0" class="rowlab " text-anchor="end">turbo full lr 2e-5 · CT2 int8, default suppression</text>
-<rect x="400" y="510.0" width="89.3" height="10.0" class="s-train"><title>clip test WER: 0.105</title></rect>
-<text x="494.3" y="519.0" class="val">0.105</text>
-<rect x="400" y="521.0" width="112.6" height="10.0" class="s-test"><title>whole-file test WER: 0.132</title></rect>
-<text x="517.6" y="530.0" class="val">0.132</text>
-<text x="390" y="555.0" class="rowlab " text-anchor="end">turbo full lr 1e-5 · CT2 default</text>
-<rect x="400" y="540.0" width="93.6" height="10.0" class="s-train"><title>clip test WER: 0.110</title></rect>
-<text x="498.6" y="549.0" class="val">0.110</text>
-<rect x="400" y="551.0" width="108.7" height="10.0" class="s-test"><title>whole-file test WER: 0.128</title></rect>
-<text x="513.7" y="560.0" class="val">0.128</text>
-<text x="390" y="585.0" class="rowlab " text-anchor="end">turbo LoRA r64 · CT2 default</text>
-<rect x="400" y="570.0" width="100.3" height="10.0" class="s-train"><title>clip test WER: 0.118</title></rect>
-<text x="505.3" y="579.0" class="val">0.118</text>
-<rect x="400" y="581.0" width="108.3" height="10.0" class="s-test"><title>whole-file test WER: 0.127</title></rect>
-<text x="513.3" y="590.0" class="val">0.127</text>
-<text x="390" y="615.0" class="rowlab " text-anchor="end">large-v3 full lr 1e-5, 1 ep · CT2 default</text>
-<rect x="400" y="600.0" width="106.8" height="10.0" class="s-train"><title>clip test WER: 0.126</title></rect>
-<text x="511.8" y="609.0" class="val">0.126</text>
-<rect x="400" y="611.0" width="122.0" height="10.0" class="s-test"><title>whole-file test WER: 0.144</title></rect>
-<text x="527.0" y="620.0" class="val">0.144</text>
-<text x="390" y="645.0" class="rowlab " text-anchor="end">large-v3 LoRA r64, 1 ep · CT2 default</text>
-<rect x="400" y="630.0" width="113.7" height="10.0" class="s-train"><title>clip test WER: 0.134</title></rect>
-<text x="518.7" y="639.0" class="val">0.134</text>
-<rect x="400" y="641.0" width="125.2" height="10.0" class="s-test"><title>whole-file test WER: 0.147</title></rect>
-<text x="530.2" y="650.0" class="val">0.147</text>
-<text x="390" y="675.0" class="rowlab " text-anchor="end">large-v3 frozen encoder · CT2 default</text>
-<rect x="400" y="660.0" width="155.1" height="10.0" class="s-train"><title>clip test WER: 0.182</title></rect>
-<text x="560.1" y="669.0" class="val">0.182</text>
-<rect x="400" y="671.0" width="169.3" height="10.0" class="s-test"><title>whole-file test WER: 0.199</title></rect>
-<text x="574.3" y="680.0" class="val">0.199</text>
-<text x="390" y="705.0" class="rowlab " text-anchor="end">turbo frozen encoder lr 2e-5 · CT2 default</text>
-<rect x="400" y="690.0" width="191.5" height="10.0" class="s-train"><title>clip test WER: 0.225</title></rect>
-<text x="596.5" y="699.0" class="val">0.225</text>
-<rect x="400" y="701.0" width="203.6" height="10.0" class="s-test"><title>whole-file test WER: 0.239</title></rect>
-<text x="608.6" y="710.0" class="val">0.239</text>
-<text x="390" y="735.0" class="rowlab " text-anchor="end">turbo frozen encoder lr 1e-5 · CT2 default</text>
-<rect x="400" y="720.0" width="207.4" height="10.0" class="s-train"><title>clip test WER: 0.244</title></rect>
-<text x="612.4" y="729.0" class="val">0.244</text>
-<rect x="400" y="731.0" width="225.9" height="10.0" class="s-test"><title>whole-file test WER: 0.266</title></rect>
-<text x="630.9" y="740.0" class="val">0.266</text>
-<text x="390" y="765.0" class="rowlab " text-anchor="end">v0: frozen encoder, 1,000 steps, unfiltered data</text>
-<rect x="400" y="750.0" width="241.1" height="10.0" class="s-train"><title>clip test WER: 0.284</title></rect>
-<text x="646.1" y="759.0" class="val">0.284</text>
-<rect x="400" y="761.0" width="259.5" height="10.0" class="s-test"><title>whole-file test WER: 0.305</title></rect>
-<text x="664.5" y="770.0" class="val">0.305</text>
-<text x="390" y="795.0" class="rowlab base" text-anchor="end">baseline ivrit-ai yi-whisper-large-v3 (no fine-tuning)</text>
-<rect x="400" y="780.0" width="451.7" height="10.0" class="s-train"><title>clip test WER: 0.531</title></rect>
-<text x="856.7" y="789.0" class="val">0.531</text>
-<rect x="400" y="791.0" width="454.1" height="10.0" class="s-test"><title>whole-file test WER: 0.534</title></rect>
-<text x="859.1" y="800.0" class="val">0.534</text>
-<text x="390" y="825.0" class="rowlab base" text-anchor="end">baseline ivrit-ai yi-whisper-large-v3-turbo (no fine-tuning)</text>
-<rect x="400" y="810.0" width="485.6" height="10.0" class="s-train"><title>clip test WER: 0.571</title></rect>
-<text x="890.6" y="819.0" class="val">0.571</text>
-<rect x="400" y="821.0" width="483.6" height="10.0" class="s-test"><title>whole-file test WER: 0.569</title></rect>
-<text x="888.6" y="830.0" class="val">0.569</text>
-<text x="390" y="855.0" class="rowlab prod" text-anchor="end">production model · <tspan font-weight="600">auto windows</tspan> (decoder default since 09-23)</text>
-<rect x="400" y="840.0" width="0.0" height="10.0" class="s-train"><title>clip test WER: 0.000</title></rect>
-<text x="405.0" y="849.0" class="val">0.000</text>
-<rect x="400" y="851.0" width="69.2" height="10.0" class="s-test"><title>whole-file test WER: 0.081</title></rect>
-<text x="474.2" y="860.0" class="val">0.081</text>
+<text x="390" y="75.0" class="rowlab " text-anchor="end">v4: large-v3 full lr 3e-5, 4 ep (resumed after the disk crash) · GPU path</text>
+<rect x="400" y="60.0" width="73.4" height="10.0" class="s-train"><title>clip test WER: 0.086</title></rect>
+<text x="478.4" y="69.0" class="val">0.086</text>
+<rect x="400" y="71.0" width="69.2" height="10.0" class="s-test"><title>whole-file test WER: 0.081</title></rect>
+<text x="474.2" y="80.0" class="val">0.081</text>
+<text x="390" y="105.0" class="rowlab prod" text-anchor="end">v2: turbo full lr 3e-5, 4 ep · <tspan font-weight="600">GPU path</tspan> (production since 09-22)</text>
+<rect x="400" y="90.0" width="73.8" height="10.0" class="s-train"><title>clip test WER: 0.087</title></rect>
+<text x="478.8" y="99.0" class="val">0.087</text>
+<rect x="400" y="101.0" width="68.9" height="10.0" class="s-test"><title>whole-file test WER: 0.081</title></rect>
+<text x="473.9" y="110.0" class="val">0.081</text>
+<text x="390" y="135.0" class="rowlab " text-anchor="end">v4: production model self-trained on pass-3 labels · GPU path</text>
+<rect x="400" y="120.0" width="74.1" height="10.0" class="s-train"><title>clip test WER: 0.087</title></rect>
+<text x="479.1" y="129.0" class="val">0.087</text>
+<rect x="400" y="131.0" width="68.8" height="10.0" class="s-test"><title>whole-file test WER: 0.081</title></rect>
+<text x="473.8" y="140.0" class="val">0.081</text>
+<text x="390" y="165.0" class="rowlab " text-anchor="end">v4: production recipe, seed 7 (repeat) · GPU path</text>
+<rect x="400" y="150.0" width="74.2" height="10.0" class="s-train"><title>clip test WER: 0.087</title></rect>
+<text x="479.2" y="159.0" class="val">0.087</text>
+<rect x="400" y="161.0" width="68.0" height="10.0" class="s-test"><title>whole-file test WER: 0.080</title></rect>
+<text x="473.0" y="170.0" class="val">0.080</text>
+<text x="390" y="195.0" class="rowlab " text-anchor="end">v4: turbo full lr 5e-5, 4 ep · GPU path</text>
+<rect x="400" y="180.0" width="75.9" height="10.0" class="s-train"><title>clip test WER: 0.089</title></rect>
+<text x="480.9" y="189.0" class="val">0.089</text>
+<rect x="400" y="191.0" width="69.7" height="10.0" class="s-test"><title>whole-file test WER: 0.082</title></rect>
+<text x="474.7" y="200.0" class="val">0.082</text>
+<text x="390" y="225.0" class="rowlab " text-anchor="end">v4: large-v3 lr 2e-5 model + pass-3 pseudo-labels · GPU path</text>
+<rect x="400" y="210.0" width="76.0" height="10.0" class="s-train"><title>clip test WER: 0.089</title></rect>
+<text x="481.0" y="219.0" class="val">0.089</text>
+<rect x="400" y="221.0" width="72.1" height="10.0" class="s-test"><title>whole-file test WER: 0.085</title></rect>
+<text x="477.1" y="230.0" class="val">0.085</text>
+<text x="390" y="255.0" class="rowlab " text-anchor="end">v3: turbo lr 1e-5 model + 2 ep on real + pseudo · GPU path</text>
+<rect x="400" y="240.0" width="76.3" height="10.0" class="s-train"><title>clip test WER: 0.090</title></rect>
+<text x="481.3" y="249.0" class="val">0.090</text>
+<rect x="400" y="251.0" width="70.0" height="10.0" class="s-test"><title>whole-file test WER: 0.082</title></rect>
+<text x="475.0" y="260.0" class="val">0.082</text>
+<text x="390" y="285.0" class="rowlab " text-anchor="end">v4: turbo full lr 4e-5, 4 ep · GPU path</text>
+<rect x="400" y="270.0" width="76.5" height="10.0" class="s-train"><title>clip test WER: 0.090</title></rect>
+<text x="481.5" y="279.0" class="val">0.090</text>
+<rect x="400" y="281.0" width="74.9" height="10.0" class="s-test"><title>whole-file test WER: 0.088</title></rect>
+<text x="479.9" y="290.0" class="val">0.088</text>
+<text x="390" y="315.0" class="rowlab " text-anchor="end">v3: turbo lr 2e-5 model + 2 ep on real + pseudo · GPU path</text>
+<rect x="400" y="300.0" width="76.7" height="10.0" class="s-train"><title>clip test WER: 0.090</title></rect>
+<text x="481.7" y="309.0" class="val">0.090</text>
+<rect x="400" y="311.0" width="71.1" height="10.0" class="s-test"><title>whole-file test WER: 0.084</title></rect>
+<text x="476.1" y="320.0" class="val">0.084</text>
+<text x="390" y="345.0" class="rowlab " text-anchor="end">v2: continue turbo lr 2e-5 at lr 1e-5, 3 ep · GPU path</text>
+<rect x="400" y="330.0" width="77.3" height="10.0" class="s-train"><title>clip test WER: 0.091</title></rect>
+<text x="482.3" y="339.0" class="val">0.091</text>
+<rect x="400" y="341.0" width="72.9" height="10.0" class="s-test"><title>whole-file test WER: 0.086</title></rect>
+<text x="477.9" y="350.0" class="val">0.086</text>
+<text x="390" y="375.0" class="rowlab " text-anchor="end">v2: large-v3 full lr 1e-5, 3 ep · GPU path</text>
+<rect x="400" y="360.0" width="77.5" height="10.0" class="s-train"><title>clip test WER: 0.091</title></rect>
+<text x="482.5" y="369.0" class="val">0.091</text>
+<rect x="400" y="371.0" width="73.6" height="10.0" class="s-test"><title>whole-file test WER: 0.087</title></rect>
+<text x="478.6" y="380.0" class="val">0.087</text>
+<text x="390" y="405.0" class="rowlab " text-anchor="end">v3: fresh turbo lr 2e-5, 2 ep on real + pseudo · GPU path</text>
+<rect x="400" y="390.0" width="77.8" height="10.0" class="s-train"><title>clip test WER: 0.092</title></rect>
+<text x="482.8" y="399.0" class="val">0.092</text>
+<rect x="400" y="401.0" width="72.8" height="10.0" class="s-test"><title>whole-file test WER: 0.086</title></rect>
+<text x="477.8" y="410.0" class="val">0.086</text>
+<text x="390" y="435.0" class="rowlab " text-anchor="end">turbo full lr 2e-5 · GPU path (production 09-21)</text>
+<rect x="400" y="420.0" width="78.8" height="10.0" class="s-train"><title>clip test WER: 0.093</title></rect>
+<text x="483.8" y="429.0" class="val">0.093</text>
+<rect x="400" y="431.0" width="74.8" height="10.0" class="s-test"><title>whole-file test WER: 0.088</title></rect>
+<text x="479.8" y="440.0" class="val">0.088</text>
+<text x="390" y="465.0" class="rowlab " text-anchor="end">turbo full lr 2e-5 · CT2 int8, quotes freed</text>
+<rect x="400" y="450.0" width="80.9" height="10.0" class="s-train"><title>clip test WER: 0.095</title></rect>
+<text x="485.9" y="459.0" class="val">0.095</text>
+<rect x="400" y="461.0" width="105.1" height="10.0" class="s-test"><title>whole-file test WER: 0.124</title></rect>
+<text x="510.1" y="470.0" class="val">0.124</text>
+<text x="390" y="495.0" class="rowlab " text-anchor="end">turbo full lr 1e-5 · GPU path</text>
+<rect x="400" y="480.0" width="83.2" height="10.0" class="s-train"><title>clip test WER: 0.098</title></rect>
+<text x="488.2" y="489.0" class="val">0.098</text>
+<rect x="400" y="491.0" width="79.0" height="10.0" class="s-test"><title>whole-file test WER: 0.093</title></rect>
+<text x="484.0" y="500.0" class="val">0.093</text>
+<text x="390" y="525.0" class="rowlab " text-anchor="end">turbo full lr 1e-5 · CT2 int8, quotes freed</text>
+<rect x="400" y="510.0" width="86.2" height="10.0" class="s-train"><title>clip test WER: 0.101</title></rect>
+<text x="491.2" y="519.0" class="val">0.101</text>
+<rect x="400" y="521.0" width="103.1" height="10.0" class="s-test"><title>whole-file test WER: 0.121</title></rect>
+<text x="508.1" y="530.0" class="val">0.121</text>
+<text x="390" y="555.0" class="rowlab " text-anchor="end">turbo full lr 2e-5 · CT2 int8, default suppression</text>
+<rect x="400" y="540.0" width="89.3" height="10.0" class="s-train"><title>clip test WER: 0.105</title></rect>
+<text x="494.3" y="549.0" class="val">0.105</text>
+<rect x="400" y="551.0" width="112.6" height="10.0" class="s-test"><title>whole-file test WER: 0.132</title></rect>
+<text x="517.6" y="560.0" class="val">0.132</text>
+<text x="390" y="585.0" class="rowlab " text-anchor="end">turbo full lr 1e-5 · CT2 default</text>
+<rect x="400" y="570.0" width="93.6" height="10.0" class="s-train"><title>clip test WER: 0.110</title></rect>
+<text x="498.6" y="579.0" class="val">0.110</text>
+<rect x="400" y="581.0" width="108.7" height="10.0" class="s-test"><title>whole-file test WER: 0.128</title></rect>
+<text x="513.7" y="590.0" class="val">0.128</text>
+<text x="390" y="615.0" class="rowlab " text-anchor="end">turbo LoRA r64 · CT2 default</text>
+<rect x="400" y="600.0" width="100.3" height="10.0" class="s-train"><title>clip test WER: 0.118</title></rect>
+<text x="505.3" y="609.0" class="val">0.118</text>
+<rect x="400" y="611.0" width="108.3" height="10.0" class="s-test"><title>whole-file test WER: 0.127</title></rect>
+<text x="513.3" y="620.0" class="val">0.127</text>
+<text x="390" y="645.0" class="rowlab " text-anchor="end">large-v3 full lr 1e-5, 1 ep · CT2 default</text>
+<rect x="400" y="630.0" width="106.8" height="10.0" class="s-train"><title>clip test WER: 0.126</title></rect>
+<text x="511.8" y="639.0" class="val">0.126</text>
+<rect x="400" y="641.0" width="122.0" height="10.0" class="s-test"><title>whole-file test WER: 0.144</title></rect>
+<text x="527.0" y="650.0" class="val">0.144</text>
+<text x="390" y="675.0" class="rowlab " text-anchor="end">large-v3 LoRA r64, 1 ep · CT2 default</text>
+<rect x="400" y="660.0" width="113.7" height="10.0" class="s-train"><title>clip test WER: 0.134</title></rect>
+<text x="518.7" y="669.0" class="val">0.134</text>
+<rect x="400" y="671.0" width="125.2" height="10.0" class="s-test"><title>whole-file test WER: 0.147</title></rect>
+<text x="530.2" y="680.0" class="val">0.147</text>
+<text x="390" y="705.0" class="rowlab " text-anchor="end">large-v3 frozen encoder · CT2 default</text>
+<rect x="400" y="690.0" width="155.1" height="10.0" class="s-train"><title>clip test WER: 0.182</title></rect>
+<text x="560.1" y="699.0" class="val">0.182</text>
+<rect x="400" y="701.0" width="169.3" height="10.0" class="s-test"><title>whole-file test WER: 0.199</title></rect>
+<text x="574.3" y="710.0" class="val">0.199</text>
+<text x="390" y="735.0" class="rowlab " text-anchor="end">turbo frozen encoder lr 2e-5 · CT2 default</text>
+<rect x="400" y="720.0" width="191.5" height="10.0" class="s-train"><title>clip test WER: 0.225</title></rect>
+<text x="596.5" y="729.0" class="val">0.225</text>
+<rect x="400" y="731.0" width="203.6" height="10.0" class="s-test"><title>whole-file test WER: 0.239</title></rect>
+<text x="608.6" y="740.0" class="val">0.239</text>
+<text x="390" y="765.0" class="rowlab " text-anchor="end">turbo frozen encoder lr 1e-5 · CT2 default</text>
+<rect x="400" y="750.0" width="207.4" height="10.0" class="s-train"><title>clip test WER: 0.244</title></rect>
+<text x="612.4" y="759.0" class="val">0.244</text>
+<rect x="400" y="761.0" width="225.9" height="10.0" class="s-test"><title>whole-file test WER: 0.266</title></rect>
+<text x="630.9" y="770.0" class="val">0.266</text>
+<text x="390" y="795.0" class="rowlab " text-anchor="end">v0: frozen encoder, 1,000 steps, unfiltered data</text>
+<rect x="400" y="780.0" width="241.1" height="10.0" class="s-train"><title>clip test WER: 0.284</title></rect>
+<text x="646.1" y="789.0" class="val">0.284</text>
+<rect x="400" y="791.0" width="259.5" height="10.0" class="s-test"><title>whole-file test WER: 0.305</title></rect>
+<text x="664.5" y="800.0" class="val">0.305</text>
+<text x="390" y="825.0" class="rowlab base" text-anchor="end">baseline ivrit-ai yi-whisper-large-v3 (no fine-tuning)</text>
+<rect x="400" y="810.0" width="451.7" height="10.0" class="s-train"><title>clip test WER: 0.531</title></rect>
+<text x="856.7" y="819.0" class="val">0.531</text>
+<rect x="400" y="821.0" width="454.1" height="10.0" class="s-test"><title>whole-file test WER: 0.534</title></rect>
+<text x="859.1" y="830.0" class="val">0.534</text>
+<text x="390" y="855.0" class="rowlab base" text-anchor="end">baseline ivrit-ai yi-whisper-large-v3-turbo (no fine-tuning)</text>
+<rect x="400" y="840.0" width="485.6" height="10.0" class="s-train"><title>clip test WER: 0.571</title></rect>
+<text x="890.6" y="849.0" class="val">0.571</text>
+<rect x="400" y="851.0" width="483.6" height="10.0" class="s-test"><title>whole-file test WER: 0.569</title></rect>
+<text x="888.6" y="860.0" class="val">0.569</text>
+<text x="390" y="885.0" class="rowlab prod" text-anchor="end">production model · <tspan font-weight="600">auto windows</tspan> (decoder default since 09-23)</text>
+<rect x="400" y="870.0" width="0.0" height="10.0" class="s-train"><title>clip test WER: 0.000</title></rect>
+<text x="405.0" y="879.0" class="val">0.000</text>
+<rect x="400" y="881.0" width="69.2" height="10.0" class="s-test"><title>whole-file test WER: 0.081</title></rect>
+<text x="474.2" y="890.0" class="val">0.081</text>
 </svg><figcaption>Baselines are the ivrit.ai models without any fine-tuning on this corpus. "CT2 int8" = CTranslate2/faster-whisper on CPU; "quotes freed" = same with the gershayim token un-suppressed; "GPU path" = HF fp32 model on MPS with VAD windows and no timestamp tokens (<code>pipeline/hf_longform.py</code>). Acceptance targets were ≤ 0.30 clip and ≤ 0.35 whole-file.</figcaption></figure>
-<div class="tablewrap"><table><tr><th>model · decoder</th><th class="n">clip dev WER</th><th class="n">clip test WER</th><th class="n">clip test CER</th><th class="n">whole-file WER</th><th class="n">whole-file CER</th></tr><tr><td>v2: turbo full lr 3e-5, 4 ep · <b>GPU path</b> (production since 09-22)</td><td class='n'>0.080</td><td class='n'>0.087</td><td class='n'>0.050</td><td class='n'>0.081</td><td class='n'>0.045</td></tr><tr><td>production model · <b>auto windows</b> (decoder default since 09-23)</td><td class='n'>–</td><td class='n'>–</td><td class='n'>–</td><td class='n'>0.081</td><td class='n'>0.045</td></tr><tr><td>v4: production recipe, seed 7 (repeat) · GPU path</td><td class='n'>0.081</td><td class='n'>0.087</td><td class='n'>0.050</td><td class='n'>0.080</td><td class='n'>0.045</td></tr><tr><td>v4: production model self-trained on pass-3 labels · GPU path</td><td class='n'>0.079</td><td class='n'>0.087</td><td class='n'>0.050</td><td class='n'>0.081</td><td class='n'>0.045</td></tr><tr><td>v4: turbo full lr 5e-5, 4 ep · GPU path</td><td class='n'>0.079</td><td class='n'>0.089</td><td class='n'>0.053</td><td class='n'>0.082</td><td class='n'>0.046</td></tr><tr><td>v4: turbo full lr 4e-5, 4 ep · GPU path</td><td class='n'>0.084</td><td class='n'>0.090</td><td class='n'>0.050</td><td class='n'>0.088</td><td class='n'>0.048</td></tr><tr><td>v4: large-v3 lr 2e-5 model + pass-3 pseudo-labels · GPU path</td><td class='n'>0.080</td><td class='n'>0.089</td><td class='n'>0.050</td><td class='n'>0.085</td><td class='n'>0.047</td></tr><tr><td>v2: large-v3 full lr 2e-5, 3 ep · GPU path</td><td class='n'>0.077</td><td class='n'>0.083</td><td class='n'>0.048</td><td class='n'>0.082</td><td class='n'>0.047</td></tr><tr><td>v3: turbo lr 1e-5 model + 2 ep on real + pseudo · GPU path</td><td class='n'>0.079</td><td class='n'>0.090</td><td class='n'>0.051</td><td class='n'>0.082</td><td class='n'>0.046</td></tr><tr><td>v3: turbo lr 2e-5 model + 2 ep on real + pseudo · GPU path</td><td class='n'>0.080</td><td class='n'>0.090</td><td class='n'>0.052</td><td class='n'>0.084</td><td class='n'>0.046</td></tr><tr><td>v3: fresh turbo lr 2e-5, 2 ep on real + pseudo · GPU path</td><td class='n'>0.079</td><td class='n'>0.092</td><td class='n'>0.053</td><td class='n'>0.086</td><td class='n'>0.047</td></tr><tr><td>v2: continue turbo lr 2e-5 at lr 1e-5, 3 ep · GPU path</td><td class='n'>0.082</td><td class='n'>0.091</td><td class='n'>0.051</td><td class='n'>0.086</td><td class='n'>0.048</td></tr><tr><td>v2: large-v3 full lr 1e-5, 3 ep · GPU path</td><td class='n'>0.083</td><td class='n'>0.091</td><td class='n'>0.051</td><td class='n'>0.087</td><td class='n'>0.048</td></tr><tr><td>turbo full lr 2e-5 · GPU path (production 09-21)</td><td class='n'>0.080</td><td class='n'>0.093</td><td class='n'>0.052</td><td class='n'>0.088</td><td class='n'>0.048</td></tr><tr><td>turbo full lr 1e-5 · GPU path</td><td class='n'>0.088</td><td class='n'>0.098</td><td class='n'>0.053</td><td class='n'>0.093</td><td class='n'>0.050</td></tr><tr><td>turbo full lr 2e-5 · CT2 int8, quotes freed</td><td class='n'>0.082</td><td class='n'>0.095</td><td class='n'>0.053</td><td class='n'>0.124</td><td class='n'>0.081</td></tr><tr><td>turbo full lr 1e-5 · CT2 int8, quotes freed</td><td class='n'>0.093</td><td class='n'>0.101</td><td class='n'>0.057</td><td class='n'>0.121</td><td class='n'>0.075</td></tr><tr><td>turbo full lr 2e-5 · CT2 int8, default suppression</td><td class='n'>0.092</td><td class='n'>0.105</td><td class='n'>0.057</td><td class='n'>0.132</td><td class='n'>0.084</td></tr><tr><td>turbo full lr 1e-5 · CT2 default</td><td class='n'>0.100</td><td class='n'>0.110</td><td class='n'>0.060</td><td class='n'>0.128</td><td class='n'>0.076</td></tr><tr><td>turbo LoRA r64 · CT2 default</td><td class='n'>0.101</td><td class='n'>0.118</td><td class='n'>0.064</td><td class='n'>0.127</td><td class='n'>0.073</td></tr><tr><td>large-v3 full lr 1e-5, 1 ep · CT2 default</td><td class='n'>0.110</td><td class='n'>0.126</td><td class='n'>0.068</td><td class='n'>0.144</td><td class='n'>0.083</td></tr><tr><td>large-v3 LoRA r64, 1 ep · CT2 default</td><td class='n'>0.115</td><td class='n'>0.134</td><td class='n'>0.071</td><td class='n'>0.147</td><td class='n'>0.084</td></tr><tr><td>large-v3 frozen encoder · CT2 default</td><td class='n'>0.157</td><td class='n'>0.182</td><td class='n'>0.099</td><td class='n'>0.199</td><td class='n'>0.117</td></tr><tr><td>turbo frozen encoder lr 2e-5 · CT2 default</td><td class='n'>0.195</td><td class='n'>0.225</td><td class='n'>0.119</td><td class='n'>0.239</td><td class='n'>0.138</td></tr><tr><td>turbo frozen encoder lr 1e-5 · CT2 default</td><td class='n'>0.212</td><td class='n'>0.244</td><td class='n'>0.128</td><td class='n'>0.266</td><td class='n'>0.148</td></tr><tr><td>v0: frozen encoder, 1,000 steps, unfiltered data</td><td class='n'>0.254</td><td class='n'>0.284</td><td class='n'>0.147</td><td class='n'>0.305</td><td class='n'>0.168</td></tr><tr><td>baseline ivrit-ai yi-whisper-large-v3 (no fine-tuning)</td><td class='n'>0.496</td><td class='n'>0.531</td><td class='n'>0.274</td><td class='n'>0.534</td><td class='n'>0.275</td></tr><tr><td>baseline ivrit-ai yi-whisper-large-v3-turbo (no fine-tuning)</td><td class='n'>0.542</td><td class='n'>0.571</td><td class='n'>0.286</td><td class='n'>0.569</td><td class='n'>0.283</td></tr></table></div>
+<div class="tablewrap"><table><tr><th>model · decoder</th><th class="n">clip dev WER</th><th class="n">clip test WER</th><th class="n">clip test CER</th><th class="n">whole-file WER</th><th class="n">whole-file CER</th></tr><tr><td>v2: turbo full lr 3e-5, 4 ep · <b>GPU path</b> (production since 09-22)</td><td class='n'>0.080</td><td class='n'>0.087</td><td class='n'>0.050</td><td class='n'>0.081</td><td class='n'>0.045</td></tr><tr><td>production model · <b>auto windows</b> (decoder default since 09-23)</td><td class='n'>–</td><td class='n'>–</td><td class='n'>–</td><td class='n'>0.081</td><td class='n'>0.045</td></tr><tr><td>v4: large-v3 full lr 3e-5, 4 ep (resumed after the disk crash) · GPU path</td><td class='n'>0.080</td><td class='n'>0.086</td><td class='n'>0.051</td><td class='n'>0.081</td><td class='n'>0.047</td></tr><tr><td>v4: production recipe, seed 7 (repeat) · GPU path</td><td class='n'>0.081</td><td class='n'>0.087</td><td class='n'>0.050</td><td class='n'>0.080</td><td class='n'>0.045</td></tr><tr><td>v4: production model self-trained on pass-3 labels · GPU path</td><td class='n'>0.079</td><td class='n'>0.087</td><td class='n'>0.050</td><td class='n'>0.081</td><td class='n'>0.045</td></tr><tr><td>v4: turbo full lr 5e-5, 4 ep · GPU path</td><td class='n'>0.079</td><td class='n'>0.089</td><td class='n'>0.053</td><td class='n'>0.082</td><td class='n'>0.046</td></tr><tr><td>v4: turbo full lr 4e-5, 4 ep · GPU path</td><td class='n'>0.084</td><td class='n'>0.090</td><td class='n'>0.050</td><td class='n'>0.088</td><td class='n'>0.048</td></tr><tr><td>v4: large-v3 lr 2e-5 model + pass-3 pseudo-labels · GPU path</td><td class='n'>0.080</td><td class='n'>0.089</td><td class='n'>0.050</td><td class='n'>0.085</td><td class='n'>0.047</td></tr><tr><td>v2: large-v3 full lr 2e-5, 3 ep · GPU path</td><td class='n'>0.077</td><td class='n'>0.083</td><td class='n'>0.048</td><td class='n'>0.082</td><td class='n'>0.047</td></tr><tr><td>v3: turbo lr 1e-5 model + 2 ep on real + pseudo · GPU path</td><td class='n'>0.079</td><td class='n'>0.090</td><td class='n'>0.051</td><td class='n'>0.082</td><td class='n'>0.046</td></tr><tr><td>v3: turbo lr 2e-5 model + 2 ep on real + pseudo · GPU path</td><td class='n'>0.080</td><td class='n'>0.090</td><td class='n'>0.052</td><td class='n'>0.084</td><td class='n'>0.046</td></tr><tr><td>v3: fresh turbo lr 2e-5, 2 ep on real + pseudo · GPU path</td><td class='n'>0.079</td><td class='n'>0.092</td><td class='n'>0.053</td><td class='n'>0.086</td><td class='n'>0.047</td></tr><tr><td>v2: continue turbo lr 2e-5 at lr 1e-5, 3 ep · GPU path</td><td class='n'>0.082</td><td class='n'>0.091</td><td class='n'>0.051</td><td class='n'>0.086</td><td class='n'>0.048</td></tr><tr><td>v2: large-v3 full lr 1e-5, 3 ep · GPU path</td><td class='n'>0.083</td><td class='n'>0.091</td><td class='n'>0.051</td><td class='n'>0.087</td><td class='n'>0.048</td></tr><tr><td>turbo full lr 2e-5 · GPU path (production 09-21)</td><td class='n'>0.080</td><td class='n'>0.093</td><td class='n'>0.052</td><td class='n'>0.088</td><td class='n'>0.048</td></tr><tr><td>turbo full lr 1e-5 · GPU path</td><td class='n'>0.088</td><td class='n'>0.098</td><td class='n'>0.053</td><td class='n'>0.093</td><td class='n'>0.050</td></tr><tr><td>turbo full lr 2e-5 · CT2 int8, quotes freed</td><td class='n'>0.082</td><td class='n'>0.095</td><td class='n'>0.053</td><td class='n'>0.124</td><td class='n'>0.081</td></tr><tr><td>turbo full lr 1e-5 · CT2 int8, quotes freed</td><td class='n'>0.093</td><td class='n'>0.101</td><td class='n'>0.057</td><td class='n'>0.121</td><td class='n'>0.075</td></tr><tr><td>turbo full lr 2e-5 · CT2 int8, default suppression</td><td class='n'>0.092</td><td class='n'>0.105</td><td class='n'>0.057</td><td class='n'>0.132</td><td class='n'>0.084</td></tr><tr><td>turbo full lr 1e-5 · CT2 default</td><td class='n'>0.100</td><td class='n'>0.110</td><td class='n'>0.060</td><td class='n'>0.128</td><td class='n'>0.076</td></tr><tr><td>turbo LoRA r64 · CT2 default</td><td class='n'>0.101</td><td class='n'>0.118</td><td class='n'>0.064</td><td class='n'>0.127</td><td class='n'>0.073</td></tr><tr><td>large-v3 full lr 1e-5, 1 ep · CT2 default</td><td class='n'>0.110</td><td class='n'>0.126</td><td class='n'>0.068</td><td class='n'>0.144</td><td class='n'>0.083</td></tr><tr><td>large-v3 LoRA r64, 1 ep · CT2 default</td><td class='n'>0.115</td><td class='n'>0.134</td><td class='n'>0.071</td><td class='n'>0.147</td><td class='n'>0.084</td></tr><tr><td>large-v3 frozen encoder · CT2 default</td><td class='n'>0.157</td><td class='n'>0.182</td><td class='n'>0.099</td><td class='n'>0.199</td><td class='n'>0.117</td></tr><tr><td>turbo frozen encoder lr 2e-5 · CT2 default</td><td class='n'>0.195</td><td class='n'>0.225</td><td class='n'>0.119</td><td class='n'>0.239</td><td class='n'>0.138</td></tr><tr><td>turbo frozen encoder lr 1e-5 · CT2 default</td><td class='n'>0.212</td><td class='n'>0.244</td><td class='n'>0.128</td><td class='n'>0.266</td><td class='n'>0.148</td></tr><tr><td>v0: frozen encoder, 1,000 steps, unfiltered data</td><td class='n'>0.254</td><td class='n'>0.284</td><td class='n'>0.147</td><td class='n'>0.305</td><td class='n'>0.168</td></tr><tr><td>baseline ivrit-ai yi-whisper-large-v3 (no fine-tuning)</td><td class='n'>0.496</td><td class='n'>0.531</td><td class='n'>0.274</td><td class='n'>0.534</td><td class='n'>0.275</td></tr><tr><td>baseline ivrit-ai yi-whisper-large-v3-turbo (no fine-tuning)</td><td class='n'>0.542</td><td class='n'>0.571</td><td class='n'>0.286</td><td class='n'>0.569</td><td class='n'>0.283</td></tr></table></div>
 
 
 <h2>Accuracy on the product years: the delivered transcripts against the hanachos</h2>
@@ -905,7 +910,7 @@ footer{margin-top:56px;border-top:1px solid var(--hair);padding-top:12px;font-si
 <tr><td class="mono">turbo-full-v5-cont-lr1e5-2ep</td><td>bigmac01</td><td>production model continued 2 ep on all data, lr 1e-5</td><td>cheapest read of what the new years add</td><td>~12 h</td></tr>
 <tr><td class="mono">turbo-full-v5-lr3e5-2ep</td><td>bigmac02</td><td>production recipe from the base on all data, 2 ep, lr 3e-5</td><td>same optimizer steps as the 4-epoch v4 run on 2.5× the clips</td><td>~12 h</td></tr>
 <tr><td class="mono">large-full-v5-lr2e5-2ep</td><td>supermac01 (512 GB)</td><td>large-v3 from the base on all data, 2 ep, lr 2e-5</td><td>best clip model in v4 (0.083); the target model</td><td>~35 h on a Mac Studio; hours on the GB10 with CUDA/bf16</td></tr></table></div>
-<p class="note">v4 verdict, now complete: on the old data nothing beats the production recipe; the seed repeat (0.080 vs 0.081 whole-file) puts run-to-run noise at ~0.001, so table differences under 0.003 mean nothing. Higher learning rates (4e-5, 5e-5) are worse; self-training never wins. large-v3 at lr 3e-5 finished 05:21 and is being scored.</p>
+<p class="note">v4 verdict, complete (all six runs scored): on the old data nothing beats the production recipe; the seed repeat (0.080 vs 0.081 whole-file) puts run-to-run noise at ~0.001, so table differences under 0.003 mean nothing. Higher learning rates (4e-5, 5e-5) are worse; self-training never wins; large-v3 at lr 3e-5 (0.086 clips / 0.081 whole-file) equals the turbo on whole files at 2.5× the cost and does not reach large-v3 at lr 2e-5 on clips. The v5 data is the only remaining lever.</p>
 
 <h2>Next steps</h2>
 <ol>
@@ -933,5 +938,5 @@ footer{margin-top:56px;border-top:1px solid var(--hair);padding-top:12px;font-si
 <tr><td>error analysis</td><td><code>reports/error-analysis-*.md</code></td><td><code>pipeline/error_analysis.py</code></td></tr>
 <tr><td>narrative and decisions</td><td><code>AGENT_HANDOFF.md</code>, <code>README.md</code>, <code>cluster/README.md</code></td><td>dated log of every choice under CURRENT POSITION</td></tr>
 </table></div>
-<footer>Corpus statistics computed 2026-09-22 from the v4 manifests (the v5 manifests are being built); training curves read from the fleet logs on 2026-09-24 05:30 EDT; v1–v4 complete (large-v3 lr 3e-5 being scored), v5 alignment wave 2 running. The Daily Sicha audio and text are used under the project's agreement with the producers: nothing is published or made searchable.</footer>
+<footer>Corpus statistics computed 2026-09-22 from the v4 manifests (the v5 manifests are being built); training curves read from the fleet logs on 2026-09-24 05:30 EDT; v1–v4 complete, v5 alignment wave 2 finishing. The Daily Sicha audio and text are used under the project's agreement with the producers: nothing is published or made searchable.</footer>
 </div></body></html>

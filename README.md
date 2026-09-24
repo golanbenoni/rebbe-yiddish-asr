@@ -10,9 +10,9 @@ recordings, the hanachos, the clips and the machine transcripts belong to The Da
 nothing produced by this project is made public or searchable before its owners have reviewed it.
 
 <!-- status:start -->
-_Last refreshed 2026-09-24 05:56 by `asr/publish_repo.py`._
+_Last refreshed 2026-09-24 07:17 by `asr/publish_repo.py`._
 
-**Status:** v4 complete; v5 data (5775-5781) being aligned on the fleet, dataset build and three v5 training runs follow automatically.
+**Status:** v4 complete (six recipes scored; nothing beats turbo full lr 3e-5 4 ep, whole-file 0.081); v5 data: 1,758 new days aligned, dataset build + scan + three v5 training runs launching automatically.
 
 **Best models on the fixed 20-day test set** (488 clips / 20 whole recordings, scored against the published hanachos; full table in [docs/reports/model-comparison.md](docs/reports/model-comparison.md)):
 
@@ -21,13 +21,13 @@ _Last refreshed 2026-09-24 05:56 by `asr/publish_repo.py`._
 | turbo-full-lr3e5-4ep-seed7 | 0.087 | 0.050 | 0.080 | 0.045 |
 | turbo-full-v4-lr3e5self-lr1e5-2ep | 0.087 | 0.050 | 0.081 | 0.045 |
 | turbo-full-lr3e5-4ep | 0.087 | 0.050 | 0.081 | 0.045 |
+| large-full-lr3e5-4ep | 0.086 | 0.051 | 0.081 | 0.047 |
 | turbo-full-lr3e5-4ep-winauto | – | – | 0.081 | 0.045 |
 | turbo-full-lr5e5-4ep | 0.089 | 0.053 | 0.082 | 0.046 |
 | large-full-lr2e5-3ep | 0.083 | 0.048 | 0.082 | 0.047 |
 | turbo-full-pseudo-self-lr1e5-2ep | 0.090 | 0.051 | 0.082 | 0.046 |
 | turbo-full-pseudo-cont-lr1e5-2ep | 0.090 | 0.052 | 0.084 | 0.046 |
 | large-full-v4-cont-lr1e5-2ep | 0.089 | 0.050 | 0.085 | 0.047 |
-| turbo-full-pseudo-lr2e5-2ep | 0.092 | 0.053 | 0.086 | 0.047 |
 
 **Delivered transcripts of the product years against their hanachos** (whole-file WER over all days of the year, including days whose printed text is a different or heavily edited sicha):
 
