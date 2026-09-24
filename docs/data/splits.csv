@@ -1,0 +1,5 @@
+split,days,clips,hours,words,clips_self_aligned,clips_site_timed
+train,1352,29273,162.04,1210725,27461,1812
+dev,20,451,2.41,18371,451,0
+test,20,488,3.34,23547,0,488
+train.clean,1352,27833,~153,~1161000,,

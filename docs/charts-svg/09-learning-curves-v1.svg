@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 250" width="320" height="250" style="background:#fff"><style>
+.grid{stroke:#D6DBD8;stroke-width:1}.axis{stroke:#5C6664;stroke-width:1}.ax{font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;fill:#5C6664}.ax.sub{font-size:10px}.axlabel{font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;fill:#5C6664}
+.val{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;fill:#1B1F1E}.rowlab{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;font-size:12.5px;fill:#1B1F1E}.rowlab.prod{font-weight:600}.rowlab.base{fill:#5C6664}
+.ctitle{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;font-size:12.5px;font-weight:600;fill:#1B1F1E}.marker{stroke:#B5443A;stroke-width:1;stroke-dasharray:3 3}.marker-text{fill:#B5443A}.band{fill:rgba(36,87,166,.07)}
+.s-train{fill:#2457A6}.s-dev{fill:#C98B1F}.s-test{fill:#3E7D6E}.s-before{fill:#A9B2AE}.s-pseudo{fill:#7B8FB8}
+.line{stroke-width:1.8;fill:none}.line.s1{stroke:#2457A6}.line.s2{stroke:#C98B1F}.line.s3{stroke:#3E7D6E}.line.s4{stroke:#B5443A}.line.s5{stroke:#6B4FA3}.line.s6{stroke:#2A8A99}
+.dot.s1{fill:#2457A6}.dot.s2{fill:#C98B1F}.dot.s3{fill:#3E7D6E}.dot.s4{fill:#B5443A}.dot.s5{fill:#6B4FA3}.dot.s6{fill:#2A8A99}
+</style><rect x="0" y="0" width="320" height="250" fill="#ffffff"/>
+<text x="46" y="14" class="ctitle">v1 · 8 recipes, complete (2026-09-19 to 21)</text>
+<line x1="46" x2="310" y1="210.0" y2="210.0" class="grid"/><text x="40" y="214.0" class="ax" text-anchor="end">0.06</text>
+<line x1="46" x2="310" y1="174.0" y2="174.0" class="grid"/><text x="40" y="178.0" class="ax" text-anchor="end">0.11</text>
+<line x1="46" x2="310" y1="138.0" y2="138.0" class="grid"/><text x="40" y="142.0" class="ax" text-anchor="end">0.16</text>
+<line x1="46" x2="310" y1="102.0" y2="102.0" class="grid"/><text x="40" y="106.0" class="ax" text-anchor="end">0.22</text>
+<line x1="46" x2="310" y1="66.0" y2="66.0" class="grid"/><text x="40" y="70.0" class="ax" text-anchor="end">0.27</text>
+<line x1="46" x2="310" y1="30.0" y2="30.0" class="grid"/><text x="40" y="34.0" class="ax" text-anchor="end">0.32</text>
+<text x="46.0" y="226" class="ax" text-anchor="middle">0</text>
+<text x="121.4" y="226" class="ax" text-anchor="middle">1000</text>
+<text x="196.9" y="226" class="ax" text-anchor="middle">2000</text>
+<text x="272.3" y="226" class="ax" text-anchor="middle">3000</text>
+<text x="310" y="242" class="axlabel" text-anchor="end">optimizer step</text>
+<path d="M83.7,164.2 L121.4,171.6 L159.1,188.0 L196.9,195.6 L234.6,194.8 L242.9,198.6" class="line s1" style="stroke-dasharray:none" fill="none"><title>turbo · full FT · lr 2e-5 · 3 ep</title></path>
+<circle cx="83.7" cy="164.2" r="2.6" class="dot s1"><title>turbo · full FT · lr 2e-5 · 3 ep step 500: 0.1261</title></circle>
+<circle cx="121.4" cy="171.6" r="2.6" class="dot s1"><title>turbo · full FT · lr 2e-5 · 3 ep step 1000: 0.1154</title></circle>
+<circle cx="159.1" cy="188.0" r="2.6" class="dot s1"><title>turbo · full FT · lr 2e-5 · 3 ep step 1500: 0.0918</title></circle>
+<circle cx="196.9" cy="195.6" r="2.6" class="dot s1"><title>turbo · full FT · lr 2e-5 · 3 ep step 2000: 0.0808</title></circle>
+<circle cx="234.6" cy="194.8" r="2.6" class="dot s1"><title>turbo · full FT · lr 2e-5 · 3 ep step 2500: 0.0820</title></circle>
+<circle cx="242.9" cy="198.6" r="2.6" class="dot s1"><title>turbo · full FT · lr 2e-5 · 3 ep step 2610: 0.0765</title></circle>
+<path d="M83.7,164.4 L121.4,173.1 L159.1,180.5 L196.9,190.8 L234.6,195.9 L242.9,196.6" class="line s1" style="stroke-dasharray:6 4" fill="none"><title>turbo · full FT · lr 1e-5 · 3 ep</title></path>
+<circle cx="83.7" cy="164.4" r="2.6" class="dot s1"><title>turbo · full FT · lr 1e-5 · 3 ep step 500: 0.1258</title></circle>
+<circle cx="121.4" cy="173.1" r="2.6" class="dot s1"><title>turbo · full FT · lr 1e-5 · 3 ep step 1000: 0.1133</title></circle>
+<circle cx="159.1" cy="180.5" r="2.6" class="dot s1"><title>turbo · full FT · lr 1e-5 · 3 ep step 1500: 0.1026</title></circle>
+<circle cx="196.9" cy="190.8" r="2.6" class="dot s1"><title>turbo · full FT · lr 1e-5 · 3 ep step 2000: 0.0878</title></circle>
+<circle cx="234.6" cy="195.9" r="2.6" class="dot s1"><title>turbo · full FT · lr 1e-5 · 3 ep step 2500: 0.0804</title></circle>
+<circle cx="242.9" cy="196.6" r="2.6" class="dot s1"><title>turbo · full FT · lr 1e-5 · 3 ep step 2610: 0.0793</title></circle>
+<path d="M83.7,158.4 L121.4,175.0 L159.1,183.4 L196.9,190.3 L234.6,193.2 L242.9,193.7" class="line s6" style="stroke-dasharray:none" fill="none"><title>turbo · LoRA r64 · 3 ep</title></path>
+<circle cx="83.7" cy="158.4" r="2.6" class="dot s6"><title>turbo · LoRA r64 · 3 ep step 500: 0.1346</title></circle>
+<circle cx="121.4" cy="175.0" r="2.6" class="dot s6"><title>turbo · LoRA r64 · 3 ep step 1000: 0.1105</title></circle>
+<circle cx="159.1" cy="183.4" r="2.6" class="dot s6"><title>turbo · LoRA r64 · 3 ep step 1500: 0.0985</title></circle>
+<circle cx="196.9" cy="190.3" r="2.6" class="dot s6"><title>turbo · LoRA r64 · 3 ep step 2000: 0.0885</title></circle>
+<circle cx="234.6" cy="193.2" r="2.6" class="dot s6"><title>turbo · LoRA r64 · 3 ep step 2500: 0.0843</title></circle>
+<circle cx="242.9" cy="193.7" r="2.6" class="dot s6"><title>turbo · LoRA r64 · 3 ep step 2610: 0.0836</title></circle>
+<path d="M83.7,57.3 L121.4,66.1 L159.1,93.5 L196.9,98.0 L234.6,116.9 L272.3,102.0 L308.5,115.9" class="line s2" style="stroke-dasharray:none" fill="none"><title>turbo · frozen encoder · lr 2e-5 · 4 ep</title></path>
+<circle cx="83.7" cy="57.3" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 2e-5 · 4 ep step 500: 0.2806</title></circle>
+<circle cx="121.4" cy="66.1" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 2e-5 · 4 ep step 1000: 0.2679</title></circle>
+<circle cx="159.1" cy="93.5" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 2e-5 · 4 ep step 1500: 0.2283</title></circle>
+<circle cx="196.9" cy="98.0" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 2e-5 · 4 ep step 2000: 0.2218</title></circle>
+<circle cx="234.6" cy="116.9" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 2e-5 · 4 ep step 2500: 0.1945</title></circle>
+<circle cx="272.3" cy="102.0" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 2e-5 · 4 ep step 3000: 0.2160</title></circle>
+<circle cx="308.5" cy="115.9" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 2e-5 · 4 ep step 3480: 0.1959</title></circle>
+<path d="M83.7,35.4 L121.4,61.1 L159.1,62.9 L196.9,91.5 L234.6,97.8 L272.3,89.5 L308.5,93.9" class="line s2" style="stroke-dasharray:6 4" fill="none"><title>turbo · frozen encoder · lr 1e-5 · 4 ep</title></path>
+<circle cx="83.7" cy="35.4" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 1e-5 · 4 ep step 500: 0.3122</title></circle>
+<circle cx="121.4" cy="61.1" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 1e-5 · 4 ep step 1000: 0.2751</title></circle>
+<circle cx="159.1" cy="62.9" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 1e-5 · 4 ep step 1500: 0.2725</title></circle>
+<circle cx="196.9" cy="91.5" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 1e-5 · 4 ep step 2000: 0.2311</title></circle>
+<circle cx="234.6" cy="97.8" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 1e-5 · 4 ep step 2500: 0.2220</title></circle>
+<circle cx="272.3" cy="89.5" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 1e-5 · 4 ep step 3000: 0.2341</title></circle>
+<circle cx="308.5" cy="93.9" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 1e-5 · 4 ep step 3480: 0.2277</title></circle>
+<path d="M83.7,169.9 L111.6,180.6" class="line s3" style="stroke-dasharray:none" fill="none"><title>large-v3 · full FT · lr 1e-5 · 1 ep</title></path>
+<circle cx="83.7" cy="169.9" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 1e-5 · 1 ep step 500: 0.1179</title></circle>
+<circle cx="111.6" cy="180.6" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 1e-5 · 1 ep step 870: 0.1025</title></circle>
+<path d="M83.7,164.7 L111.6,180.3" class="line s5" style="stroke-dasharray:none" fill="none"><title>large-v3 · LoRA r64 · 1 ep</title></path>
+<circle cx="83.7" cy="164.7" r="2.6" class="dot s5"><title>large-v3 · LoRA r64 · 1 ep step 500: 0.1254</title></circle>
+<circle cx="111.6" cy="180.3" r="2.6" class="dot s5"><title>large-v3 · LoRA r64 · 1 ep step 870: 0.1029</title></circle>
+<path d="M83.7,126.4 L121.4,134.6 L159.1,136.3 L177.2,136.3" class="line s4" style="stroke-dasharray:none" fill="none"><title>large-v3 · frozen encoder · 2 ep</title></path>
+<circle cx="83.7" cy="126.4" r="2.6" class="dot s4"><title>large-v3 · frozen encoder · 2 ep step 500: 0.1807</title></circle>
+<circle cx="121.4" cy="134.6" r="2.6" class="dot s4"><title>large-v3 · frozen encoder · 2 ep step 1000: 0.1689</title></circle>
+<circle cx="159.1" cy="136.3" r="2.6" class="dot s4"><title>large-v3 · frozen encoder · 2 ep step 1500: 0.1664</title></circle>
+<circle cx="177.2" cy="136.3" r="2.6" class="dot s4"><title>large-v3 · frozen encoder · 2 ep step 1740: 0.1664</title></circle>
+<line x1="46" x2="310" y1="210" y2="210" class="axis"/></svg>

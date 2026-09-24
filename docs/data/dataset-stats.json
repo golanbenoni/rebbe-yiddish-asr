@@ -1,0 +1,527 @@
+{
+ "site_years": {
+  "5783": {
+   "clips": 4873,
+   "hours": 26.65,
+   "days": 242
+  },
+  "5784": {
+   "clips": 6290,
+   "hours": 34.02,
+   "days": 318
+  },
+  "5785": {
+   "clips": 6080,
+   "hours": 33.23,
+   "days": 290
+  },
+  "5786": {
+   "clips": 6224,
+   "hours": 36.51,
+   "days": 291
+  },
+  "5787": {
+   "clips": 6745,
+   "hours": 37.38,
+   "days": 319
+  }
+ },
+ "delivery_years": {
+  "5711": {
+   "clips": 218,
+   "hours": 1.18,
+   "words": 11198,
+   "days": 12
+  },
+  "5712": {
+   "clips": 188,
+   "hours": 1.12,
+   "words": 10066,
+   "days": 10
+  },
+  "5713": {
+   "clips": 2,
+   "hours": 0.01,
+   "words": 76,
+   "days": 1
+  },
+  "5714": {
+   "clips": 360,
+   "hours": 2.04,
+   "words": 17406,
+   "days": 17
+  },
+  "5715": {
+   "clips": 311,
+   "hours": 1.7,
+   "words": 13364,
+   "days": 15
+  },
+  "5716": {
+   "clips": 500,
+   "hours": 2.76,
+   "words": 21208,
+   "days": 25
+  },
+  "5717": {
+   "clips": 343,
+   "hours": 1.89,
+   "words": 14215,
+   "days": 15
+  },
+  "5718": {
+   "clips": 386,
+   "hours": 2.21,
+   "words": 16492,
+   "days": 17
+  },
+  "5719": {
+   "clips": 271,
+   "hours": 1.48,
+   "words": 11476,
+   "days": 14
+  },
+  "5720": {
+   "clips": 403,
+   "hours": 2.27,
+   "words": 17520,
+   "days": 20
+  },
+  "5721": {
+   "clips": 356,
+   "hours": 2.08,
+   "words": 16947,
+   "days": 14
+  },
+  "5722": {
+   "clips": 598,
+   "hours": 3.17,
+   "words": 26231,
+   "days": 25
+  },
+  "5723": {
+   "clips": 380,
+   "hours": 2.05,
+   "words": 16536,
+   "days": 19
+  },
+  "5724": {
+   "clips": 394,
+   "hours": 2.13,
+   "words": 16191,
+   "days": 19
+  },
+  "5725": {
+   "clips": 599,
+   "hours": 3.31,
+   "words": 28125,
+   "days": 30
+  },
+  "5726": {
+   "clips": 345,
+   "hours": 1.8,
+   "words": 15122,
+   "days": 14
+  },
+  "5727": {
+   "clips": 339,
+   "hours": 1.87,
+   "words": 14485,
+   "days": 17
+  },
+  "5728": {
+   "clips": 436,
+   "hours": 2.5,
+   "words": 19781,
+   "days": 20
+  },
+  "5729": {
+   "clips": 444,
+   "hours": 2.45,
+   "words": 19708,
+   "days": 22
+  },
+  "5730": {
+   "clips": 290,
+   "hours": 1.56,
+   "words": 11982,
+   "days": 17
+  },
+  "5731": {
+   "clips": 430,
+   "hours": 2.37,
+   "words": 19150,
+   "days": 22
+  },
+  "5732": {
+   "clips": 481,
+   "hours": 2.65,
+   "words": 20851,
+   "days": 24
+  },
+  "5733": {
+   "clips": 444,
+   "hours": 2.46,
+   "words": 17978,
+   "days": 22
+  },
+  "5734": {
+   "clips": 691,
+   "hours": 3.72,
+   "words": 27664,
+   "days": 35
+  },
+  "5735": {
+   "clips": 880,
+   "hours": 4.8,
+   "words": 36856,
+   "days": 45
+  },
+  "5736": {
+   "clips": 1212,
+   "hours": 6.99,
+   "words": 52617,
+   "days": 56
+  },
+  "5737": {
+   "clips": 842,
+   "hours": 4.67,
+   "words": 33988,
+   "days": 38
+  },
+  "5738": {
+   "clips": 1406,
+   "hours": 7.86,
+   "words": 56211,
+   "days": 67
+  },
+  "5739": {
+   "clips": 2121,
+   "hours": 11.81,
+   "words": 87224,
+   "days": 99
+  },
+  "5740": {
+   "clips": 1602,
+   "hours": 8.99,
+   "words": 64431,
+   "days": 72
+  },
+  "5741": {
+   "clips": 1361,
+   "hours": 7.57,
+   "words": 53292,
+   "days": 64
+  },
+  "5742": {
+   "clips": 1141,
+   "hours": 6.45,
+   "words": 45430,
+   "days": 50
+  },
+  "5743": {
+   "clips": 1606,
+   "hours": 8.89,
+   "words": 61985,
+   "days": 69
+  },
+  "5744": {
+   "clips": 1397,
+   "hours": 7.68,
+   "words": 54276,
+   "days": 63
+  },
+  "5745": {
+   "clips": 1713,
+   "hours": 9.39,
+   "words": 68278,
+   "days": 82
+  },
+  "5746": {
+   "clips": 1541,
+   "hours": 8.53,
+   "words": 62558,
+   "days": 79
+  },
+  "5747": {
+   "clips": 1085,
+   "hours": 6.03,
+   "words": 44308,
+   "days": 52
+  },
+  "5748": {
+   "clips": 681,
+   "hours": 3.76,
+   "words": 27570,
+   "days": 38
+  },
+  "5749": {
+   "clips": 880,
+   "hours": 5.02,
+   "words": 36563,
+   "days": 46
+  },
+  "5750": {
+   "clips": 290,
+   "hours": 1.59,
+   "words": 11587,
+   "days": 19
+  },
+  "5751": {
+   "clips": 271,
+   "hours": 1.56,
+   "words": 11564,
+   "days": 14
+  },
+  "5752": {
+   "clips": 337,
+   "hours": 1.86,
+   "words": 13296,
+   "days": 24
+  },
+  "None": {
+   "clips": 637,
+   "hours": 3.56,
+   "words": 26837,
+   "days": 32
+  }
+ },
+ "splits": {
+  "train": {
+   "clips": 29273,
+   "hours": 162.04,
+   "words": 1210725,
+   "days": 1352
+  },
+  "dev": {
+   "clips": 451,
+   "hours": 2.41,
+   "words": 18371,
+   "days": 20
+  },
+  "test": {
+   "clips": 488,
+   "hours": 3.34,
+   "words": 23547,
+   "days": 20
+  }
+ },
+ "timing_by_split": {
+  "train": {
+   "local": 27461,
+   "site": 1812
+  },
+  "dev": {
+   "local": 451
+  },
+  "test": {
+   "site": 488
+  }
+ },
+ "duration_hist": {
+  "edges": [
+   0,
+   2,
+   4,
+   6,
+   8,
+   10,
+   12,
+   14,
+   16,
+   18,
+   20,
+   22,
+   24,
+   26,
+   28.5
+  ],
+  "counts": [
+   43,
+   210,
+   432,
+   660,
+   946,
+   1327,
+   1763,
+   2167,
+   2495,
+   2992,
+   3385,
+   3967,
+   4744,
+   5081
+  ]
+ },
+ "words_hist": {
+  "edges": [
+   0,
+   5,
+   10,
+   15,
+   20,
+   25,
+   30,
+   35,
+   40,
+   45,
+   50,
+   55,
+   60,
+   65,
+   70,
+   75,
+   80,
+   85,
+   90,
+   95,
+   100
+  ],
+  "counts": [
+   97,
+   365,
+   701,
+   1110,
+   1595,
+   2191,
+   2880,
+   3689,
+   4200,
+   4378,
+   3779,
+   2605,
+   1445,
+   670,
+   322,
+   107,
+   40,
+   16,
+   11,
+   5
+  ]
+ },
+ "anchor_hist": {
+  "edges": [
+   0.3,
+   0.35,
+   0.4,
+   0.45,
+   0.5,
+   0.55,
+   0.6,
+   0.65,
+   0.7,
+   0.75,
+   0.8,
+   0.85,
+   0.9,
+   0.95,
+   1.0001
+  ],
+  "counts": [
+   306,
+   500,
+   929,
+   1244,
+   2732,
+   3390,
+   4268,
+   4393,
+   3796,
+   3099,
+   1934,
+   829,
+   325,
+   167
+  ]
+ },
+ "anchor_stats": {
+  "n": 27912,
+  "mean": 0.651,
+  "median": 0.656,
+  "min": 0.3
+ },
+ "clips_per_day": {
+  "mean": 21.7,
+  "median": 21.0,
+  "min": 1,
+  "max": 57
+ },
+ "words_per_sec": {
+  "mean": 2.08,
+  "median": 2.05
+ },
+ "vocab": {
+  "tokens": 1161335,
+  "types": 27712,
+  "hapax": 10646,
+  "coverage_by_top_types": {
+   "100": 0.5708,
+   "1000": 0.8178,
+   "5000": 0.9427,
+   "10000": 0.9749,
+   "20000": 0.9934
+  },
+  "share_tokens_freq100plus": 0.8266,
+  "share_types_freq100plus": 0.0396,
+  "oov_rate_dev": 0.0107,
+  "oov_rate_test": 0.0121
+ },
+ "text_marks": {
+  "clips_with_gershayim": 20798,
+  "share": 0.688,
+  "clips_with_apostrophe": 20444,
+  "clips_with_nikkud_in_raw": 27644
+ },
+ "dropped_header": [
+  "5783/004/017",
+  "cer 0.82",
+  "אבער האט א דיון יונים וואס ער דארף דער גדול זיין, ווארוי ושוין וואס דעמאלט איז א"
+ ],
+ "dropped_n": 1443,
+ "splits_rule": "test: 20 evenly spaced days among the site-timed days (Tamuz 5786-Tishrei 5787) whose source farbrengen is 5739 or later and whose offset is known; dev: 20 evenly spaced days among the remaining text-only days with known offsets. Fixed on 2026-09-16; never train on these days.",
+ "dev_days": [
+  "001 3-Tishrei",
+  "028 11-Cheshvan",
+  "055 13-Kislev",
+  "082 15-Teiveis",
+  "109 17-Shvat",
+  "137 20-Adar",
+  "164 27-Nisan",
+  "191 28-Iyar",
+  "023 2-Cheshvan 5787",
+  "050 3-Kisleiv 5787",
+  "077 5-Teiveis 5787",
+  "104 7-Shvat 5787",
+  "131 9-Adar 1 5787",
+  "158 10-Adar 2 5787",
+  "185 13-Nisan 5787",
+  "213 20-Iyar 5787",
+  "240 24-Sivan 5787",
+  "267 25-Tamuz 5787",
+  "294 28-Av 5787",
+  "321 29-Elul 5787"
+ ],
+ "test_days": [
+  "227 13-Tamuz",
+  "237 24-Tamuz",
+  "242 1-Av",
+  "246 6-Av",
+  "251 12-Av",
+  "254 15-Av",
+  "260 22-Av",
+  "263 26-Av",
+  "265 28-Av",
+  "268 1-Elul",
+  "272 6-Elul",
+  "278 13-Elul",
+  "281 17-Elul",
+  "284 20-Elul",
+  "001 3-Tishrei 5787",
+  "006 9-Tishrei 5787",
+  "009 13-Tishrei 5787",
+  "016 24-Tishrei 5787",
+  "018 26-Tishrei 5787",
+  "021 30-Tishrei 5787"
+ ]
+}

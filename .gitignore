@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.DS_Store
+# never commit data, models or transcripts
+asr/data/
+asr/runs/
+asr/output*/
+asr/reports/

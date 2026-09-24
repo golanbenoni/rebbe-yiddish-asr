@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 240" width="470" height="240" style="background:#fff"><style>
+.grid{stroke:#D6DBD8;stroke-width:1}.axis{stroke:#5C6664;stroke-width:1}.ax{font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;fill:#5C6664}.ax.sub{font-size:10px}.axlabel{font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;fill:#5C6664}
+.val{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;fill:#1B1F1E}.rowlab{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;font-size:12.5px;fill:#1B1F1E}.rowlab.prod{font-weight:600}.rowlab.base{fill:#5C6664}
+.ctitle{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;font-size:12.5px;font-weight:600;fill:#1B1F1E}.marker{stroke:#B5443A;stroke-width:1;stroke-dasharray:3 3}.marker-text{fill:#B5443A}.band{fill:rgba(36,87,166,.07)}
+.s-train{fill:#2457A6}.s-dev{fill:#C98B1F}.s-test{fill:#3E7D6E}.s-before{fill:#A9B2AE}.s-pseudo{fill:#7B8FB8}
+.line{stroke-width:1.8;fill:none}.line.s1{stroke:#2457A6}.line.s2{stroke:#C98B1F}.line.s3{stroke:#3E7D6E}.line.s4{stroke:#B5443A}.line.s5{stroke:#6B4FA3}.line.s6{stroke:#2A8A99}
+.dot.s1{fill:#2457A6}.dot.s2{fill:#C98B1F}.dot.s3{fill:#3E7D6E}.dot.s4{fill:#B5443A}.dot.s5{fill:#6B4FA3}.dot.s6{fill:#2A8A99}
+</style><rect x="0" y="0" width="470" height="240" fill="#ffffff"/>
+<line x1="52" x2="458" y1="196.0" y2="196.0" class="grid"/><text x="46" y="200.0" class="ax" text-anchor="end">0</text>
+<line x1="52" x2="458" y1="136.0" y2="136.0" class="grid"/><text x="46" y="140.0" class="ax" text-anchor="end">2,000</text>
+<line x1="52" x2="458" y1="76.0" y2="76.0" class="grid"/><text x="46" y="80.0" class="ax" text-anchor="end">4,000</text>
+<line x1="52" x2="458" y1="16.0" y2="16.0" class="grid"/><text x="46" y="20.0" class="ax" text-anchor="end">6,000</text>
+<rect x="52.5" y="193.1" width="19.3" height="2.9" class="s-dev"><title>0–5: 97 clips</title></rect>
+<rect x="72.8" y="185.1" width="19.3" height="10.9" class="s-dev"><title>5–10: 365 clips</title></rect>
+<rect x="93.1" y="175.0" width="19.3" height="21.0" class="s-dev"><title>10–15: 701 clips</title></rect>
+<rect x="113.4" y="162.7" width="19.3" height="33.3" class="s-dev"><title>15–20: 1,110 clips</title></rect>
+<rect x="133.7" y="148.2" width="19.3" height="47.8" class="s-dev"><title>20–25: 1,595 clips</title></rect>
+<rect x="154.0" y="130.3" width="19.3" height="65.7" class="s-dev"><title>25–30: 2,191 clips</title></rect>
+<rect x="174.3" y="109.6" width="19.3" height="86.4" class="s-dev"><title>30–35: 2,880 clips</title></rect>
+<rect x="194.6" y="85.3" width="19.3" height="110.7" class="s-dev"><title>35–40: 3,689 clips</title></rect>
+<rect x="214.9" y="70.0" width="19.3" height="126.0" class="s-dev"><title>40–45: 4,200 clips</title></rect>
+<rect x="235.2" y="64.7" width="19.3" height="131.3" class="s-dev"><title>45–50: 4,378 clips</title></rect>
+<rect x="255.5" y="82.6" width="19.3" height="113.4" class="s-dev"><title>50–55: 3,779 clips</title></rect>
+<rect x="275.8" y="117.9" width="19.3" height="78.1" class="s-dev"><title>55–60: 2,605 clips</title></rect>
+<rect x="296.1" y="152.7" width="19.3" height="43.3" class="s-dev"><title>60–65: 1,445 clips</title></rect>
+<rect x="316.4" y="175.9" width="19.3" height="20.1" class="s-dev"><title>65–70: 670 clips</title></rect>
+<rect x="336.7" y="186.3" width="19.3" height="9.7" class="s-dev"><title>70–75: 322 clips</title></rect>
+<rect x="357.0" y="192.8" width="19.3" height="3.2" class="s-dev"><title>75–80: 107 clips</title></rect>
+<rect x="377.3" y="194.8" width="19.3" height="1.2" class="s-dev"><title>80–85: 40 clips</title></rect>
+<rect x="397.6" y="195.5" width="19.3" height="0.5" class="s-dev"><title>85–90: 16 clips</title></rect>
+<rect x="417.9" y="195.7" width="19.3" height="0.3" class="s-dev"><title>90–95: 11 clips</title></rect>
+<rect x="438.2" y="195.8" width="19.3" height="0.2" class="s-dev"><title>95–100: 5 clips</title></rect>
+<text x="52.0" y="212" class="ax" text-anchor="middle">0</text>
+<text x="92.6" y="212" class="ax" text-anchor="middle">10</text>
+<text x="133.2" y="212" class="ax" text-anchor="middle">20</text>
+<text x="173.8" y="212" class="ax" text-anchor="middle">30</text>
+<text x="214.4" y="212" class="ax" text-anchor="middle">40</text>
+<text x="255.0" y="212" class="ax" text-anchor="middle">50</text>
+<text x="295.6" y="212" class="ax" text-anchor="middle">60</text>
+<text x="336.2" y="212" class="ax" text-anchor="middle">70</text>
+<text x="376.8" y="212" class="ax" text-anchor="middle">80</text>
+<text x="417.4" y="212" class="ax" text-anchor="middle">90</text>
+<text x="458.0" y="212" class="ax" text-anchor="middle">100</text>
+<line x1="52" x2="458" y1="196.0" y2="196.0" class="axis"/><text x="458" y="230" class="axlabel" text-anchor="end">words per clip</text><text x="52" y="12" class="axlabel">clips</text></svg>

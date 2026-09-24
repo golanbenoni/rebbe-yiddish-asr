@@ -1,0 +1,5 @@
+# v4b part 2 (2026-09-22): real data only (TRAIN_MANIFEST=train.clean.jsonl). Hosts in cluster/hosts_v4b2.txt order.
+# supermac01 (512 GB): the recipe of the turbo winner on the large model (large lr2e5 3ep already scored 0.082 / clips 0.083)
+large-full-lr3e5-4ep          | --base-model ivrit-ai/yi-whisper-large-v3 --epochs 4 --lr 3e-5 --batch 8 --grad-accum 4 --gradient-checkpointing
+# bigmac01: seed repeat of the production recipe -> run-to-run variance of the 0.081 whole-file result
+turbo-full-lr3e5-4ep-seed7    | --base-model ivrit-ai/yi-whisper-large-v3-turbo --epochs 4 --lr 3e-5 --seed 7 --batch 8 --grad-accum 4 --gradient-checkpointing

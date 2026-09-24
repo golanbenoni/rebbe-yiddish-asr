@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 260" width="480" height="260" style="background:#fff"><style>
+.grid{stroke:#D6DBD8;stroke-width:1}.axis{stroke:#5C6664;stroke-width:1}.ax{font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;fill:#5C6664}.ax.sub{font-size:10px}.axlabel{font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;fill:#5C6664}
+.val{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;fill:#1B1F1E}.rowlab{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;font-size:12.5px;fill:#1B1F1E}.rowlab.prod{font-weight:600}.rowlab.base{fill:#5C6664}
+.ctitle{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;font-size:12.5px;font-weight:600;fill:#1B1F1E}.marker{stroke:#B5443A;stroke-width:1;stroke-dasharray:3 3}.marker-text{fill:#B5443A}.band{fill:rgba(36,87,166,.07)}
+.s-train{fill:#2457A6}.s-dev{fill:#C98B1F}.s-test{fill:#3E7D6E}.s-before{fill:#A9B2AE}.s-pseudo{fill:#7B8FB8}
+.line{stroke-width:1.8;fill:none}.line.s1{stroke:#2457A6}.line.s2{stroke:#C98B1F}.line.s3{stroke:#3E7D6E}.line.s4{stroke:#B5443A}.line.s5{stroke:#6B4FA3}.line.s6{stroke:#2A8A99}
+.dot.s1{fill:#2457A6}.dot.s2{fill:#C98B1F}.dot.s3{fill:#3E7D6E}.dot.s4{fill:#B5443A}.dot.s5{fill:#6B4FA3}.dot.s6{fill:#2A8A99}
+</style><rect x="0" y="0" width="480" height="260" fill="#ffffff"/>
+<line x1="56" x2="464" y1="204.0" y2="204.0" class="grid"/>
+<text x="48" y="208.0" class="ax" text-anchor="end">0</text>
+<line x1="56" x2="464" y1="157.5" y2="157.5" class="grid"/>
+<text x="48" y="161.5" class="ax" text-anchor="end">10</text>
+<line x1="56" x2="464" y1="111.0" y2="111.0" class="grid"/>
+<text x="48" y="115.0" class="ax" text-anchor="end">20</text>
+<line x1="56" x2="464" y1="64.5" y2="64.5" class="grid"/>
+<text x="48" y="68.5" class="ax" text-anchor="end">30</text>
+<line x1="56" x2="464" y1="18.0" y2="18.0" class="grid"/>
+<text x="48" y="22.0" class="ax" text-anchor="end">40</text>
+<text x="56" y="12" class="axlabel">hours of clips</text>
+<rect x="63.3" y="80.1" width="65.9" height="123.9" class="s-train"><title>5783 · hours: 26.65</title></rect>
+<text x="96.3" y="76.1" class="val" text-anchor="middle">26.65</text>
+<text x="96.8" y="220" class="ax" text-anchor="middle">5783</text>
+<text x="96.8" y="234" class="ax sub" text-anchor="middle">242 days · 4,873 clips</text>
+<rect x="144.9" y="45.8" width="65.9" height="158.2" class="s-train"><title>5784 · hours: 34.02</title></rect>
+<text x="177.9" y="41.8" class="val" text-anchor="middle">34.02</text>
+<text x="178.4" y="220" class="ax" text-anchor="middle">5784</text>
+<text x="178.4" y="234" class="ax sub" text-anchor="middle">318 days · 6,290 clips</text>
+<rect x="226.5" y="49.5" width="65.9" height="154.5" class="s-train"><title>5785 · hours: 33.23</title></rect>
+<text x="259.5" y="45.5" class="val" text-anchor="middle">33.23</text>
+<text x="260.0" y="220" class="ax" text-anchor="middle">5785</text>
+<text x="260.0" y="234" class="ax sub" text-anchor="middle">290 days · 6,080 clips</text>
+<rect x="308.1" y="34.2" width="65.9" height="169.8" class="s-train"><title>5786 · hours: 36.51</title></rect>
+<text x="341.1" y="30.2" class="val" text-anchor="middle">36.51</text>
+<text x="341.6" y="220" class="ax" text-anchor="middle">5786</text>
+<text x="341.6" y="234" class="ax sub" text-anchor="middle">291 days · 6,224 clips</text>
+<rect x="389.7" y="30.2" width="65.9" height="173.8" class="s-train"><title>5787 · hours: 37.38</title></rect>
+<text x="422.7" y="26.2" class="val" text-anchor="middle">37.38</text>
+<text x="423.2" y="220" class="ax" text-anchor="middle">5787</text>
+<text x="423.2" y="234" class="ax sub" text-anchor="middle">319 days · 6,745 clips</text>
+<line x1="56" x2="464" y1="204.0" y2="204.0" class="axis"/>
+</svg>

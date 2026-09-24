@@ -1,0 +1,11 @@
+# v3 wave (2026-09-21): semi-supervised round. TRAIN_MANIFEST=train.clean_pseudo.jsonl (27,833 human-timed clips +
+# pseudo-labeled clips cut from the 1,005 Phase 7 transcripts of 5778-5781, model = turbo-full-lr2e5-3ep decoded
+# with the GPU path (--backend hf, long-form test WER 0.088), labels normalized by pipeline/merge_pseudo_manifest.py). One line per host in cluster/hosts_v3.txt order. Compare against:
+#   bigmac03 turbo-full-cont-lr1e5-3ep (same continuation on real data only) -> isolates the pseudo-data effect
+#   v1 turbo-full-lr2e5-3ep (fresh on real data only)
+# bigmac01: continue the best v1 model on the mixed set (self-training: the labels came from this same model)
+turbo-full-pseudo-cont-lr1e5-2ep   | --base-model ivrit-ai/yi-whisper-large-v3-turbo --init-from runs/turbo-full-lr2e5-3ep --epochs 2 --lr 1e-5 --warmup-steps 100 --batch 8 --grad-accum 4 --gradient-checkpointing
+# bigmac04: fresh turbo full fine-tune on the mixed set
+turbo-full-pseudo-lr2e5-2ep        | --base-model ivrit-ai/yi-whisper-large-v3-turbo --epochs 2 --lr 2e-5 --batch 8 --grad-accum 4 --gradient-checkpointing
+# supermac01: continue the sibling lr1e5 model on the mixed set (labels from lr2e5 = cross-model)
+turbo-full-pseudo-self-lr1e5-2ep   | --base-model ivrit-ai/yi-whisper-large-v3-turbo --init-from runs/turbo-full-lr1e5-3ep --epochs 2 --lr 1e-5 --warmup-steps 100 --batch 8 --grad-accum 4 --gradient-checkpointing

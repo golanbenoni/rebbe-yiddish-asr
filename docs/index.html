@@ -1,0 +1,937 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rebbe Yiddish ASR Corpus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Hebrew:wght@400;500&display=swap">
+<style>
+:root{--bg:#F4F5F2;--surface:#FFFFFF;--ink:#1B1F1E;--muted:#5C6664;--hair:#D6DBD8;--band:rgba(36,87,166,.07);
+--s1:#2457A6;--s2:#C98B1F;--s3:#3E7D6E;--s4:#B5443A;--s5:#6B4FA3;--s6:#2A8A99;--before:#A9B2AE;--pseudo:#7B8FB8;
+--serif:"Source Serif 4",Georgia,"Times New Roman",serif;--sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;--mono:"IBM Plex Mono",Menlo,Consolas,monospace;--heb:"IBM Plex Sans Hebrew","Noto Sans Hebrew",Arial,sans-serif;color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#15181A;--surface:#1E2224;--ink:#E6E9E7;--muted:#9AA5A1;--hair:#333A3D;--band:rgba(108,155,224,.12);--s1:#6C9BE0;--s2:#E0A43A;--s3:#6FB39F;--s4:#E07A70;--s5:#A98FDD;--s6:#5BB8C6;--before:#5E6A66;--pseudo:#8FA6D6;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#15181A;--surface:#1E2224;--ink:#E6E9E7;--muted:#9AA5A1;--hair:#333A3D;--band:rgba(108,155,224,.12);--s1:#6C9BE0;--s2:#E0A43A;--s3:#6FB39F;--s4:#E07A70;--s5:#A98FDD;--s6:#5BB8C6;--before:#5E6A66;--pseudo:#8FA6D6;color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55}
+.wrap{max-width:1040px;margin:0 auto;padding-block:28px 64px;padding-inline:clamp(16px,4vw,40px)}
+header.top{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--hair);padding-bottom:14px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,4.2vw,44px);line-height:1.08;margin:18px 0 10px;text-wrap:balance;letter-spacing:-.01em}
+h2{font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.15;margin:52px 0 8px;text-wrap:balance}
+h3{font-family:var(--sans);font-weight:600;font-size:16px;margin:26px 0 6px}
+p,li{max-width:70ch}
+.lede{font-size:17px;color:var(--ink);max-width:72ch}
+.muted{color:var(--muted)} .mono{font-family:var(--mono);font-variant-numeric:tabular-nums} .small{font-size:13px}
+.figures{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair);margin:26px 0 8px}
+.fig{background:var(--surface);padding:14px 16px}
+.fig b{display:block;font-family:var(--mono);font-size:26px;font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.fig span{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.chart{display:block;width:100%;margin:10px 0 4px}
+.chart .grid{stroke:var(--hair);stroke-width:1} .chart .axis{stroke:var(--muted);stroke-width:1}
+.chart .ax{font-family:var(--mono);font-size:11px;fill:var(--muted)} .chart .ax.sub{font-size:10px} .chart .axlabel{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+.chart .val{font-family:var(--mono);font-size:10.5px;fill:var(--ink)} .chart .rowlab{font-family:var(--sans);font-size:12.5px;fill:var(--ink)} .chart .rowlab.prod{font-weight:600} .chart .rowlab.base{fill:var(--muted)}
+.chart .ctitle{font-family:var(--sans);font-size:12.5px;font-weight:600;fill:var(--ink)}
+.chart .marker{stroke:var(--s4);stroke-width:1;stroke-dasharray:3 3} .chart .marker-text{fill:var(--s4)} .chart .band{fill:var(--band)}
+.s-train{fill:var(--s1)} .s-dev{fill:var(--s2)} .s-test{fill:var(--s3)} .s-before{fill:var(--before)} .s-pseudo{fill:var(--pseudo)}
+.line.s1{stroke:var(--s1)} .line.s2{stroke:var(--s2)} .line.s3{stroke:var(--s3)} .line.s4{stroke:var(--s4)} .line.s5{stroke:var(--s5)} .line.s6{stroke:var(--s6)} .line{stroke-width:1.8}
+.dot.s1{fill:var(--s1)} .dot.s2{fill:var(--s2)} .dot.s3{fill:var(--s3)} .dot.s4{fill:var(--s4)} .dot.s5{fill:var(--s5)} .dot.s6{fill:var(--s6)}
+.sw{display:inline-block;width:18px;height:0;border-top:3px solid;vertical-align:middle;margin-right:8px} .sw.s1{border-color:var(--s1)} .sw.s2{border-color:var(--s2)} .sw.s3{border-color:var(--s3)} .sw.s4{border-color:var(--s4)} .sw.s5{border-color:var(--s5)} .sw.s6{border-color:var(--s6)}
+.legend{list-style:none;padding:0;margin:4px 0 0;font-size:12.5px} .legend li{margin:3px 0;max-width:none}
+.keys{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.5px;margin:2px 0 0} .keys span::before{content:"";display:inline-block;width:11px;height:11px;margin-right:6px;vertical-align:-1px}
+.keys .k-train::before{background:var(--s1)} .keys .k-dev::before{background:var(--s2)} .keys .k-test::before{background:var(--s3)} .keys .k-before::before{background:var(--before)} .keys .k-pseudo::before{background:var(--pseudo)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px 28px;align-items:start}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px 24px;align-items:start}
+figure{margin:12px 0 0} figcaption{font-size:13px;color:var(--muted);max-width:78ch;margin-top:2px}
+.tablewrap{overflow-x:auto;margin:10px 0} table{border-collapse:collapse;width:100%;font-size:13.5px} th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--hair);vertical-align:top} th{font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)} td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;counter-reset:step;margin:14px 0}
+.flow div{background:var(--surface);border:1px solid var(--hair);padding:12px 12px 12px;font-size:13px;counter-increment:step;position:relative}
+.flow div::before{content:counter(step);font-family:var(--mono);font-size:11px;color:var(--muted);display:block;margin-bottom:4px}
+.flow b{display:block;font-size:14px;margin-bottom:3px} .flow code{font-size:11.5px}
+code{font-family:var(--mono);font-size:12.5px;background:var(--surface);border:1px solid var(--hair);padding:0 4px;border-radius:2px}
+.yi{font-family:var(--heb);direction:rtl;unicode-bidi:isolate;font-size:15px}
+.callout{border-left:3px solid var(--s2);padding:8px 14px;background:var(--surface);margin:14px 0;max-width:78ch} .callout p{margin:4px 0}
+.note{font-size:13px;color:var(--muted)}
+dl.defs{display:grid;grid-template-columns:max-content 1fr;gap:6px 18px;max-width:80ch} dl.defs dt{font-weight:600} dl.defs dd{margin:0}
+@media (max-width:640px){dl.defs{grid-template-columns:1fr} .fig b{font-size:22px}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+a{color:var(--s1)} a:focus-visible,button:focus-visible{outline:2px solid var(--s2);outline-offset:2px}
+footer{margin-top:56px;border-top:1px solid var(--hair);padding-top:12px;font-size:12.5px;color:var(--muted)}
+@media print{:root{--bg:#fff;--surface:#fff;--ink:#111;--muted:#555;--hair:#ccc;--band:rgba(36,87,166,.08)} body{background:#fff;font-size:12.5px} .wrap{max-width:none;padding:0} h2{break-after:avoid;margin-top:34px} h1{font-size:30px}
+ figure,.callout,.tablewrap,.figures,.flow div,.two>*,.three>*{break-inside:avoid} .chart{max-width:100%} a{color:inherit;text-decoration:none} .export{display:none} @page{size:A4;margin:14mm}}
+</style>
+</head><body><div class="wrap">
+<header class="top"><span class="eyebrow">Training-data sheet · snapshot 2026-09-24 05:45 EDT (v4 complete, v5 data building)</span><span class="eyebrow">Sichos / asr · prepared for the training scientist</span></header>
+<p class="export note">Export: this page prints cleanly (File → Print → Save as PDF; the layout has print styles). A PDF, the standalone HTML, every chart as SVG and PNG, and the underlying tables as CSV are in <code>asr/reports/corpus-datasheet-export.zip</code>.</p>
+<h1>Rebbe Yiddish ASR Corpus</h1>
+<p class="lede">Everything the speech-recognition models in this project train and test on, updated 2026-09-24 with the new source data, the v4 results, the audit of the delivered transcripts and the plan for v5: where the audio and text come from, how they were paired and cut into clips, what was filtered, how the fixed evaluation sets were chosen, the pseudo-labeled extension, and what each training run did with it. All figures are computed from the manifests in <code>asr/data/manifests/</code> and the evaluation reports in <code>asr/reports/</code>; nothing here is estimated.</p>
+<div class="figures"><div class="fig"><b>1,468</b><span>paired days (audio + Yiddish hanacha)</span></div><div class="fig"><b>30,212</b><span>clips ≤ 28 s, 168 h</span></div><div class="fig"><b>1.25 M</b><span>reference words</span></div><div class="fig"><b>27,833</b><span>clean training clips, 153 h</span></div><div class="fig"><b>20 / 20</b><span>fixed dev / test days</span></div><div class="fig"><b>+1,758</b><span>paired days arriving in v5 (5775–5781): 306 h, 2.31 M words</span></div></div>
+<p class="note">Hours are audio inside clips. Words are counted on the training-target text (punctuation kept, vowel points removed). Hebrew years: 5711 = 1950/51 … 5752 = 1991/92; 5783 = 2022/23 … 5787 = 2026/27.</p>
+
+<h2>What one training example is</h2>
+<p>A <b>clip</b> is a stretch of at most 28 s of the Rebbe's speech, cut from a Daily Sicha recording, paired with the words the published Yiddish <i>hanacha</i> (the written transcript of the talk) gives for that stretch. The model sees the 16 kHz mono audio and learns to emit the text. A typical clip is 20 s long and carries about 42 words at 2.1 words per second.</p>
+<div class="callout"><p class="mono small muted">id 5783/001/000 · 38.22–54.59 s · 16.4 s · timing: site sync (offset-corrected)</p>
+<p class="yi muted">[the example text is withheld on the public page: the hanachos belong to The Daily Sicha and are not republished here]</p>
+<p class="small muted">One real training target. Note the conventions the model must learn: Yiddish in unpointed Hebrew script, loshon-kodesh phrases embedded verbatim, source names abbreviated with gershayim (רמב"ן, של"ה), quoted terms in quotation marks.</p></div>
+
+<h2>Where the data comes from</h2>
+<p>The Daily Sicha (thedailysicha.com) publishes one ~10-minute excerpt of a farbrengen per day with a Yiddish hanacha, and for recent years a sync file with segment timings. The project holds the daily mp3s for five publication years (5783–5787) and the site's text for each; the source talks span 1950 to 1992. Four older archive years (5778–5781, 1,005 files) have audio only and are the transcription target of the project.</p>
+<div class="flow">
+<div><b>Pair days</b>Resolve each mp3 to its Hebrew date, fetch the day's hanacha and sync JSON.<code>fetch_days.py</code></div>
+<div><b>Measure offsets</b>292 of 613 daily files carry a dedication before the excerpt (median 9.2 s); cross-correlation finds where the excerpt starts.<code>compute_offsets.py</code></div>
+<div><b>Align text to audio</b>Where the site has no timings, a Yiddish Whisper model transcribes with word times and the hypothesis is anchored to the reference (exact, then fuzzy).<code>align_day.py</code></div>
+<div><b>Cut clips</b>Merge consecutive timed segments up to 28 s; write FLAC clips and manifests; split by day.<code>build_dataset.py</code></div>
+<div><b>Filter</b>Drop clips whose baseline transcription disagrees wildly with the reference (misaligned timings).<code>filter_manifest.py</code></div>
+<div><b>Extend</b>Transcribe the 1,005 text-less files with the best model and turn confident windows into pseudo-labeled clips.<code>build_pseudo_dataset.py</code></div>
+</div>
+<div class="two">
+<figure><svg viewBox="0 0 480 260" class="chart" role="img" aria-label="hours of clips by category" style="max-width:100%;height:auto">
+<line x1="56" x2="464" y1="204.0" y2="204.0" class="grid"/>
+<text x="48" y="208.0" class="ax" text-anchor="end">0</text>
+<line x1="56" x2="464" y1="157.5" y2="157.5" class="grid"/>
+<text x="48" y="161.5" class="ax" text-anchor="end">10</text>
+<line x1="56" x2="464" y1="111.0" y2="111.0" class="grid"/>
+<text x="48" y="115.0" class="ax" text-anchor="end">20</text>
+<line x1="56" x2="464" y1="64.5" y2="64.5" class="grid"/>
+<text x="48" y="68.5" class="ax" text-anchor="end">30</text>
+<line x1="56" x2="464" y1="18.0" y2="18.0" class="grid"/>
+<text x="48" y="22.0" class="ax" text-anchor="end">40</text>
+<text x="56" y="12" class="axlabel">hours of clips</text>
+<rect x="63.3" y="80.1" width="65.9" height="123.9" class="s-train"><title>5783 · hours: 26.65</title></rect>
+<text x="96.3" y="76.1" class="val" text-anchor="middle">26.65</text>
+<text x="96.8" y="220" class="ax" text-anchor="middle">5783</text>
+<text x="96.8" y="234" class="ax sub" text-anchor="middle">242 days · 4,873 clips</text>
+<rect x="144.9" y="45.8" width="65.9" height="158.2" class="s-train"><title>5784 · hours: 34.02</title></rect>
+<text x="177.9" y="41.8" class="val" text-anchor="middle">34.02</text>
+<text x="178.4" y="220" class="ax" text-anchor="middle">5784</text>
+<text x="178.4" y="234" class="ax sub" text-anchor="middle">318 days · 6,290 clips</text>
+<rect x="226.5" y="49.5" width="65.9" height="154.5" class="s-train"><title>5785 · hours: 33.23</title></rect>
+<text x="259.5" y="45.5" class="val" text-anchor="middle">33.23</text>
+<text x="260.0" y="220" class="ax" text-anchor="middle">5785</text>
+<text x="260.0" y="234" class="ax sub" text-anchor="middle">290 days · 6,080 clips</text>
+<rect x="308.1" y="34.2" width="65.9" height="169.8" class="s-train"><title>5786 · hours: 36.51</title></rect>
+<text x="341.1" y="30.2" class="val" text-anchor="middle">36.51</text>
+<text x="341.6" y="220" class="ax" text-anchor="middle">5786</text>
+<text x="341.6" y="234" class="ax sub" text-anchor="middle">291 days · 6,224 clips</text>
+<rect x="389.7" y="30.2" width="65.9" height="173.8" class="s-train"><title>5787 · hours: 37.38</title></rect>
+<text x="422.7" y="26.2" class="val" text-anchor="middle">37.38</text>
+<text x="423.2" y="220" class="ax" text-anchor="middle">5787</text>
+<text x="423.2" y="234" class="ax sub" text-anchor="middle">319 days · 6,745 clips</text>
+<line x1="56" x2="464" y1="204.0" y2="204.0" class="axis"/>
+</svg><figcaption><b>Clips by Daily Sicha publication year.</b> 1,460 of the 1,468 paired days yielded clips (8 days failed alignment). Per year: 5783 = 242 days, 5784 = 318, 5785 = 290, 5786 = 291, 5787 = 319.</figcaption></figure>
+<figure><svg viewBox="0 0 480 260" class="chart" role="img" aria-label="clips by category" style="max-width:100%;height:auto">
+<line x1="56" x2="464" y1="204.0" y2="204.0" class="grid"/>
+<text x="48" y="208.0" class="ax" text-anchor="end">0</text>
+<line x1="56" x2="464" y1="142.0" y2="142.0" class="grid"/>
+<text x="48" y="146.0" class="ax" text-anchor="end">10,000</text>
+<line x1="56" x2="464" y1="80.0" y2="80.0" class="grid"/>
+<text x="48" y="84.0" class="ax" text-anchor="end">20,000</text>
+<line x1="56" x2="464" y1="18.0" y2="18.0" class="grid"/>
+<text x="48" y="22.0" class="ax" text-anchor="end">30,000</text>
+<text x="56" y="12" class="axlabel">clips</text>
+<rect x="68.2" y="33.7" width="111.5" height="170.3" class="s-train"><title>train · own anchor alignment: 27,461</title></rect>
+<rect x="68.2" y="22.5" width="111.5" height="11.2" class="s-test"><title>train · site sync timings (offset-corrected): 1,812</title></rect>
+<text x="124.0" y="18.5" class="val" text-anchor="middle">29,273</text>
+<text x="124.0" y="220" class="ax" text-anchor="middle">train</text>
+<rect x="204.2" y="201.2" width="111.5" height="2.8" class="s-train"><title>dev · own anchor alignment: 451</title></rect>
+<rect x="204.2" y="201.2" width="111.5" height="0.0" class="s-test"><title>dev · site sync timings (offset-corrected): 0</title></rect>
+<text x="260.0" y="197.2" class="val" text-anchor="middle">451</text>
+<text x="260.0" y="220" class="ax" text-anchor="middle">dev</text>
+<rect x="340.2" y="204.0" width="111.5" height="0.0" class="s-train"><title>test · own anchor alignment: 0</title></rect>
+<rect x="340.2" y="201.0" width="111.5" height="3.0" class="s-test"><title>test · site sync timings (offset-corrected): 488</title></rect>
+<text x="396.0" y="197.0" class="val" text-anchor="middle">488</text>
+<text x="396.0" y="220" class="ax" text-anchor="middle">test</text>
+<line x1="56" x2="464" y1="204.0" y2="204.0" class="axis"/>
+</svg><figcaption><b>How each clip got its timings.</b> 27,912 clips (92%) are timed by the project's own anchor alignment, 2,300 (8%) by the site's sync files corrected for the dedication offset. The test set is deliberately all site-timed; dev is all self-aligned (see splits).</figcaption></figure>
+</div>
+<figure><svg viewBox="0 0 980 320" class="chart" role="img" aria-label="hours of paired audio by category" style="max-width:100%;height:auto">
+<line x1="56" x2="964" y1="264.0" y2="264.0" class="grid"/>
+<text x="48" y="268.0" class="ax" text-anchor="end">0</text>
+<line x1="56" x2="964" y1="214.8" y2="214.8" class="grid"/>
+<text x="48" y="218.8" class="ax" text-anchor="end">2.5</text>
+<line x1="56" x2="964" y1="165.6" y2="165.6" class="grid"/>
+<text x="48" y="169.6" class="ax" text-anchor="end">5</text>
+<line x1="56" x2="964" y1="116.4" y2="116.4" class="grid"/>
+<text x="48" y="120.4" class="ax" text-anchor="end">7.5</text>
+<line x1="56" x2="964" y1="67.2" y2="67.2" class="grid"/>
+<text x="48" y="71.2" class="ax" text-anchor="end">10</text>
+<line x1="56" x2="964" y1="18.0" y2="18.0" class="grid"/>
+<text x="48" y="22.0" class="ax" text-anchor="end">12.5</text>
+<text x="56" y="12" class="axlabel">hours of paired audio</text>
+<rect x="57.9" y="240.8" width="16.7" height="23.2" class="s-train"><title>5711 · hours: 1.18</title></rect>
+<text x="66.8" y="280" class="ax" text-anchor="middle"></text>
+<rect x="79.6" y="242.0" width="16.7" height="22.0" class="s-train"><title>5712 · hours: 1.12</title></rect>
+<text x="88.4" y="280" class="ax" text-anchor="middle">5712</text>
+<rect x="101.2" y="263.8" width="16.7" height="0.2" class="s-train"><title>5713 · hours: 0.01</title></rect>
+<text x="110.0" y="280" class="ax" text-anchor="middle"></text>
+<rect x="122.8" y="223.9" width="16.7" height="40.1" class="s-train"><title>5714 · hours: 2.04</title></rect>
+<text x="131.7" y="280" class="ax" text-anchor="middle"></text>
+<rect x="144.4" y="230.5" width="16.7" height="33.5" class="s-train"><title>5715 · hours: 1.7</title></rect>
+<text x="153.3" y="280" class="ax" text-anchor="middle">5715</text>
+<rect x="166.0" y="209.7" width="16.7" height="54.3" class="s-train"><title>5716 · hours: 2.76</title></rect>
+<text x="174.9" y="280" class="ax" text-anchor="middle"></text>
+<rect x="187.7" y="226.8" width="16.7" height="37.2" class="s-train"><title>5717 · hours: 1.89</title></rect>
+<text x="196.5" y="280" class="ax" text-anchor="middle"></text>
+<rect x="209.3" y="220.5" width="16.7" height="43.5" class="s-train"><title>5718 · hours: 2.21</title></rect>
+<text x="218.1" y="280" class="ax" text-anchor="middle">5718</text>
+<rect x="230.9" y="234.9" width="16.7" height="29.1" class="s-train"><title>5719 · hours: 1.48</title></rect>
+<text x="239.8" y="280" class="ax" text-anchor="middle"></text>
+<rect x="252.5" y="219.3" width="16.7" height="44.7" class="s-train"><title>5720 · hours: 2.27</title></rect>
+<text x="261.4" y="280" class="ax" text-anchor="middle"></text>
+<rect x="274.1" y="223.1" width="16.7" height="40.9" class="s-train"><title>5721 · hours: 2.08</title></rect>
+<text x="283.0" y="280" class="ax" text-anchor="middle">5721</text>
+<rect x="295.8" y="201.6" width="16.7" height="62.4" class="s-train"><title>5722 · hours: 3.17</title></rect>
+<text x="304.6" y="280" class="ax" text-anchor="middle"></text>
+<rect x="317.4" y="223.7" width="16.7" height="40.3" class="s-train"><title>5723 · hours: 2.05</title></rect>
+<text x="326.2" y="280" class="ax" text-anchor="middle"></text>
+<rect x="339.0" y="222.1" width="16.7" height="41.9" class="s-train"><title>5724 · hours: 2.13</title></rect>
+<text x="347.9" y="280" class="ax" text-anchor="middle">5724</text>
+<rect x="360.6" y="198.9" width="16.7" height="65.1" class="s-train"><title>5725 · hours: 3.31</title></rect>
+<text x="369.5" y="280" class="ax" text-anchor="middle"></text>
+<rect x="382.2" y="228.6" width="16.7" height="35.4" class="s-train"><title>5726 · hours: 1.8</title></rect>
+<text x="391.1" y="280" class="ax" text-anchor="middle"></text>
+<rect x="403.9" y="227.2" width="16.7" height="36.8" class="s-train"><title>5727 · hours: 1.87</title></rect>
+<text x="412.7" y="280" class="ax" text-anchor="middle">5727</text>
+<rect x="425.5" y="214.8" width="16.7" height="49.2" class="s-train"><title>5728 · hours: 2.5</title></rect>
+<text x="434.3" y="280" class="ax" text-anchor="middle"></text>
+<rect x="447.1" y="215.8" width="16.7" height="48.2" class="s-train"><title>5729 · hours: 2.45</title></rect>
+<text x="456.0" y="280" class="ax" text-anchor="middle"></text>
+<rect x="468.7" y="233.3" width="16.7" height="30.7" class="s-train"><title>5730 · hours: 1.56</title></rect>
+<text x="477.6" y="280" class="ax" text-anchor="middle">5730</text>
+<rect x="490.3" y="217.4" width="16.7" height="46.6" class="s-train"><title>5731 · hours: 2.37</title></rect>
+<text x="499.2" y="280" class="ax" text-anchor="middle"></text>
+<rect x="511.9" y="211.8" width="16.7" height="52.2" class="s-train"><title>5732 · hours: 2.65</title></rect>
+<text x="520.8" y="280" class="ax" text-anchor="middle"></text>
+<rect x="533.6" y="215.6" width="16.7" height="48.4" class="s-train"><title>5733 · hours: 2.46</title></rect>
+<text x="542.4" y="280" class="ax" text-anchor="middle">5733</text>
+<rect x="555.2" y="190.8" width="16.7" height="73.2" class="s-train"><title>5734 · hours: 3.72</title></rect>
+<text x="564.0" y="280" class="ax" text-anchor="middle"></text>
+<rect x="576.8" y="169.5" width="16.7" height="94.5" class="s-train"><title>5735 · hours: 4.8</title></rect>
+<text x="585.7" y="280" class="ax" text-anchor="middle"></text>
+<rect x="598.4" y="126.4" width="16.7" height="137.6" class="s-train"><title>5736 · hours: 6.99</title></rect>
+<text x="607.3" y="280" class="ax" text-anchor="middle">5736</text>
+<rect x="620.0" y="172.1" width="16.7" height="91.9" class="s-train"><title>5737 · hours: 4.67</title></rect>
+<text x="628.9" y="280" class="ax" text-anchor="middle"></text>
+<rect x="641.7" y="109.3" width="16.7" height="154.7" class="s-train"><title>5738 · hours: 7.86</title></rect>
+<text x="650.5" y="280" class="ax" text-anchor="middle"></text>
+<rect x="663.3" y="31.6" width="16.7" height="232.4" class="s-train"><title>5739 · hours: 11.81</title></rect>
+<text x="672.1" y="280" class="ax" text-anchor="middle">5739</text>
+<rect x="684.9" y="87.1" width="16.7" height="176.9" class="s-train"><title>5740 · hours: 8.99</title></rect>
+<text x="693.8" y="280" class="ax" text-anchor="middle"></text>
+<rect x="706.5" y="115.0" width="16.7" height="149.0" class="s-train"><title>5741 · hours: 7.57</title></rect>
+<text x="715.4" y="280" class="ax" text-anchor="middle"></text>
+<rect x="728.1" y="137.1" width="16.7" height="126.9" class="s-train"><title>5742 · hours: 6.45</title></rect>
+<text x="737.0" y="280" class="ax" text-anchor="middle">5742</text>
+<rect x="749.8" y="89.0" width="16.7" height="175.0" class="s-train"><title>5743 · hours: 8.89</title></rect>
+<text x="758.6" y="280" class="ax" text-anchor="middle"></text>
+<rect x="771.4" y="112.9" width="16.7" height="151.1" class="s-train"><title>5744 · hours: 7.68</title></rect>
+<text x="780.2" y="280" class="ax" text-anchor="middle"></text>
+<rect x="793.0" y="79.2" width="16.7" height="184.8" class="s-train"><title>5745 · hours: 9.39</title></rect>
+<text x="801.9" y="280" class="ax" text-anchor="middle">5745</text>
+<rect x="814.6" y="96.1" width="16.7" height="167.9" class="s-train"><title>5746 · hours: 8.53</title></rect>
+<text x="823.5" y="280" class="ax" text-anchor="middle"></text>
+<rect x="836.2" y="145.3" width="16.7" height="118.7" class="s-train"><title>5747 · hours: 6.03</title></rect>
+<text x="845.1" y="280" class="ax" text-anchor="middle"></text>
+<rect x="857.9" y="190.0" width="16.7" height="74.0" class="s-train"><title>5748 · hours: 3.76</title></rect>
+<text x="866.7" y="280" class="ax" text-anchor="middle">5748</text>
+<rect x="879.5" y="165.2" width="16.7" height="98.8" class="s-train"><title>5749 · hours: 5.02</title></rect>
+<text x="888.3" y="280" class="ax" text-anchor="middle"></text>
+<rect x="901.1" y="232.7" width="16.7" height="31.3" class="s-train"><title>5750 · hours: 1.59</title></rect>
+<text x="910.0" y="280" class="ax" text-anchor="middle"></text>
+<rect x="922.7" y="233.3" width="16.7" height="30.7" class="s-train"><title>5751 · hours: 1.56</title></rect>
+<text x="931.6" y="280" class="ax" text-anchor="middle">5751</text>
+<rect x="944.3" y="227.4" width="16.7" height="36.6" class="s-train"><title>5752 · hours: 1.86</title></rect>
+<text x="953.2" y="280" class="ax" text-anchor="middle"></text>
+<line x1="56" x2="964" y1="264.0" y2="264.0" class="axis"/>
+<rect x="661.3" y="18" width="302.7" height="246" class="band"/><text x="667.3" y="32" class="ax">5739 and later (the years the hanachos' author asked for)</text>
+</svg><figcaption><b>Hours of paired audio by year of the original farbrengen</b> (5711–5752; 637 clips from 32 days have no recorded year and are omitted here). The bulk of the material is 5734–5749; the shaded region marks 5739 onward, the years the requested transcriptions must cover. Older recordings are noisier and the speaker is younger, so the model sees both conditions.</figcaption></figure>
+
+
+<h2>New since 2026-09-23: hanachos and audio for 5775–5781</h2>
+<p>The Daily Sicha delivered the Yiddish hanachos as one PDF per year (5768–5782 and 5784–5787) together with the recordings of 5775–5777. The four years the project had been transcribing <i>without</i> text (5778–5781) and three more years are now paired: <b>1,758 days, 306 h of recordings, 2.31 M words</b>, more than doubling the corpus once aligned. Nine PDFs have a clean text layer. Ten (5768–5770, 5774–5780) are set in custom-encoded fonts: every glyph code is a fixed permutation of the Hebrew alphabet, different per font. They are decoded exactly rather than OCR'd: <code>pipeline/pdf_fontmap.py</code> hill-climbs each font's code→letter map by the share of decoded words that exist in the training vocabulary (0.91–0.93 for the body font) and pins the bold header font with the words every day's header shares (<span class="yi">בס"ד. "השיחה היומית" ליום</span>, the year, <span class="yi">התוכן</span>, the month names). Tesseract on the same pages scored 0.39 WER; the exact decode leaves no systematic errors (the drafts-vs-text numbers below equal the clean-layer year).</p>
+<div class="flow">
+<div><b>Decode the fonts</b>Learn one code→letter map per font from ~100k sample words; bold font pinned by the header crib.<code>pdf_fontmap.py</code></div>
+<div><b>Split into days</b>Header line → day; the printed [NNN] number → the mp3 stem. All 1,758 days matched, none missing or duplicated.<code>pdf_hanachos.py</code></div>
+<div><b>Day records</b>Same record shape as the site years, text as one paragraph per PDF line, no site timings (offset 0).<code>build_pdf_days.py</code></div>
+<div><b>Align on the fleet</b>7 Mac Studios × 5 workers, production CT2 model anchors the text to the audio (anchor rates 0.94–0.98).<code>align_day.py</code></div>
+<div><b>Build + scan</b>Clips ≤ 28 s; the production model transcribes every train clip; clips with CER &gt; 0.6 are dropped (per-year drop rate = text-quality signal).<code>build_dataset.py · filter_manifest.py</code></div>
+</div>
+<div class="keys"><span class="k-pseudo">new years (aligning now)</span><span class="k-train">v4 training years</span></div>
+<figure><svg viewBox="0 0 980 348" class="chart" role="img" aria-label="paired days per Daily Sicha publication year" style="max-width:100%;height:auto">
+<line y1="20" y2="314" x1="360.0" x2="360.0" class="grid"/>
+<text y="330" x="360.0" class="ax" text-anchor="middle">0</text>
+<line y1="20" y2="314" x1="497.5" x2="497.5" class="grid"/>
+<text y="330" x="497.5" class="ax" text-anchor="middle">100</text>
+<line y1="20" y2="314" x1="635.0" x2="635.0" class="grid"/>
+<text y="330" x="635.0" class="ax" text-anchor="middle">200</text>
+<line y1="20" y2="314" x1="772.5" x2="772.5" class="grid"/>
+<text y="330" x="772.5" class="ax" text-anchor="middle">300</text>
+<line y1="20" y2="314" x1="910.0" x2="910.0" class="grid"/>
+<text y="330" x="910.0" class="ax" text-anchor="middle">400</text>
+<text x="910" y="344" class="axlabel" text-anchor="end">paired days per Daily Sicha publication year</text>
+<text x="350" y="42.0" class="rowlab " text-anchor="end">5775 · 42.5 h audio · 0.32 M words · decoded</text>
+<rect x="360" y="30.0" width="339.6" height="15.0" class="s-pseudo"><title>: 247.000</title></rect>
+<text x="704.6" y="41.5" class="val">247.000</text>
+<text x="350" y="66.0" class="rowlab " text-anchor="end">5776 · 46.5 h audio · 0.35 M words · decoded</text>
+<rect x="360" y="54.0" width="365.8" height="15.0" class="s-pseudo"><title>: 266.000</title></rect>
+<text x="730.8" y="65.5" class="val">266.000</text>
+<text x="350" y="90.0" class="rowlab " text-anchor="end">5777 · 42.3 h audio · 0.32 M words · decoded</text>
+<rect x="360" y="78.0" width="330.0" height="15.0" class="s-pseudo"><title>: 240.000</title></rect>
+<text x="695.0" y="89.5" class="val">240.000</text>
+<text x="350" y="114.0" class="rowlab " text-anchor="end">5778 · 43.4 h audio · 0.33 M words · decoded</text>
+<rect x="360" y="102.0" width="339.6" height="15.0" class="s-pseudo"><title>: 247.000</title></rect>
+<text x="704.6" y="113.5" class="val">247.000</text>
+<text x="350" y="138.0" class="rowlab " text-anchor="end">5779 · 46.6 h audio · 0.35 M words · decoded</text>
+<rect x="360" y="126.0" width="365.8" height="15.0" class="s-pseudo"><title>: 266.000</title></rect>
+<text x="730.8" y="137.5" class="val">266.000</text>
+<text x="350" y="162.0" class="rowlab " text-anchor="end">5780 · 42.1 h audio · 0.32 M words · decoded</text>
+<rect x="360" y="150.0" width="336.9" height="15.0" class="s-pseudo"><title>: 245.000</title></rect>
+<text x="701.9" y="161.5" class="val">245.000</text>
+<text x="350" y="186.0" class="rowlab " text-anchor="end">5781 · 43.1 h audio · 0.33 M words · clean text layer</text>
+<rect x="360" y="174.0" width="339.6" height="15.0" class="s-pseudo"><title>: 247.000</title></rect>
+<text x="704.6" y="185.5" class="val">247.000</text>
+<text x="350" y="210.0" class="rowlab " text-anchor="end">5783 · site text (v4 training data)</text>
+<rect x="360" y="198.0" width="332.8" height="15.0" class="s-train"><title>: 242.000</title></rect>
+<text x="697.8" y="209.5" class="val">242.000</text>
+<text x="350" y="234.0" class="rowlab " text-anchor="end">5784 · site text (v4 training data)</text>
+<rect x="360" y="222.0" width="437.2" height="15.0" class="s-train"><title>: 318.000</title></rect>
+<text x="802.2" y="233.5" class="val">318.000</text>
+<text x="350" y="258.0" class="rowlab " text-anchor="end">5785 · site text (v4 training data)</text>
+<rect x="360" y="246.0" width="398.8" height="15.0" class="s-train"><title>: 290.000</title></rect>
+<text x="763.8" y="257.5" class="val">290.000</text>
+<text x="350" y="282.0" class="rowlab " text-anchor="end">5786 · site text (v4 training data)</text>
+<rect x="360" y="270.0" width="400.1" height="15.0" class="s-train"><title>: 291.000</title></rect>
+<text x="765.1" y="281.5" class="val">291.000</text>
+<text x="350" y="306.0" class="rowlab " text-anchor="end">5787 · site text (v4 training data)</text>
+<rect x="360" y="294.0" width="438.6" height="15.0" class="s-train"><title>: 319.000</title></rect>
+<text x="803.6" y="305.5" class="val">319.000</text>
+</svg><figcaption><b>Paired days per Daily Sicha publication year.</b> Hours are recording time before clipping (roughly 65% of it ends up inside clips). Text for 5768–5770, 5774 and 5782 exists too (about 1.4 M words) but no audio is in hand, so those years are text-only for now.</figcaption></figure>
+<div class="callout"><p><b>Three traps in the PDFs, all fixed at the glyph level.</b> (1) 5776–5778 carry a diagonal watermark (<span class="yi">הנחה פרטית בלתי מוגה</span>, 80–85 pt): its letters landed on body rows and fused words (2,100–2,700 fourteen-letter "words" per year against ~130 in clean years) and left ~500 stray single letters per year; glyphs over 40 pt are now dropped before rows are formed. (2) Every page's footer small print (contact line, 6–10 pt, Arial/Tahoma) decoded through the wrong font into junk tokens, up to 2,788 per year; rows are now kept only in the body font family, not by size (two 10 pt days would have been emptied by a size cut), and the training-text normalizer drops any token with Latin letters. (3) The bold header font learned without the crib landed in a wrong permutation on 5775/5776 (0.03 in-vocabulary, zero days found); with the crib it reaches 0.82–0.85. After the fixes the 5778 drafts score 0.072 against the text instead of 0.120: the gap was the text, not the audio.</p></div>
+
+<h2>Splits</h2>
+<p>Splitting is by day, never by clip, so no test audio shares a recording with training audio. The rule, fixed on 2026-09-16 and never changed:</p>
+<div class="callout"><p>test: 20 evenly spaced days among the site-timed days (Tamuz 5786-Tishrei 5787) whose source farbrengen is 5739 or later and whose offset is known; dev: 20 evenly spaced days among the remaining text-only days with known offsets. Fixed on 2026-09-16; never train on these days.</p></div>
+<div class="tablewrap"><table><tr><th>split</th><th class="n">days</th><th class="n">clips</th><th class="n">hours</th><th class="n">reference words</th><th>timing source</th></tr>
+<tr><td>train (all)</td><td class="n">1,352</td><td class="n">29,273</td><td class="n">162.0</td><td class="n">1,210,725</td><td>27,461 self-aligned · 1,812 site-timed</td></tr>
+<tr><td>train.clean (used by every v1–v3 run)</td><td class="n">1,352</td><td class="n">27,833</td><td class="n">≈153</td><td class="n">≈1,161,000</td><td>after the CER filter below</td></tr>
+<tr><td>dev</td><td class="n">20</td><td class="n">451</td><td class="n">2.41</td><td class="n">18,371</td><td>self-aligned</td></tr>
+<tr><td>test</td><td class="n">20</td><td class="n">488</td><td class="n">3.34</td><td class="n">23,547</td><td>site-timed, farbrengens 5739+</td></tr></table></div>
+<p class="small"><b>Dev days:</b> <span class="mono">001 3-Tishrei, 028 11-Cheshvan, 055 13-Kislev, 082 15-Teiveis, 109 17-Shvat, 137 20-Adar, 164 27-Nisan, 191 28-Iyar, 023 2-Cheshvan 5787, 050 3-Kisleiv 5787, 077 5-Teiveis 5787, 104 7-Shvat 5787, 131 9-Adar 1 5787, 158 10-Adar 2 5787, 185 13-Nisan 5787, 213 20-Iyar 5787, 240 24-Sivan 5787, 267 25-Tamuz 5787, 294 28-Av 5787, 321 29-Elul 5787</span></p>
+<p class="small"><b>Test days:</b> <span class="mono">227 13-Tamuz, 237 24-Tamuz, 242 1-Av, 246 6-Av, 251 12-Av, 254 15-Av, 260 22-Av, 263 26-Av, 265 28-Av, 268 1-Elul, 272 6-Elul, 278 13-Elul, 281 17-Elul, 284 20-Elul, 001 3-Tishrei 5787, 006 9-Tishrei 5787, 009 13-Tishrei 5787, 016 24-Tishrei 5787, 018 26-Tishrei 5787, 021 30-Tishrei 5787</span></p>
+<p class="note">Caveats for the scientist: (1) the dev WER printed during training uses a fixed 200-clip subset of dev decoded with the HF generate path; the full-dev and test numbers in the results section use the full sets. (2) One test day, 9 Tishrei 5787, scores 0.28–0.34 for every model and is a suspected reference-quality outlier; it is kept because the split is frozen. (3) Out-of-vocabulary rate against the clean training text: dev 1.1%, test 1.2%.</p>
+
+<h2>Clip anatomy</h2>
+<div class="two">
+<figure><svg viewBox="0 0 470 240" class="chart" role="img" aria-label="histogram of clip duration (s)" style="max-width:100%;height:auto">
+<line x1="52" x2="458" y1="196.0" y2="196.0" class="grid"/><text x="46" y="200.0" class="ax" text-anchor="end">0</text>
+<line x1="52" x2="458" y1="136.0" y2="136.0" class="grid"/><text x="46" y="140.0" class="ax" text-anchor="end">2,000</text>
+<line x1="52" x2="458" y1="76.0" y2="76.0" class="grid"/><text x="46" y="80.0" class="ax" text-anchor="end">4,000</text>
+<line x1="52" x2="458" y1="16.0" y2="16.0" class="grid"/><text x="46" y="20.0" class="ax" text-anchor="end">6,000</text>
+<rect x="52.5" y="194.7" width="27.5" height="1.3" class="s-train"><title>0–2: 43 clips</title></rect>
+<rect x="81.0" y="189.7" width="27.5" height="6.3" class="s-train"><title>2–4: 210 clips</title></rect>
+<rect x="109.5" y="183.0" width="27.5" height="13.0" class="s-train"><title>4–6: 432 clips</title></rect>
+<rect x="138.0" y="176.2" width="27.5" height="19.8" class="s-train"><title>6–8: 660 clips</title></rect>
+<rect x="166.5" y="167.6" width="27.5" height="28.4" class="s-train"><title>8–10: 946 clips</title></rect>
+<rect x="195.0" y="156.2" width="27.5" height="39.8" class="s-train"><title>10–12: 1,327 clips</title></rect>
+<rect x="223.4" y="143.1" width="27.5" height="52.9" class="s-train"><title>12–14: 1,763 clips</title></rect>
+<rect x="251.9" y="131.0" width="27.5" height="65.0" class="s-train"><title>14–16: 2,167 clips</title></rect>
+<rect x="280.4" y="121.2" width="27.5" height="74.8" class="s-train"><title>16–18: 2,495 clips</title></rect>
+<rect x="308.9" y="106.2" width="27.5" height="89.8" class="s-train"><title>18–20: 2,992 clips</title></rect>
+<rect x="337.4" y="94.4" width="27.5" height="101.6" class="s-train"><title>20–22: 3,385 clips</title></rect>
+<rect x="365.9" y="77.0" width="27.5" height="119.0" class="s-train"><title>22–24: 3,967 clips</title></rect>
+<rect x="394.4" y="53.7" width="27.5" height="142.3" class="s-train"><title>24–26: 4,744 clips</title></rect>
+<rect x="422.9" y="43.6" width="34.6" height="152.4" class="s-train"><title>26–28: 5,081 clips</title></rect>
+<text x="52.0" y="212" class="ax" text-anchor="middle">0</text>
+<text x="80.5" y="212" class="ax" text-anchor="middle">2</text>
+<text x="109.0" y="212" class="ax" text-anchor="middle">4</text>
+<text x="137.5" y="212" class="ax" text-anchor="middle">6</text>
+<text x="166.0" y="212" class="ax" text-anchor="middle">8</text>
+<text x="194.5" y="212" class="ax" text-anchor="middle">10</text>
+<text x="222.9" y="212" class="ax" text-anchor="middle">12</text>
+<text x="251.4" y="212" class="ax" text-anchor="middle">14</text>
+<text x="279.9" y="212" class="ax" text-anchor="middle">16</text>
+<text x="308.4" y="212" class="ax" text-anchor="middle">18</text>
+<text x="336.9" y="212" class="ax" text-anchor="middle">20</text>
+<text x="365.4" y="212" class="ax" text-anchor="middle">22</text>
+<text x="393.9" y="212" class="ax" text-anchor="middle">24</text>
+<text x="422.4" y="212" class="ax" text-anchor="middle">26</text>
+<text x="458.0" y="212" class="ax" text-anchor="middle">28</text>
+<line x1="52" x2="458" y1="196.0" y2="196.0" class="axis"/><text x="458" y="230" class="axlabel" text-anchor="end">clip duration (s)</text><text x="52" y="12" class="axlabel">clips</text></svg><figcaption><b>Clip duration.</b> Mean 20.0 s, median 21.2 s, 10th–90th percentile 11.1–26.8 s, max 28.3 s. The builder merges consecutive timed segments until the next one would exceed 28 s, so most clips sit just under the Whisper 30 s window.</figcaption></figure>
+<figure><svg viewBox="0 0 470 240" class="chart" role="img" aria-label="histogram of words per clip" style="max-width:100%;height:auto">
+<line x1="52" x2="458" y1="196.0" y2="196.0" class="grid"/><text x="46" y="200.0" class="ax" text-anchor="end">0</text>
+<line x1="52" x2="458" y1="136.0" y2="136.0" class="grid"/><text x="46" y="140.0" class="ax" text-anchor="end">2,000</text>
+<line x1="52" x2="458" y1="76.0" y2="76.0" class="grid"/><text x="46" y="80.0" class="ax" text-anchor="end">4,000</text>
+<line x1="52" x2="458" y1="16.0" y2="16.0" class="grid"/><text x="46" y="20.0" class="ax" text-anchor="end">6,000</text>
+<rect x="52.5" y="193.1" width="19.3" height="2.9" class="s-dev"><title>0–5: 97 clips</title></rect>
+<rect x="72.8" y="185.1" width="19.3" height="10.9" class="s-dev"><title>5–10: 365 clips</title></rect>
+<rect x="93.1" y="175.0" width="19.3" height="21.0" class="s-dev"><title>10–15: 701 clips</title></rect>
+<rect x="113.4" y="162.7" width="19.3" height="33.3" class="s-dev"><title>15–20: 1,110 clips</title></rect>
+<rect x="133.7" y="148.2" width="19.3" height="47.8" class="s-dev"><title>20–25: 1,595 clips</title></rect>
+<rect x="154.0" y="130.3" width="19.3" height="65.7" class="s-dev"><title>25–30: 2,191 clips</title></rect>
+<rect x="174.3" y="109.6" width="19.3" height="86.4" class="s-dev"><title>30–35: 2,880 clips</title></rect>
+<rect x="194.6" y="85.3" width="19.3" height="110.7" class="s-dev"><title>35–40: 3,689 clips</title></rect>
+<rect x="214.9" y="70.0" width="19.3" height="126.0" class="s-dev"><title>40–45: 4,200 clips</title></rect>
+<rect x="235.2" y="64.7" width="19.3" height="131.3" class="s-dev"><title>45–50: 4,378 clips</title></rect>
+<rect x="255.5" y="82.6" width="19.3" height="113.4" class="s-dev"><title>50–55: 3,779 clips</title></rect>
+<rect x="275.8" y="117.9" width="19.3" height="78.1" class="s-dev"><title>55–60: 2,605 clips</title></rect>
+<rect x="296.1" y="152.7" width="19.3" height="43.3" class="s-dev"><title>60–65: 1,445 clips</title></rect>
+<rect x="316.4" y="175.9" width="19.3" height="20.1" class="s-dev"><title>65–70: 670 clips</title></rect>
+<rect x="336.7" y="186.3" width="19.3" height="9.7" class="s-dev"><title>70–75: 322 clips</title></rect>
+<rect x="357.0" y="192.8" width="19.3" height="3.2" class="s-dev"><title>75–80: 107 clips</title></rect>
+<rect x="377.3" y="194.8" width="19.3" height="1.2" class="s-dev"><title>80–85: 40 clips</title></rect>
+<rect x="397.6" y="195.5" width="19.3" height="0.5" class="s-dev"><title>85–90: 16 clips</title></rect>
+<rect x="417.9" y="195.7" width="19.3" height="0.3" class="s-dev"><title>90–95: 11 clips</title></rect>
+<rect x="438.2" y="195.8" width="19.3" height="0.2" class="s-dev"><title>95–100: 5 clips</title></rect>
+<text x="52.0" y="212" class="ax" text-anchor="middle">0</text>
+<text x="92.6" y="212" class="ax" text-anchor="middle">10</text>
+<text x="133.2" y="212" class="ax" text-anchor="middle">20</text>
+<text x="173.8" y="212" class="ax" text-anchor="middle">30</text>
+<text x="214.4" y="212" class="ax" text-anchor="middle">40</text>
+<text x="255.0" y="212" class="ax" text-anchor="middle">50</text>
+<text x="295.6" y="212" class="ax" text-anchor="middle">60</text>
+<text x="336.2" y="212" class="ax" text-anchor="middle">70</text>
+<text x="376.8" y="212" class="ax" text-anchor="middle">80</text>
+<text x="417.4" y="212" class="ax" text-anchor="middle">90</text>
+<text x="458.0" y="212" class="ax" text-anchor="middle">100</text>
+<line x1="52" x2="458" y1="196.0" y2="196.0" class="axis"/><text x="458" y="230" class="axlabel" text-anchor="end">words per clip</text><text x="52" y="12" class="axlabel">clips</text></svg><figcaption><b>Words per clip.</b> Mean 41.5, median 43; 2.07 words per second of audio overall. Clips per day: median 21 (1–57).</figcaption></figure>
+</div>
+
+<h2>Alignment quality</h2>
+<p>For the 92% of clips timed by the project's own aligner, the <b>anchor rate</b> is the share of a clip's reference words that were matched exactly or fuzzily to a word the Yiddish Whisper model heard at a known time; the remaining words are placed by interpolation. Clips below 0.30 are excluded at build time, and clip boundaries must fall on anchored words.</p>
+<div class="two">
+<figure><svg viewBox="0 0 470 240" class="chart" role="img" aria-label="histogram of anchor rate of the clip&#x27;s words" style="max-width:100%;height:auto">
+<line x1="52" x2="458" y1="196.0" y2="196.0" class="grid"/><text x="46" y="200.0" class="ax" text-anchor="end">0</text>
+<line x1="52" x2="458" y1="136.0" y2="136.0" class="grid"/><text x="46" y="140.0" class="ax" text-anchor="end">2,000</text>
+<line x1="52" x2="458" y1="76.0" y2="76.0" class="grid"/><text x="46" y="80.0" class="ax" text-anchor="end">4,000</text>
+<line x1="52" x2="458" y1="16.0" y2="16.0" class="grid"/><text x="46" y="20.0" class="ax" text-anchor="end">6,000</text>
+<rect x="52.5" y="186.8" width="28.0" height="9.2" class="s-test"><title>0.3–0.35: 306 clips</title></rect>
+<rect x="81.5" y="181.0" width="28.0" height="15.0" class="s-test"><title>0.35–0.4: 500 clips</title></rect>
+<rect x="110.5" y="168.1" width="28.0" height="27.9" class="s-test"><title>0.4–0.45: 929 clips</title></rect>
+<rect x="139.5" y="158.7" width="28.0" height="37.3" class="s-test"><title>0.45–0.5: 1,244 clips</title></rect>
+<rect x="168.5" y="114.0" width="28.0" height="82.0" class="s-test"><title>0.5–0.55: 2,732 clips</title></rect>
+<rect x="197.5" y="94.3" width="28.0" height="101.7" class="s-test"><title>0.55–0.6: 3,390 clips</title></rect>
+<rect x="226.5" y="68.0" width="28.0" height="128.0" class="s-test"><title>0.6–0.65: 4,268 clips</title></rect>
+<rect x="255.5" y="64.2" width="28.0" height="131.8" class="s-test"><title>0.65–0.7: 4,393 clips</title></rect>
+<rect x="284.5" y="82.1" width="28.0" height="113.9" class="s-test"><title>0.7–0.75: 3,796 clips</title></rect>
+<rect x="313.5" y="103.0" width="28.0" height="93.0" class="s-test"><title>0.75–0.8: 3,099 clips</title></rect>
+<rect x="342.5" y="138.0" width="28.0" height="58.0" class="s-test"><title>0.8–0.85: 1,934 clips</title></rect>
+<rect x="371.5" y="171.1" width="28.0" height="24.9" class="s-test"><title>0.85–0.9: 829 clips</title></rect>
+<rect x="400.5" y="186.2" width="28.0" height="9.8" class="s-test"><title>0.9–0.95: 325 clips</title></rect>
+<rect x="429.4" y="191.0" width="28.1" height="5.0" class="s-test"><title>0.95–1: 167 clips</title></rect>
+<text x="52.0" y="212" class="ax" text-anchor="middle">0.3</text>
+<text x="110.0" y="212" class="ax" text-anchor="middle">0.4</text>
+<text x="168.0" y="212" class="ax" text-anchor="middle">0.5</text>
+<text x="226.0" y="212" class="ax" text-anchor="middle">0.6</text>
+<text x="284.0" y="212" class="ax" text-anchor="middle">0.7</text>
+<text x="342.0" y="212" class="ax" text-anchor="middle">0.8</text>
+<text x="400.0" y="212" class="ax" text-anchor="middle">0.9</text>
+<text x="458.0" y="212" class="ax" text-anchor="middle">1</text>
+<line x1="52" x2="458" y1="196.0" y2="196.0" class="axis"/><text x="458" y="230" class="axlabel" text-anchor="end">anchor rate of the clip&#x27;s words</text><text x="52" y="12" class="axlabel">clips</text></svg><figcaption><b>Anchor rate of self-aligned clips</b> (n = 27,912; mean 0.65, median 0.66). Validation against the site's own timings on 3 Tishrei 5787 (113 segments): median start difference 0.33 s, 90th percentile 0.95 s, 83% of segments within 1 s at both ends.</figcaption></figure>
+<div><h3>Cleaning</h3><p>The whole train split was transcribed once with the untouched Yiddish model and each clip's hypothesis compared with its reference. Clips with character error rate above 0.60, or a hypothesis/reference length ratio outside 0.5–2.0, were removed: <b>1,440 clips (4.9%)</b>, 1,436 of them by the CER rule (median CER of the dropped clips 0.75). These are almost always timing errors, where the text does not belong to the audio, not hard speech. The v0 model trained on the unfiltered set; every run since uses <code>train.clean.jsonl</code>.</p>
+<h3>Vocabulary</h3><p>Clean training text: 1,161,335 tokens, 27,712 distinct words (letters only, no marks), 10,646 of them seen once. The 1,000 most frequent words cover 81.8% of tokens, the top 5,000 cover 94.3%. Words seen 100+ times are 4.0% of the types but 82.7% of the tokens — the long tail of names and sources is where the remaining errors live.</p></div>
+</div>
+
+<h2>Text conventions and normalization</h2>
+<dl class="defs">
+<dt>Training target</dt><dd><code>normalize.training_text</code>: the hanacha paragraph text with vowel points (nikkud) removed, punctuation and the abbreviation marks kept (geresh <span class="yi">'</span> and gershayim <span class="yi">"</span>), bracket characters removed but the bracketed words kept (they are spoken asides; dropping them raised WER for every model). 27,644 of 30,212 raw references carried nikkud; 68.8% of clips contain at least one gershayim abbreviation.</dd>
+<dt>Scoring text</dt><dd><code>normalize.scoring_text</code>: Hebrew letters only. All WER and CER figures anywhere in the project are computed on this form, so punctuation, quotes and spelling of marks never count as errors, but a misspelled abbreviation does.</dd>
+<dt>Reference frames</dt><dd>Site sync timings can refer to the raw excerpt or to the daily file with its dedication; <code>calibrate_site_timings.py</code> decides per day and <code>compute_offsets.py</code> supplies the offset. Days whose offset could not be established are never used with site timings.</dd>
+<dt>Decoder note</dt><dd>Whisper's default token-suppression list blocks the ASCII double quote, which in Hebrew text is the gershayim. Every fine-tuned model learned to write רש"י and הקב"ה but could not emit them through faster-whisper until 2026-09-21; the production decoder (HF fp32 on the GPU, VAD windows, no timestamp tokens) has no such list.</dd>
+</dl>
+
+<h2>Pseudo-labeled extension (v3 self-training)</h2>
+<div class="callout"><p><b>Superseded for training on 2026-09-23:</b> the 5778–5781 recordings now have their real hanachos (section above), so v5 trains on human text for these years; the pseudo-labels remain as a documented experiment. Result of self-training (v3 + v4): it lifts weaker starting points by 0.5–1 point but never beats the best supervised recipe on the same data (production 0.081 → 0.081; large lr 2e-5 0.082 → 0.085).</p></div>
+<p class="note">A second pseudo-label set (26,797 clips, 169.4 h) was cut on 2026-09-22 from the third transcription pass (model turbo lr 3e-5, whole-file WER 0.081); the two v4 self-training runs use it, the v3 runs below used the first set. Result of v3 on the full test set: 0.082 / 0.084 / 0.086 whole-file for the three recipes — each 0.5–1 point better than its starting model, none better than the supervised lr 3e-5 model (0.081).</p>
+<p>The 1,005 recordings of 5778–5781 have no human text. They were transcribed with the best model (turbo full fine-tune, lr 2e-5) through the production decoder; each VAD window of up to 28 s became a clip with the model's text as its label. Windows with mean token log-probability below −0.6, fewer than two words, or repetitive text (decoder loops, 32 windows) were dropped, and labels were normalized exactly like human targets.</p>
+<div class="two">
+<figure><svg viewBox="0 0 480 260" class="chart" role="img" aria-label="hours of pseudo-labeled clips by category" style="max-width:100%;height:auto">
+<line x1="56" x2="464" y1="204.0" y2="204.0" class="grid"/>
+<text x="48" y="208.0" class="ax" text-anchor="end">0</text>
+<line x1="56" x2="464" y1="166.8" y2="166.8" class="grid"/>
+<text x="48" y="170.8" class="ax" text-anchor="end">10</text>
+<line x1="56" x2="464" y1="129.6" y2="129.6" class="grid"/>
+<text x="48" y="133.6" class="ax" text-anchor="end">20</text>
+<line x1="56" x2="464" y1="92.4" y2="92.4" class="grid"/>
+<text x="48" y="96.4" class="ax" text-anchor="end">30</text>
+<line x1="56" x2="464" y1="55.2" y2="55.2" class="grid"/>
+<text x="48" y="59.2" class="ax" text-anchor="end">40</text>
+<line x1="56" x2="464" y1="18.0" y2="18.0" class="grid"/>
+<text x="48" y="22.0" class="ax" text-anchor="end">50</text>
+<text x="56" y="12" class="axlabel">hours of pseudo-labeled clips</text>
+<rect x="65.2" y="47.8" width="82.6" height="156.2" class="s-pseudo"><title>DS 5778 · hours: 42</title></rect>
+<text x="106.5" y="43.8" class="val" text-anchor="middle">42</text>
+<text x="107.0" y="220" class="ax" text-anchor="middle">DS 5778</text>
+<text x="107.0" y="234" class="ax sub" text-anchor="middle">247 files · 6,687 clips</text>
+<rect x="167.2" y="37.0" width="82.6" height="167.0" class="s-pseudo"><title>Sicha Yomis 5779 · hours: 44.9</title></rect>
+<text x="208.5" y="33.0" class="val" text-anchor="middle">44.9</text>
+<text x="209.0" y="220" class="ax" text-anchor="middle">Sicha Yomis 5779</text>
+<text x="209.0" y="234" class="ax sub" text-anchor="middle">266 files · 7,089 clips</text>
+<rect x="269.2" y="52.6" width="82.6" height="151.4" class="s-pseudo"><title>Sicha Yomis 5780 · hours: 40.7</title></rect>
+<text x="310.5" y="48.6" class="val" text-anchor="middle">40.7</text>
+<text x="311.0" y="220" class="ax" text-anchor="middle">Sicha Yomis 5780</text>
+<text x="311.0" y="234" class="ax sub" text-anchor="middle">245 files · 6,446 clips</text>
+<rect x="371.2" y="49.2" width="82.6" height="154.8" class="s-pseudo"><title>Sicha Yomis 5781 · hours: 41.6</title></rect>
+<text x="412.5" y="45.2" class="val" text-anchor="middle">41.6</text>
+<text x="413.0" y="220" class="ax" text-anchor="middle">Sicha Yomis 5781</text>
+<text x="413.0" y="234" class="ax sub" text-anchor="middle">247 files · 6,556 clips</text>
+<line x1="56" x2="464" y1="204.0" y2="204.0" class="axis"/>
+</svg><figcaption><b>Pseudo-labeled clips by archive folder.</b> 26,778 clips, 169.3 h, mean 22.8 s, 77,201 gershayim in the labels. Confidence (mean token log-prob per window): 10th percentile −0.065, median −0.035, 90th −0.020.</figcaption></figure>
+<div><h3>Mixed training set for v3</h3><p><code>train.clean_pseudo.jsonl</code> = 27,833 human-timed clips + 26,778 pseudo-labeled clips = 54,611 rows, about 322 h. At batch 8 × 4 accumulation that is 1,707 steps per epoch. The pseudo-labels inherit the labeling model's error rate (about 9% of words), so v3 tests whether in-domain audio with imperfect labels beats the same continuation on real data alone (run on bigmac03 in v2 for exactly this comparison).</p>
+<p class="note">Rows carry <code>timing_source: pseudo</code>, <code>min_logprob</code> and <code>n_segments</code>, so they can be filtered or down-weighted later without rebuilding.</p></div>
+</div>
+
+<h2>Training runs</h2>
+<p>All runs fine-tune ivrit.ai's Yiddish-adapted Whisper (large-v3 or large-v3-turbo) in fp32 on Apple-silicon GPUs, one run per Mac Studio, from the same clean manifest; batch 8 × 4 accumulation (32 clips per step), 870 steps per epoch, linear decay with 200 warm-up steps, evaluation every 500 steps on the 200-clip dev subset. Lines are dev WER; a dot is an evaluation.</p>
+<div class="two">
+<figure><svg viewBox="0 0 320 250" class="chart" role="img" aria-label="v1 · 8 recipes, complete (2026-09-19 to 21)" style="max-width:100%;height:auto">
+<text x="46" y="14" class="ctitle">v1 · 8 recipes, complete (2026-09-19 to 21)</text>
+<line x1="46" x2="310" y1="210.0" y2="210.0" class="grid"/><text x="40" y="214.0" class="ax" text-anchor="end">0.06</text>
+<line x1="46" x2="310" y1="174.0" y2="174.0" class="grid"/><text x="40" y="178.0" class="ax" text-anchor="end">0.11</text>
+<line x1="46" x2="310" y1="138.0" y2="138.0" class="grid"/><text x="40" y="142.0" class="ax" text-anchor="end">0.16</text>
+<line x1="46" x2="310" y1="102.0" y2="102.0" class="grid"/><text x="40" y="106.0" class="ax" text-anchor="end">0.22</text>
+<line x1="46" x2="310" y1="66.0" y2="66.0" class="grid"/><text x="40" y="70.0" class="ax" text-anchor="end">0.27</text>
+<line x1="46" x2="310" y1="30.0" y2="30.0" class="grid"/><text x="40" y="34.0" class="ax" text-anchor="end">0.32</text>
+<text x="46.0" y="226" class="ax" text-anchor="middle">0</text>
+<text x="121.4" y="226" class="ax" text-anchor="middle">1000</text>
+<text x="196.9" y="226" class="ax" text-anchor="middle">2000</text>
+<text x="272.3" y="226" class="ax" text-anchor="middle">3000</text>
+<text x="310" y="242" class="axlabel" text-anchor="end">optimizer step</text>
+<path d="M83.7,164.2 L121.4,171.6 L159.1,188.0 L196.9,195.6 L234.6,194.8 L242.9,198.6" class="line s1" style="stroke-dasharray:none" fill="none"><title>turbo · full FT · lr 2e-5 · 3 ep</title></path>
+<circle cx="83.7" cy="164.2" r="2.6" class="dot s1"><title>turbo · full FT · lr 2e-5 · 3 ep step 500: 0.1261</title></circle>
+<circle cx="121.4" cy="171.6" r="2.6" class="dot s1"><title>turbo · full FT · lr 2e-5 · 3 ep step 1000: 0.1154</title></circle>
+<circle cx="159.1" cy="188.0" r="2.6" class="dot s1"><title>turbo · full FT · lr 2e-5 · 3 ep step 1500: 0.0918</title></circle>
+<circle cx="196.9" cy="195.6" r="2.6" class="dot s1"><title>turbo · full FT · lr 2e-5 · 3 ep step 2000: 0.0808</title></circle>
+<circle cx="234.6" cy="194.8" r="2.6" class="dot s1"><title>turbo · full FT · lr 2e-5 · 3 ep step 2500: 0.0820</title></circle>
+<circle cx="242.9" cy="198.6" r="2.6" class="dot s1"><title>turbo · full FT · lr 2e-5 · 3 ep step 2610: 0.0765</title></circle>
+<path d="M83.7,164.4 L121.4,173.1 L159.1,180.5 L196.9,190.8 L234.6,195.9 L242.9,196.6" class="line s1" style="stroke-dasharray:6 4" fill="none"><title>turbo · full FT · lr 1e-5 · 3 ep</title></path>
+<circle cx="83.7" cy="164.4" r="2.6" class="dot s1"><title>turbo · full FT · lr 1e-5 · 3 ep step 500: 0.1258</title></circle>
+<circle cx="121.4" cy="173.1" r="2.6" class="dot s1"><title>turbo · full FT · lr 1e-5 · 3 ep step 1000: 0.1133</title></circle>
+<circle cx="159.1" cy="180.5" r="2.6" class="dot s1"><title>turbo · full FT · lr 1e-5 · 3 ep step 1500: 0.1026</title></circle>
+<circle cx="196.9" cy="190.8" r="2.6" class="dot s1"><title>turbo · full FT · lr 1e-5 · 3 ep step 2000: 0.0878</title></circle>
+<circle cx="234.6" cy="195.9" r="2.6" class="dot s1"><title>turbo · full FT · lr 1e-5 · 3 ep step 2500: 0.0804</title></circle>
+<circle cx="242.9" cy="196.6" r="2.6" class="dot s1"><title>turbo · full FT · lr 1e-5 · 3 ep step 2610: 0.0793</title></circle>
+<path d="M83.7,158.4 L121.4,175.0 L159.1,183.4 L196.9,190.3 L234.6,193.2 L242.9,193.7" class="line s6" style="stroke-dasharray:none" fill="none"><title>turbo · LoRA r64 · 3 ep</title></path>
+<circle cx="83.7" cy="158.4" r="2.6" class="dot s6"><title>turbo · LoRA r64 · 3 ep step 500: 0.1346</title></circle>
+<circle cx="121.4" cy="175.0" r="2.6" class="dot s6"><title>turbo · LoRA r64 · 3 ep step 1000: 0.1105</title></circle>
+<circle cx="159.1" cy="183.4" r="2.6" class="dot s6"><title>turbo · LoRA r64 · 3 ep step 1500: 0.0985</title></circle>
+<circle cx="196.9" cy="190.3" r="2.6" class="dot s6"><title>turbo · LoRA r64 · 3 ep step 2000: 0.0885</title></circle>
+<circle cx="234.6" cy="193.2" r="2.6" class="dot s6"><title>turbo · LoRA r64 · 3 ep step 2500: 0.0843</title></circle>
+<circle cx="242.9" cy="193.7" r="2.6" class="dot s6"><title>turbo · LoRA r64 · 3 ep step 2610: 0.0836</title></circle>
+<path d="M83.7,57.3 L121.4,66.1 L159.1,93.5 L196.9,98.0 L234.6,116.9 L272.3,102.0 L308.5,115.9" class="line s2" style="stroke-dasharray:none" fill="none"><title>turbo · frozen encoder · lr 2e-5 · 4 ep</title></path>
+<circle cx="83.7" cy="57.3" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 2e-5 · 4 ep step 500: 0.2806</title></circle>
+<circle cx="121.4" cy="66.1" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 2e-5 · 4 ep step 1000: 0.2679</title></circle>
+<circle cx="159.1" cy="93.5" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 2e-5 · 4 ep step 1500: 0.2283</title></circle>
+<circle cx="196.9" cy="98.0" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 2e-5 · 4 ep step 2000: 0.2218</title></circle>
+<circle cx="234.6" cy="116.9" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 2e-5 · 4 ep step 2500: 0.1945</title></circle>
+<circle cx="272.3" cy="102.0" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 2e-5 · 4 ep step 3000: 0.2160</title></circle>
+<circle cx="308.5" cy="115.9" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 2e-5 · 4 ep step 3480: 0.1959</title></circle>
+<path d="M83.7,35.4 L121.4,61.1 L159.1,62.9 L196.9,91.5 L234.6,97.8 L272.3,89.5 L308.5,93.9" class="line s2" style="stroke-dasharray:6 4" fill="none"><title>turbo · frozen encoder · lr 1e-5 · 4 ep</title></path>
+<circle cx="83.7" cy="35.4" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 1e-5 · 4 ep step 500: 0.3122</title></circle>
+<circle cx="121.4" cy="61.1" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 1e-5 · 4 ep step 1000: 0.2751</title></circle>
+<circle cx="159.1" cy="62.9" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 1e-5 · 4 ep step 1500: 0.2725</title></circle>
+<circle cx="196.9" cy="91.5" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 1e-5 · 4 ep step 2000: 0.2311</title></circle>
+<circle cx="234.6" cy="97.8" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 1e-5 · 4 ep step 2500: 0.2220</title></circle>
+<circle cx="272.3" cy="89.5" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 1e-5 · 4 ep step 3000: 0.2341</title></circle>
+<circle cx="308.5" cy="93.9" r="2.6" class="dot s2"><title>turbo · frozen encoder · lr 1e-5 · 4 ep step 3480: 0.2277</title></circle>
+<path d="M83.7,169.9 L111.6,180.6" class="line s3" style="stroke-dasharray:none" fill="none"><title>large-v3 · full FT · lr 1e-5 · 1 ep</title></path>
+<circle cx="83.7" cy="169.9" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 1e-5 · 1 ep step 500: 0.1179</title></circle>
+<circle cx="111.6" cy="180.6" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 1e-5 · 1 ep step 870: 0.1025</title></circle>
+<path d="M83.7,164.7 L111.6,180.3" class="line s5" style="stroke-dasharray:none" fill="none"><title>large-v3 · LoRA r64 · 1 ep</title></path>
+<circle cx="83.7" cy="164.7" r="2.6" class="dot s5"><title>large-v3 · LoRA r64 · 1 ep step 500: 0.1254</title></circle>
+<circle cx="111.6" cy="180.3" r="2.6" class="dot s5"><title>large-v3 · LoRA r64 · 1 ep step 870: 0.1029</title></circle>
+<path d="M83.7,126.4 L121.4,134.6 L159.1,136.3 L177.2,136.3" class="line s4" style="stroke-dasharray:none" fill="none"><title>large-v3 · frozen encoder · 2 ep</title></path>
+<circle cx="83.7" cy="126.4" r="2.6" class="dot s4"><title>large-v3 · frozen encoder · 2 ep step 500: 0.1807</title></circle>
+<circle cx="121.4" cy="134.6" r="2.6" class="dot s4"><title>large-v3 · frozen encoder · 2 ep step 1000: 0.1689</title></circle>
+<circle cx="159.1" cy="136.3" r="2.6" class="dot s4"><title>large-v3 · frozen encoder · 2 ep step 1500: 0.1664</title></circle>
+<circle cx="177.2" cy="136.3" r="2.6" class="dot s4"><title>large-v3 · frozen encoder · 2 ep step 1740: 0.1664</title></circle>
+<line x1="46" x2="310" y1="210" y2="210" class="axis"/></svg><ul class='legend'><li><span class="sw s1" style="border-style:solid"></span>turbo · full FT · lr 2e-5 · 3 ep <span class="mono muted">2610 steps · last dev 0.0765</span></li><li><span class="sw s1" style="border-style:dashed"></span>turbo · full FT · lr 1e-5 · 3 ep <span class="mono muted">2610 steps · last dev 0.0793</span></li><li><span class="sw s6" style="border-style:solid"></span>turbo · LoRA r64 · 3 ep <span class="mono muted">2610 steps · last dev 0.0836</span></li><li><span class="sw s2" style="border-style:solid"></span>turbo · frozen encoder · lr 2e-5 · 4 ep <span class="mono muted">3480 steps · last dev 0.1959</span></li><li><span class="sw s2" style="border-style:dashed"></span>turbo · frozen encoder · lr 1e-5 · 4 ep <span class="mono muted">3480 steps · last dev 0.2277</span></li><li><span class="sw s3" style="border-style:solid"></span>large-v3 · full FT · lr 1e-5 · 1 ep <span class="mono muted">870 steps · last dev 0.1025</span></li><li><span class="sw s5" style="border-style:solid"></span>large-v3 · LoRA r64 · 1 ep <span class="mono muted">870 steps · last dev 0.1029</span></li><li><span class="sw s4" style="border-style:solid"></span>large-v3 · frozen encoder · 2 ep <span class="mono muted">1740 steps · last dev 0.1664</span></li></ul></figure><figure><svg viewBox="0 0 320 250" class="chart" role="img" aria-label="v2 · 4 recipes, complete (2026-09-21 to 22)" style="max-width:100%;height:auto">
+<text x="46" y="14" class="ctitle">v2 · 4 recipes, complete (2026-09-21 to 22)</text>
+<line x1="46" x2="310" y1="210.0" y2="210.0" class="grid"/><text x="40" y="214.0" class="ax" text-anchor="end">0.06</text>
+<line x1="46" x2="310" y1="174.0" y2="174.0" class="grid"/><text x="40" y="178.0" class="ax" text-anchor="end">0.08</text>
+<line x1="46" x2="310" y1="138.0" y2="138.0" class="grid"/><text x="40" y="142.0" class="ax" text-anchor="end">0.10</text>
+<line x1="46" x2="310" y1="102.0" y2="102.0" class="grid"/><text x="40" y="106.0" class="ax" text-anchor="end">0.12</text>
+<line x1="46" x2="310" y1="66.0" y2="66.0" class="grid"/><text x="40" y="70.0" class="ax" text-anchor="end">0.14</text>
+<line x1="46" x2="310" y1="30.0" y2="30.0" class="grid"/><text x="40" y="34.0" class="ax" text-anchor="end">0.16</text>
+<text x="46.0" y="226" class="ax" text-anchor="middle">0</text>
+<text x="121.4" y="226" class="ax" text-anchor="middle">1000</text>
+<text x="196.9" y="226" class="ax" text-anchor="middle">2000</text>
+<text x="272.3" y="226" class="ax" text-anchor="middle">3000</text>
+<text x="310" y="242" class="axlabel" text-anchor="end">optimizer step</text>
+<line x1="46" x2="310" y1="180.3" y2="180.3" class="marker"/><text x="50" y="192.3" class="ax marker-text">best v1 final 0.0765</text>
+<path d="M83.7,166.0 L121.4,155.2 L159.1,176.8 L196.9,180.2 L234.6,181.7 L242.9,173.1" class="line s1" style="stroke-dasharray:none" fill="none"><title>continue best v1 (turbo lr 2e-5) · lr 1e-5 · 3 ep</title></path>
+<circle cx="83.7" cy="166.0" r="2.6" class="dot s1"><title>continue best v1 (turbo lr 2e-5) · lr 1e-5 · 3 ep step 500: 0.0844</title></circle>
+<circle cx="121.4" cy="155.2" r="2.6" class="dot s1"><title>continue best v1 (turbo lr 2e-5) · lr 1e-5 · 3 ep step 1000: 0.0905</title></circle>
+<circle cx="159.1" cy="176.8" r="2.6" class="dot s1"><title>continue best v1 (turbo lr 2e-5) · lr 1e-5 · 3 ep step 1500: 0.0784</title></circle>
+<circle cx="196.9" cy="180.2" r="2.6" class="dot s1"><title>continue best v1 (turbo lr 2e-5) · lr 1e-5 · 3 ep step 2000: 0.0766</title></circle>
+<circle cx="234.6" cy="181.7" r="2.6" class="dot s1"><title>continue best v1 (turbo lr 2e-5) · lr 1e-5 · 3 ep step 2500: 0.0757</title></circle>
+<circle cx="242.9" cy="173.1" r="2.6" class="dot s1"><title>continue best v1 (turbo lr 2e-5) · lr 1e-5 · 3 ep step 2610: 0.0805</title></circle>
+<path d="M83.7,66.7 L121.4,77.9 L159.1,144.1 L196.9,158.9 L234.6,178.2 L272.3,183.7 L308.5,186.6" class="line s6" style="stroke-dasharray:none" fill="none"><title>turbo · full FT · lr 3e-5 · 4 ep</title></path>
+<circle cx="83.7" cy="66.7" r="2.6" class="dot s6"><title>turbo · full FT · lr 3e-5 · 4 ep step 500: 0.1396</title></circle>
+<circle cx="121.4" cy="77.9" r="2.6" class="dot s6"><title>turbo · full FT · lr 3e-5 · 4 ep step 1000: 0.1334</title></circle>
+<circle cx="159.1" cy="144.1" r="2.6" class="dot s6"><title>turbo · full FT · lr 3e-5 · 4 ep step 1500: 0.0966</title></circle>
+<circle cx="196.9" cy="158.9" r="2.6" class="dot s6"><title>turbo · full FT · lr 3e-5 · 4 ep step 2000: 0.0884</title></circle>
+<circle cx="234.6" cy="178.2" r="2.6" class="dot s6"><title>turbo · full FT · lr 3e-5 · 4 ep step 2500: 0.0777</title></circle>
+<circle cx="272.3" cy="183.7" r="2.6" class="dot s6"><title>turbo · full FT · lr 3e-5 · 4 ep step 3000: 0.0746</title></circle>
+<circle cx="308.5" cy="186.6" r="2.6" class="dot s6"><title>turbo · full FT · lr 3e-5 · 4 ep step 3480: 0.0730</title></circle>
+<path d="M83.7,108.7 L121.4,145.0 L159.1,154.0 L196.9,169.3 L234.6,171.1 L242.9,172.4" class="line s3" style="stroke-dasharray:none" fill="none"><title>large-v3 · full FT · lr 1e-5 · 3 ep</title></path>
+<circle cx="83.7" cy="108.7" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 1e-5 · 3 ep step 500: 0.1163</title></circle>
+<circle cx="121.4" cy="145.0" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 1e-5 · 3 ep step 1000: 0.0961</title></circle>
+<circle cx="159.1" cy="154.0" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 1e-5 · 3 ep step 1500: 0.0911</title></circle>
+<circle cx="196.9" cy="169.3" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 1e-5 · 3 ep step 2000: 0.0826</title></circle>
+<circle cx="234.6" cy="171.1" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 1e-5 · 3 ep step 2500: 0.0816</title></circle>
+<circle cx="242.9" cy="172.4" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 1e-5 · 3 ep step 2610: 0.0809</title></circle>
+<path d="M83.7,90.1 L121.4,160.0 L159.1,166.2 L196.9,178.4 L234.6,179.3 L242.9,187.9" class="line s3" style="stroke-dasharray:6 4" fill="none"><title>large-v3 · full FT · lr 2e-5 · 3 ep</title></path>
+<circle cx="83.7" cy="90.1" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 2e-5 · 3 ep step 500: 0.1266</title></circle>
+<circle cx="121.4" cy="160.0" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 2e-5 · 3 ep step 1000: 0.0878</title></circle>
+<circle cx="159.1" cy="166.2" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 2e-5 · 3 ep step 1500: 0.0843</title></circle>
+<circle cx="196.9" cy="178.4" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 2e-5 · 3 ep step 2000: 0.0776</title></circle>
+<circle cx="234.6" cy="179.3" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 2e-5 · 3 ep step 2500: 0.0771</title></circle>
+<circle cx="242.9" cy="187.9" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 2e-5 · 3 ep step 2610: 0.0723</title></circle>
+<line x1="46" x2="310" y1="210" y2="210" class="axis"/></svg><ul class='legend'><li><span class="sw s1" style="border-style:solid"></span>continue best v1 (turbo lr 2e-5) · lr 1e-5 · 3 ep <span class="mono muted">2610 steps · last dev 0.0805</span></li><li><span class="sw s6" style="border-style:solid"></span>turbo · full FT · lr 3e-5 · 4 ep <span class="mono muted">3480 steps · last dev 0.0730</span></li><li><span class="sw s3" style="border-style:solid"></span>large-v3 · full FT · lr 1e-5 · 3 ep <span class="mono muted">2610 steps · last dev 0.0809</span></li><li><span class="sw s3" style="border-style:dashed"></span>large-v3 · full FT · lr 2e-5 · 3 ep <span class="mono muted">2610 steps · last dev 0.0723</span></li></ul></figure><figure><svg viewBox="0 0 320 250" class="chart" role="img" aria-label="v3 · self-training, complete (2026-09-21 to 22)" style="max-width:100%;height:auto">
+<text x="46" y="14" class="ctitle">v3 · self-training, complete (2026-09-21 to 22)</text>
+<line x1="46" x2="310" y1="210.0" y2="210.0" class="grid"/><text x="40" y="214.0" class="ax" text-anchor="end">0.06</text>
+<line x1="46" x2="310" y1="174.0" y2="174.0" class="grid"/><text x="40" y="178.0" class="ax" text-anchor="end">0.08</text>
+<line x1="46" x2="310" y1="138.0" y2="138.0" class="grid"/><text x="40" y="142.0" class="ax" text-anchor="end">0.09</text>
+<line x1="46" x2="310" y1="102.0" y2="102.0" class="grid"/><text x="40" y="106.0" class="ax" text-anchor="end">0.11</text>
+<line x1="46" x2="310" y1="66.0" y2="66.0" class="grid"/><text x="40" y="70.0" class="ax" text-anchor="end">0.12</text>
+<line x1="46" x2="310" y1="30.0" y2="30.0" class="grid"/><text x="40" y="34.0" class="ax" text-anchor="end">0.14</text>
+<text x="46.0" y="226" class="ax" text-anchor="middle">0</text>
+<text x="121.4" y="226" class="ax" text-anchor="middle">1000</text>
+<text x="196.9" y="226" class="ax" text-anchor="middle">2000</text>
+<text x="272.3" y="226" class="ax" text-anchor="middle">3000</text>
+<text x="310" y="242" class="axlabel" text-anchor="end">optimizer step</text>
+<line x1="46" x2="310" y1="172.9" y2="172.9" class="marker"/><text x="50" y="184.9" class="ax marker-text">best v1 final 0.0765</text>
+<path d="M83.7,164.4 L121.4,174.1 L159.1,172.1 L196.9,185.7 L234.6,172.7 L272.3,190.7 L303.5,185.7" class="line s1" style="stroke-dasharray:none" fill="none"><title>continue v1 lr 2e-5 on real + pseudo · lr 1e-5 · 2 ep</title></path>
+<circle cx="83.7" cy="164.4" r="2.6" class="dot s1"><title>continue v1 lr 2e-5 on real + pseudo · lr 1e-5 · 2 ep step 500: 0.0803</title></circle>
+<circle cx="121.4" cy="174.1" r="2.6" class="dot s1"><title>continue v1 lr 2e-5 on real + pseudo · lr 1e-5 · 2 ep step 1000: 0.0760</title></circle>
+<circle cx="159.1" cy="172.1" r="2.6" class="dot s1"><title>continue v1 lr 2e-5 on real + pseudo · lr 1e-5 · 2 ep step 1500: 0.0768</title></circle>
+<circle cx="196.9" cy="185.7" r="2.6" class="dot s1"><title>continue v1 lr 2e-5 on real + pseudo · lr 1e-5 · 2 ep step 2000: 0.0708</title></circle>
+<circle cx="234.6" cy="172.7" r="2.6" class="dot s1"><title>continue v1 lr 2e-5 on real + pseudo · lr 1e-5 · 2 ep step 2500: 0.0766</title></circle>
+<circle cx="272.3" cy="190.7" r="2.6" class="dot s1"><title>continue v1 lr 2e-5 on real + pseudo · lr 1e-5 · 2 ep step 3000: 0.0686</title></circle>
+<circle cx="303.5" cy="185.7" r="2.6" class="dot s1"><title>continue v1 lr 2e-5 on real + pseudo · lr 1e-5 · 2 ep step 3414: 0.0708</title></circle>
+<path d="M83.7,144.2 L121.4,132.0 L159.1,152.2 L196.9,173.2 L234.6,175.7 L272.3,185.4 L303.5,189.0" class="line s5" style="stroke-dasharray:none" fill="none"><title>continue v1 lr 1e-5 on real + pseudo · lr 1e-5 · 2 ep</title></path>
+<circle cx="83.7" cy="144.2" r="2.6" class="dot s5"><title>continue v1 lr 1e-5 on real + pseudo · lr 1e-5 · 2 ep step 500: 0.0892</title></circle>
+<circle cx="121.4" cy="132.0" r="2.6" class="dot s5"><title>continue v1 lr 1e-5 on real + pseudo · lr 1e-5 · 2 ep step 1000: 0.0946</title></circle>
+<circle cx="159.1" cy="152.2" r="2.6" class="dot s5"><title>continue v1 lr 1e-5 on real + pseudo · lr 1e-5 · 2 ep step 1500: 0.0857</title></circle>
+<circle cx="196.9" cy="173.2" r="2.6" class="dot s5"><title>continue v1 lr 1e-5 on real + pseudo · lr 1e-5 · 2 ep step 2000: 0.0763</title></circle>
+<circle cx="234.6" cy="175.7" r="2.6" class="dot s5"><title>continue v1 lr 1e-5 on real + pseudo · lr 1e-5 · 2 ep step 2500: 0.0752</title></circle>
+<circle cx="272.3" cy="185.4" r="2.6" class="dot s5"><title>continue v1 lr 1e-5 on real + pseudo · lr 1e-5 · 2 ep step 3000: 0.0709</title></circle>
+<circle cx="303.5" cy="189.0" r="2.6" class="dot s5"><title>continue v1 lr 1e-5 on real + pseudo · lr 1e-5 · 2 ep step 3414: 0.0693</title></circle>
+<path d="M83.7,45.8 L121.4,115.7 L159.1,87.2 L196.9,169.9 L234.6,173.5 L272.3,184.6 L303.5,190.7" class="line s6" style="stroke-dasharray:none" fill="none"><title>fresh turbo on real + pseudo · lr 2e-5 · 2 ep</title></path>
+<circle cx="83.7" cy="45.8" r="2.6" class="dot s6"><title>fresh turbo on real + pseudo · lr 2e-5 · 2 ep step 500: 0.1330</title></circle>
+<circle cx="121.4" cy="115.7" r="2.6" class="dot s6"><title>fresh turbo on real + pseudo · lr 2e-5 · 2 ep step 1000: 0.1019</title></circle>
+<circle cx="159.1" cy="87.2" r="2.6" class="dot s6"><title>fresh turbo on real + pseudo · lr 2e-5 · 2 ep step 1500: 0.1146</title></circle>
+<circle cx="196.9" cy="169.9" r="2.6" class="dot s6"><title>fresh turbo on real + pseudo · lr 2e-5 · 2 ep step 2000: 0.0778</title></circle>
+<circle cx="234.6" cy="173.5" r="2.6" class="dot s6"><title>fresh turbo on real + pseudo · lr 2e-5 · 2 ep step 2500: 0.0762</title></circle>
+<circle cx="272.3" cy="184.6" r="2.6" class="dot s6"><title>fresh turbo on real + pseudo · lr 2e-5 · 2 ep step 3000: 0.0713</title></circle>
+<circle cx="303.5" cy="190.7" r="2.6" class="dot s6"><title>fresh turbo on real + pseudo · lr 2e-5 · 2 ep step 3414: 0.0686</title></circle>
+<line x1="46" x2="310" y1="210" y2="210" class="axis"/></svg><ul class='legend'><li><span class="sw s1" style="border-style:solid"></span>continue v1 lr 2e-5 on real + pseudo · lr 1e-5 · 2 ep <span class="mono muted">3414 steps · last dev 0.0708</span></li><li><span class="sw s5" style="border-style:solid"></span>continue v1 lr 1e-5 on real + pseudo · lr 1e-5 · 2 ep <span class="mono muted">3414 steps · last dev 0.0693</span></li><li><span class="sw s6" style="border-style:solid"></span>fresh turbo on real + pseudo · lr 2e-5 · 2 ep <span class="mono muted">3414 steps · last dev 0.0686</span></li></ul></figure><figure><svg viewBox="0 0 320 250" class="chart" role="img" aria-label="v4 · 6 recipes, complete (2026-09-22 to 24)" style="max-width:100%;height:auto">
+<text x="46" y="14" class="ctitle">v4 · 6 recipes, complete (2026-09-22 to 24)</text>
+<line x1="46" x2="310" y1="210.0" y2="210.0" class="grid"/><text x="40" y="214.0" class="ax" text-anchor="end">0.06</text>
+<line x1="46" x2="310" y1="174.0" y2="174.0" class="grid"/><text x="40" y="178.0" class="ax" text-anchor="end">0.09</text>
+<line x1="46" x2="310" y1="138.0" y2="138.0" class="grid"/><text x="40" y="142.0" class="ax" text-anchor="end">0.12</text>
+<line x1="46" x2="310" y1="102.0" y2="102.0" class="grid"/><text x="40" y="106.0" class="ax" text-anchor="end">0.14</text>
+<line x1="46" x2="310" y1="66.0" y2="66.0" class="grid"/><text x="40" y="70.0" class="ax" text-anchor="end">0.17</text>
+<line x1="46" x2="310" y1="30.0" y2="30.0" class="grid"/><text x="40" y="34.0" class="ax" text-anchor="end">0.20</text>
+<text x="46.0" y="226" class="ax" text-anchor="middle">0</text>
+<text x="121.4" y="226" class="ax" text-anchor="middle">1000</text>
+<text x="196.9" y="226" class="ax" text-anchor="middle">2000</text>
+<text x="272.3" y="226" class="ax" text-anchor="middle">3000</text>
+<text x="310" y="242" class="axlabel" text-anchor="end">optimizer step</text>
+<line x1="46" x2="310" y1="188.8" y2="188.8" class="marker"/><text x="50" y="200.8" class="ax marker-text">best v1 final 0.0765</text>
+<path d="M83.7,173.7 L121.4,187.1 L159.1,181.6 L196.9,192.0 L234.6,193.1 L272.3,195.5 L303.7,197.2" class="line s1" style="stroke-dasharray:none" fill="none"><title>v4: production model self-trained on pass-3 labels · lr 1e-5 · 2 ep</title></path>
+<circle cx="83.7" cy="173.7" r="2.6" class="dot s1"><title>v4: production model self-trained on pass-3 labels · lr 1e-5 · 2 ep step 500: 0.0883</title></circle>
+<circle cx="121.4" cy="187.1" r="2.6" class="dot s1"><title>v4: production model self-trained on pass-3 labels · lr 1e-5 · 2 ep step 1000: 0.0778</title></circle>
+<circle cx="159.1" cy="181.6" r="2.6" class="dot s1"><title>v4: production model self-trained on pass-3 labels · lr 1e-5 · 2 ep step 1500: 0.0821</title></circle>
+<circle cx="196.9" cy="192.0" r="2.6" class="dot s1"><title>v4: production model self-trained on pass-3 labels · lr 1e-5 · 2 ep step 2000: 0.0740</title></circle>
+<circle cx="234.6" cy="193.1" r="2.6" class="dot s1"><title>v4: production model self-trained on pass-3 labels · lr 1e-5 · 2 ep step 2500: 0.0731</title></circle>
+<circle cx="272.3" cy="195.5" r="2.6" class="dot s1"><title>v4: production model self-trained on pass-3 labels · lr 1e-5 · 2 ep step 3000: 0.0713</title></circle>
+<circle cx="303.7" cy="197.2" r="2.6" class="dot s1"><title>v4: production model self-trained on pass-3 labels · lr 1e-5 · 2 ep step 3416: 0.0699</title></circle>
+<path d="M83.7,191.2 L121.4,196.3 L159.1,175.4 L196.9,196.3 L234.6,193.7 L272.3,195.5 L303.7,193.0" class="line s3" style="stroke-dasharray:none" fill="none"><title>v4: large lr 2e-5 + pass-3 pseudo · lr 1e-5 · 2 ep</title></path>
+<circle cx="83.7" cy="191.2" r="2.6" class="dot s3"><title>v4: large lr 2e-5 + pass-3 pseudo · lr 1e-5 · 2 ep step 500: 0.0746</title></circle>
+<circle cx="121.4" cy="196.3" r="2.6" class="dot s3"><title>v4: large lr 2e-5 + pass-3 pseudo · lr 1e-5 · 2 ep step 1000: 0.0707</title></circle>
+<circle cx="159.1" cy="175.4" r="2.6" class="dot s3"><title>v4: large lr 2e-5 + pass-3 pseudo · lr 1e-5 · 2 ep step 1500: 0.0869</title></circle>
+<circle cx="196.9" cy="196.3" r="2.6" class="dot s3"><title>v4: large lr 2e-5 + pass-3 pseudo · lr 1e-5 · 2 ep step 2000: 0.0707</title></circle>
+<circle cx="234.6" cy="193.7" r="2.6" class="dot s3"><title>v4: large lr 2e-5 + pass-3 pseudo · lr 1e-5 · 2 ep step 2500: 0.0727</title></circle>
+<circle cx="272.3" cy="195.5" r="2.6" class="dot s3"><title>v4: large lr 2e-5 + pass-3 pseudo · lr 1e-5 · 2 ep step 3000: 0.0713</title></circle>
+<circle cx="303.7" cy="193.0" r="2.6" class="dot s3"><title>v4: large lr 2e-5 + pass-3 pseudo · lr 1e-5 · 2 ep step 3416: 0.0733</title></circle>
+<path d="M83.7,81.7 L121.4,142.5 L159.1,158.3 L196.9,156.6 L234.6,179.2 L272.3,181.7 L308.5,178.2" class="line s6" style="stroke-dasharray:none" fill="none"><title>turbo · full FT · lr 4e-5 · 4 ep</title></path>
+<circle cx="83.7" cy="81.7" r="2.6" class="dot s6"><title>turbo · full FT · lr 4e-5 · 4 ep step 500: 0.1598</title></circle>
+<circle cx="121.4" cy="142.5" r="2.6" class="dot s6"><title>turbo · full FT · lr 4e-5 · 4 ep step 1000: 0.1125</title></circle>
+<circle cx="159.1" cy="158.3" r="2.6" class="dot s6"><title>turbo · full FT · lr 4e-5 · 4 ep step 1500: 0.1002</title></circle>
+<circle cx="196.9" cy="156.6" r="2.6" class="dot s6"><title>turbo · full FT · lr 4e-5 · 4 ep step 2000: 0.1015</title></circle>
+<circle cx="234.6" cy="179.2" r="2.6" class="dot s6"><title>turbo · full FT · lr 4e-5 · 4 ep step 2500: 0.0840</title></circle>
+<circle cx="272.3" cy="181.7" r="2.6" class="dot s6"><title>turbo · full FT · lr 4e-5 · 4 ep step 3000: 0.0820</title></circle>
+<circle cx="308.5" cy="178.2" r="2.6" class="dot s6"><title>turbo · full FT · lr 4e-5 · 4 ep step 3480: 0.0847</title></circle>
+<path d="M83.7,55.3 L121.4,127.2 L159.1,148.4 L196.9,165.9 L234.6,172.9 L272.3,188.8 L308.5,195.5" class="line s6" style="stroke-dasharray:6 4" fill="none"><title>turbo · full FT · lr 5e-5 · 4 ep</title></path>
+<circle cx="83.7" cy="55.3" r="2.6" class="dot s6"><title>turbo · full FT · lr 5e-5 · 4 ep step 500: 0.1803</title></circle>
+<circle cx="121.4" cy="127.2" r="2.6" class="dot s6"><title>turbo · full FT · lr 5e-5 · 4 ep step 1000: 0.1244</title></circle>
+<circle cx="159.1" cy="148.4" r="2.6" class="dot s6"><title>turbo · full FT · lr 5e-5 · 4 ep step 1500: 0.1079</title></circle>
+<circle cx="196.9" cy="165.9" r="2.6" class="dot s6"><title>turbo · full FT · lr 5e-5 · 4 ep step 2000: 0.0943</title></circle>
+<circle cx="234.6" cy="172.9" r="2.6" class="dot s6"><title>turbo · full FT · lr 5e-5 · 4 ep step 2500: 0.0889</title></circle>
+<circle cx="272.3" cy="188.8" r="2.6" class="dot s6"><title>turbo · full FT · lr 5e-5 · 4 ep step 3000: 0.0765</title></circle>
+<circle cx="308.5" cy="195.5" r="2.6" class="dot s6"><title>turbo · full FT · lr 5e-5 · 4 ep step 3480: 0.0713</title></circle>
+<path d="M83.7,136.6 L121.4,162.3 L159.1,178.4 L196.9,183.9 L234.6,186.6 L272.3,192.3 L308.5,190.6" class="line s3" style="stroke-dasharray:6 4" fill="none"><title>large-v3 · full FT · lr 3e-5 · 4 ep</title></path>
+<circle cx="83.7" cy="136.6" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 3e-5 · 4 ep step 500: 0.1171</title></circle>
+<circle cx="121.4" cy="162.3" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 3e-5 · 4 ep step 1000: 0.0971</title></circle>
+<circle cx="159.1" cy="178.4" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 3e-5 · 4 ep step 1500: 0.0846</title></circle>
+<circle cx="196.9" cy="183.9" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 3e-5 · 4 ep step 2000: 0.0803</title></circle>
+<circle cx="234.6" cy="186.6" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 3e-5 · 4 ep step 2500: 0.0782</title></circle>
+<circle cx="272.3" cy="192.3" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 3e-5 · 4 ep step 3000: 0.0738</title></circle>
+<circle cx="308.5" cy="190.6" r="2.6" class="dot s3"><title>large-v3 · full FT · lr 3e-5 · 4 ep step 3480: 0.0751</title></circle>
+<path d="M83.7,109.3 L121.4,144.3 L159.1,165.8 L196.9,170.5 L234.6,182.7 L272.3,186.6 L308.5,192.0" class="line s2" style="stroke-dasharray:none" fill="none"><title>turbo · full FT · lr 3e-5 · 4 ep · seed 7 (repeat)</title></path>
+<circle cx="83.7" cy="109.3" r="2.6" class="dot s2"><title>turbo · full FT · lr 3e-5 · 4 ep · seed 7 (repeat) step 500: 0.1383</title></circle>
+<circle cx="121.4" cy="144.3" r="2.6" class="dot s2"><title>turbo · full FT · lr 3e-5 · 4 ep · seed 7 (repeat) step 1000: 0.1111</title></circle>
+<circle cx="159.1" cy="165.8" r="2.6" class="dot s2"><title>turbo · full FT · lr 3e-5 · 4 ep · seed 7 (repeat) step 1500: 0.0944</title></circle>
+<circle cx="196.9" cy="170.5" r="2.6" class="dot s2"><title>turbo · full FT · lr 3e-5 · 4 ep · seed 7 (repeat) step 2000: 0.0907</title></circle>
+<circle cx="234.6" cy="182.7" r="2.6" class="dot s2"><title>turbo · full FT · lr 3e-5 · 4 ep · seed 7 (repeat) step 2500: 0.0813</title></circle>
+<circle cx="272.3" cy="186.6" r="2.6" class="dot s2"><title>turbo · full FT · lr 3e-5 · 4 ep · seed 7 (repeat) step 3000: 0.0782</title></circle>
+<circle cx="308.5" cy="192.0" r="2.6" class="dot s2"><title>turbo · full FT · lr 3e-5 · 4 ep · seed 7 (repeat) step 3480: 0.0740</title></circle>
+<line x1="46" x2="310" y1="210" y2="210" class="axis"/></svg><ul class='legend'><li><span class="sw s1" style="border-style:solid"></span>v4: production model self-trained on pass-3 labels · lr 1e-5 · 2 ep <span class="mono muted">3416 steps · last dev 0.0699</span></li><li><span class="sw s3" style="border-style:solid"></span>v4: large lr 2e-5 + pass-3 pseudo · lr 1e-5 · 2 ep <span class="mono muted">3416 steps · last dev 0.0733</span></li><li><span class="sw s6" style="border-style:solid"></span>turbo · full FT · lr 4e-5 · 4 ep <span class="mono muted">3480 steps · last dev 0.0847</span></li><li><span class="sw s6" style="border-style:dashed"></span>turbo · full FT · lr 5e-5 · 4 ep <span class="mono muted">3480 steps · last dev 0.0713</span></li><li><span class="sw s3" style="border-style:dashed"></span>large-v3 · full FT · lr 3e-5 · 4 ep <span class="mono muted">3480 steps · last dev 0.0751</span></li><li><span class="sw s2" style="border-style:solid"></span>turbo · full FT · lr 3e-5 · 4 ep · seed 7 (repeat) <span class="mono muted">3480 steps · last dev 0.0740</span></li></ul></figure>
+</div>
+<p class="note">Reading the curves: freezing the encoder (amber) plateaus at 0.19–0.22, LoRA (teal, purple) lands near 0.084, full fine-tuning of the turbo model reaches 0.0765 at lr 2e-5. v2 finished with large-v3 at lr 2e-5 on 0.0723 and turbo at lr 3e-5 on 0.0730 (both better than the v1 winner); continuing the v1 winner at lr 1e-5 only reached 0.0757. The v3 self-training runs ended with the best in-training scores of all (0.0686–0.0693) but scored 0.082–0.086 whole-file on the full test set, behind the production model — the 200-clip dev subset overstates models trained on pseudo-labels, so only the full test set ranks them. Pseudo-labels lifted each starting model by 0.5–1 point without surpassing the best supervised recipe. v4 probes higher learning rates, the turbo recipe on large-v3, a seed repeat of the production run, and self-training from the strongest starting points with fresher labels.</p>
+
+<h2>Results on the fixed test set</h2>
+<p>Two metrics, both against the human hanacha of the 20 test days: <b>clip WER</b> on the 488 test clips (audio cut on known timings) and <b>whole-file WER</b> where each day's full recording is decoded with voice-activity chunking and scored against the whole hanacha — the number that matters for the product. Decoder matters as much as model: the same weights score 0.132, 0.124 and 0.088 whole-file under the three decoders tried. The v2 winner on whole files is the turbo model trained at lr 3e-5 for 4 epochs (0.081, CER 0.045); large-v3 at lr 2e-5 is best on clips (0.083) but decodes three times slower and is a hair worse on whole files (0.082).</p>
+<div class="keys"><span class="k-train">clip test WER</span><span class="k-test">whole-file test WER</span></div>
+<figure><svg viewBox="0 0 980 900" class="chart" role="img" aria-label="word error rate on the 20 fixed test days (lower is better)" style="max-width:100%;height:auto">
+<line y1="20" y2="866" x1="400.0" x2="400.0" class="grid"/>
+<text y="882" x="400.0" class="ax" text-anchor="middle">0</text>
+<line y1="20" y2="866" x1="485.0" x2="485.0" class="grid"/>
+<text y="882" x="485.0" class="ax" text-anchor="middle">0.1</text>
+<line y1="20" y2="866" x1="570.0" x2="570.0" class="grid"/>
+<text y="882" x="570.0" class="ax" text-anchor="middle">0.2</text>
+<line y1="20" y2="866" x1="655.0" x2="655.0" class="grid"/>
+<text y="882" x="655.0" class="ax" text-anchor="middle">0.3</text>
+<line y1="20" y2="866" x1="740.0" x2="740.0" class="grid"/>
+<text y="882" x="740.0" class="ax" text-anchor="middle">0.4</text>
+<line y1="20" y2="866" x1="825.0" x2="825.0" class="grid"/>
+<text y="882" x="825.0" class="ax" text-anchor="middle">0.5</text>
+<line y1="20" y2="866" x1="910.0" x2="910.0" class="grid"/>
+<text y="882" x="910.0" class="ax" text-anchor="middle">0.6</text>
+<text x="910" y="896" class="axlabel" text-anchor="end">word error rate on the 20 fixed test days (lower is better)</text>
+<text x="390" y="45.0" class="rowlab " text-anchor="end">v2: large-v3 full lr 2e-5, 3 ep · GPU path</text>
+<rect x="400" y="30.0" width="70.8" height="10.0" class="s-train"><title>clip test WER: 0.083</title></rect>
+<text x="475.8" y="39.0" class="val">0.083</text>
+<rect x="400" y="41.0" width="69.9" height="10.0" class="s-test"><title>whole-file test WER: 0.082</title></rect>
+<text x="474.9" y="50.0" class="val">0.082</text>
+<text x="390" y="75.0" class="rowlab prod" text-anchor="end">v2: turbo full lr 3e-5, 4 ep · <tspan font-weight="600">GPU path</tspan> (production since 09-22)</text>
+<rect x="400" y="60.0" width="73.8" height="10.0" class="s-train"><title>clip test WER: 0.087</title></rect>
+<text x="478.8" y="69.0" class="val">0.087</text>
+<rect x="400" y="71.0" width="68.9" height="10.0" class="s-test"><title>whole-file test WER: 0.081</title></rect>
+<text x="473.9" y="80.0" class="val">0.081</text>
+<text x="390" y="105.0" class="rowlab " text-anchor="end">v4: production model self-trained on pass-3 labels · GPU path</text>
+<rect x="400" y="90.0" width="74.1" height="10.0" class="s-train"><title>clip test WER: 0.087</title></rect>
+<text x="479.1" y="99.0" class="val">0.087</text>
+<rect x="400" y="101.0" width="68.8" height="10.0" class="s-test"><title>whole-file test WER: 0.081</title></rect>
+<text x="473.8" y="110.0" class="val">0.081</text>
+<text x="390" y="135.0" class="rowlab " text-anchor="end">v4: production recipe, seed 7 (repeat) · GPU path</text>
+<rect x="400" y="120.0" width="74.2" height="10.0" class="s-train"><title>clip test WER: 0.087</title></rect>
+<text x="479.2" y="129.0" class="val">0.087</text>
+<rect x="400" y="131.0" width="67.7" height="10.0" class="s-test"><title>whole-file test WER: 0.080</title></rect>
+<text x="472.7" y="140.0" class="val">0.080</text>
+<text x="390" y="165.0" class="rowlab " text-anchor="end">v4: turbo full lr 5e-5, 4 ep · GPU path</text>
+<rect x="400" y="150.0" width="75.9" height="10.0" class="s-train"><title>clip test WER: 0.089</title></rect>
+<text x="480.9" y="159.0" class="val">0.089</text>
+<rect x="400" y="161.0" width="69.7" height="10.0" class="s-test"><title>whole-file test WER: 0.082</title></rect>
+<text x="474.7" y="170.0" class="val">0.082</text>
+<text x="390" y="195.0" class="rowlab " text-anchor="end">v4: large-v3 lr 2e-5 model + pass-3 pseudo-labels · GPU path</text>
+<rect x="400" y="180.0" width="76.0" height="10.0" class="s-train"><title>clip test WER: 0.089</title></rect>
+<text x="481.0" y="189.0" class="val">0.089</text>
+<rect x="400" y="191.0" width="72.1" height="10.0" class="s-test"><title>whole-file test WER: 0.085</title></rect>
+<text x="477.1" y="200.0" class="val">0.085</text>
+<text x="390" y="225.0" class="rowlab " text-anchor="end">v3: turbo lr 1e-5 model + 2 ep on real + pseudo · GPU path</text>
+<rect x="400" y="210.0" width="76.3" height="10.0" class="s-train"><title>clip test WER: 0.090</title></rect>
+<text x="481.3" y="219.0" class="val">0.090</text>
+<rect x="400" y="221.0" width="70.0" height="10.0" class="s-test"><title>whole-file test WER: 0.082</title></rect>
+<text x="475.0" y="230.0" class="val">0.082</text>
+<text x="390" y="255.0" class="rowlab " text-anchor="end">v4: turbo full lr 4e-5, 4 ep · GPU path</text>
+<rect x="400" y="240.0" width="76.5" height="10.0" class="s-train"><title>clip test WER: 0.090</title></rect>
+<text x="481.5" y="249.0" class="val">0.090</text>
+<rect x="400" y="251.0" width="74.7" height="10.0" class="s-test"><title>whole-file test WER: 0.088</title></rect>
+<text x="479.7" y="260.0" class="val">0.088</text>
+<text x="390" y="285.0" class="rowlab " text-anchor="end">v3: turbo lr 2e-5 model + 2 ep on real + pseudo · GPU path</text>
+<rect x="400" y="270.0" width="76.7" height="10.0" class="s-train"><title>clip test WER: 0.090</title></rect>
+<text x="481.7" y="279.0" class="val">0.090</text>
+<rect x="400" y="281.0" width="71.1" height="10.0" class="s-test"><title>whole-file test WER: 0.084</title></rect>
+<text x="476.1" y="290.0" class="val">0.084</text>
+<text x="390" y="315.0" class="rowlab " text-anchor="end">v2: continue turbo lr 2e-5 at lr 1e-5, 3 ep · GPU path</text>
+<rect x="400" y="300.0" width="77.3" height="10.0" class="s-train"><title>clip test WER: 0.091</title></rect>
+<text x="482.3" y="309.0" class="val">0.091</text>
+<rect x="400" y="311.0" width="72.9" height="10.0" class="s-test"><title>whole-file test WER: 0.086</title></rect>
+<text x="477.9" y="320.0" class="val">0.086</text>
+<text x="390" y="345.0" class="rowlab " text-anchor="end">v2: large-v3 full lr 1e-5, 3 ep · GPU path</text>
+<rect x="400" y="330.0" width="77.5" height="10.0" class="s-train"><title>clip test WER: 0.091</title></rect>
+<text x="482.5" y="339.0" class="val">0.091</text>
+<rect x="400" y="341.0" width="73.6" height="10.0" class="s-test"><title>whole-file test WER: 0.087</title></rect>
+<text x="478.6" y="350.0" class="val">0.087</text>
+<text x="390" y="375.0" class="rowlab " text-anchor="end">v3: fresh turbo lr 2e-5, 2 ep on real + pseudo · GPU path</text>
+<rect x="400" y="360.0" width="77.8" height="10.0" class="s-train"><title>clip test WER: 0.092</title></rect>
+<text x="482.8" y="369.0" class="val">0.092</text>
+<rect x="400" y="371.0" width="72.8" height="10.0" class="s-test"><title>whole-file test WER: 0.086</title></rect>
+<text x="477.8" y="380.0" class="val">0.086</text>
+<text x="390" y="405.0" class="rowlab " text-anchor="end">turbo full lr 2e-5 · GPU path (production 09-21)</text>
+<rect x="400" y="390.0" width="78.8" height="10.0" class="s-train"><title>clip test WER: 0.093</title></rect>
+<text x="483.8" y="399.0" class="val">0.093</text>
+<rect x="400" y="401.0" width="74.8" height="10.0" class="s-test"><title>whole-file test WER: 0.088</title></rect>
+<text x="479.8" y="410.0" class="val">0.088</text>
+<text x="390" y="435.0" class="rowlab " text-anchor="end">turbo full lr 2e-5 · CT2 int8, quotes freed</text>
+<rect x="400" y="420.0" width="80.9" height="10.0" class="s-train"><title>clip test WER: 0.095</title></rect>
+<text x="485.9" y="429.0" class="val">0.095</text>
+<rect x="400" y="431.0" width="105.1" height="10.0" class="s-test"><title>whole-file test WER: 0.124</title></rect>
+<text x="510.1" y="440.0" class="val">0.124</text>
+<text x="390" y="465.0" class="rowlab " text-anchor="end">turbo full lr 1e-5 · GPU path</text>
+<rect x="400" y="450.0" width="83.2" height="10.0" class="s-train"><title>clip test WER: 0.098</title></rect>
+<text x="488.2" y="459.0" class="val">0.098</text>
+<rect x="400" y="461.0" width="79.0" height="10.0" class="s-test"><title>whole-file test WER: 0.093</title></rect>
+<text x="484.0" y="470.0" class="val">0.093</text>
+<text x="390" y="495.0" class="rowlab " text-anchor="end">turbo full lr 1e-5 · CT2 int8, quotes freed</text>
+<rect x="400" y="480.0" width="86.2" height="10.0" class="s-train"><title>clip test WER: 0.101</title></rect>
+<text x="491.2" y="489.0" class="val">0.101</text>
+<rect x="400" y="491.0" width="103.1" height="10.0" class="s-test"><title>whole-file test WER: 0.121</title></rect>
+<text x="508.1" y="500.0" class="val">0.121</text>
+<text x="390" y="525.0" class="rowlab " text-anchor="end">turbo full lr 2e-5 · CT2 int8, default suppression</text>
+<rect x="400" y="510.0" width="89.3" height="10.0" class="s-train"><title>clip test WER: 0.105</title></rect>
+<text x="494.3" y="519.0" class="val">0.105</text>
+<rect x="400" y="521.0" width="112.6" height="10.0" class="s-test"><title>whole-file test WER: 0.132</title></rect>
+<text x="517.6" y="530.0" class="val">0.132</text>
+<text x="390" y="555.0" class="rowlab " text-anchor="end">turbo full lr 1e-5 · CT2 default</text>
+<rect x="400" y="540.0" width="93.6" height="10.0" class="s-train"><title>clip test WER: 0.110</title></rect>
+<text x="498.6" y="549.0" class="val">0.110</text>
+<rect x="400" y="551.0" width="108.7" height="10.0" class="s-test"><title>whole-file test WER: 0.128</title></rect>
+<text x="513.7" y="560.0" class="val">0.128</text>
+<text x="390" y="585.0" class="rowlab " text-anchor="end">turbo LoRA r64 · CT2 default</text>
+<rect x="400" y="570.0" width="100.3" height="10.0" class="s-train"><title>clip test WER: 0.118</title></rect>
+<text x="505.3" y="579.0" class="val">0.118</text>
+<rect x="400" y="581.0" width="108.3" height="10.0" class="s-test"><title>whole-file test WER: 0.127</title></rect>
+<text x="513.3" y="590.0" class="val">0.127</text>
+<text x="390" y="615.0" class="rowlab " text-anchor="end">large-v3 full lr 1e-5, 1 ep · CT2 default</text>
+<rect x="400" y="600.0" width="106.8" height="10.0" class="s-train"><title>clip test WER: 0.126</title></rect>
+<text x="511.8" y="609.0" class="val">0.126</text>
+<rect x="400" y="611.0" width="122.0" height="10.0" class="s-test"><title>whole-file test WER: 0.144</title></rect>
+<text x="527.0" y="620.0" class="val">0.144</text>
+<text x="390" y="645.0" class="rowlab " text-anchor="end">large-v3 LoRA r64, 1 ep · CT2 default</text>
+<rect x="400" y="630.0" width="113.7" height="10.0" class="s-train"><title>clip test WER: 0.134</title></rect>
+<text x="518.7" y="639.0" class="val">0.134</text>
+<rect x="400" y="641.0" width="125.2" height="10.0" class="s-test"><title>whole-file test WER: 0.147</title></rect>
+<text x="530.2" y="650.0" class="val">0.147</text>
+<text x="390" y="675.0" class="rowlab " text-anchor="end">large-v3 frozen encoder · CT2 default</text>
+<rect x="400" y="660.0" width="155.1" height="10.0" class="s-train"><title>clip test WER: 0.182</title></rect>
+<text x="560.1" y="669.0" class="val">0.182</text>
+<rect x="400" y="671.0" width="169.3" height="10.0" class="s-test"><title>whole-file test WER: 0.199</title></rect>
+<text x="574.3" y="680.0" class="val">0.199</text>
+<text x="390" y="705.0" class="rowlab " text-anchor="end">turbo frozen encoder lr 2e-5 · CT2 default</text>
+<rect x="400" y="690.0" width="191.5" height="10.0" class="s-train"><title>clip test WER: 0.225</title></rect>
+<text x="596.5" y="699.0" class="val">0.225</text>
+<rect x="400" y="701.0" width="203.6" height="10.0" class="s-test"><title>whole-file test WER: 0.239</title></rect>
+<text x="608.6" y="710.0" class="val">0.239</text>
+<text x="390" y="735.0" class="rowlab " text-anchor="end">turbo frozen encoder lr 1e-5 · CT2 default</text>
+<rect x="400" y="720.0" width="207.4" height="10.0" class="s-train"><title>clip test WER: 0.244</title></rect>
+<text x="612.4" y="729.0" class="val">0.244</text>
+<rect x="400" y="731.0" width="225.9" height="10.0" class="s-test"><title>whole-file test WER: 0.266</title></rect>
+<text x="630.9" y="740.0" class="val">0.266</text>
+<text x="390" y="765.0" class="rowlab " text-anchor="end">v0: frozen encoder, 1,000 steps, unfiltered data</text>
+<rect x="400" y="750.0" width="241.1" height="10.0" class="s-train"><title>clip test WER: 0.284</title></rect>
+<text x="646.1" y="759.0" class="val">0.284</text>
+<rect x="400" y="761.0" width="259.5" height="10.0" class="s-test"><title>whole-file test WER: 0.305</title></rect>
+<text x="664.5" y="770.0" class="val">0.305</text>
+<text x="390" y="795.0" class="rowlab base" text-anchor="end">baseline ivrit-ai yi-whisper-large-v3 (no fine-tuning)</text>
+<rect x="400" y="780.0" width="451.7" height="10.0" class="s-train"><title>clip test WER: 0.531</title></rect>
+<text x="856.7" y="789.0" class="val">0.531</text>
+<rect x="400" y="791.0" width="454.1" height="10.0" class="s-test"><title>whole-file test WER: 0.534</title></rect>
+<text x="859.1" y="800.0" class="val">0.534</text>
+<text x="390" y="825.0" class="rowlab base" text-anchor="end">baseline ivrit-ai yi-whisper-large-v3-turbo (no fine-tuning)</text>
+<rect x="400" y="810.0" width="485.6" height="10.0" class="s-train"><title>clip test WER: 0.571</title></rect>
+<text x="890.6" y="819.0" class="val">0.571</text>
+<rect x="400" y="821.0" width="483.6" height="10.0" class="s-test"><title>whole-file test WER: 0.569</title></rect>
+<text x="888.6" y="830.0" class="val">0.569</text>
+<text x="390" y="855.0" class="rowlab prod" text-anchor="end">production model · <tspan font-weight="600">auto windows</tspan> (decoder default since 09-23)</text>
+<rect x="400" y="840.0" width="0.0" height="10.0" class="s-train"><title>clip test WER: 0.000</title></rect>
+<text x="405.0" y="849.0" class="val">0.000</text>
+<rect x="400" y="851.0" width="69.2" height="10.0" class="s-test"><title>whole-file test WER: 0.081</title></rect>
+<text x="474.2" y="860.0" class="val">0.081</text>
+</svg><figcaption>Baselines are the ivrit.ai models without any fine-tuning on this corpus. "CT2 int8" = CTranslate2/faster-whisper on CPU; "quotes freed" = same with the gershayim token un-suppressed; "GPU path" = HF fp32 model on MPS with VAD windows and no timestamp tokens (<code>pipeline/hf_longform.py</code>). Acceptance targets were ≤ 0.30 clip and ≤ 0.35 whole-file.</figcaption></figure>
+<div class="tablewrap"><table><tr><th>model · decoder</th><th class="n">clip dev WER</th><th class="n">clip test WER</th><th class="n">clip test CER</th><th class="n">whole-file WER</th><th class="n">whole-file CER</th></tr><tr><td>v2: turbo full lr 3e-5, 4 ep · <b>GPU path</b> (production since 09-22)</td><td class='n'>0.080</td><td class='n'>0.087</td><td class='n'>0.050</td><td class='n'>0.081</td><td class='n'>0.045</td></tr><tr><td>production model · <b>auto windows</b> (decoder default since 09-23)</td><td class='n'>–</td><td class='n'>–</td><td class='n'>–</td><td class='n'>0.081</td><td class='n'>0.045</td></tr><tr><td>v4: production recipe, seed 7 (repeat) · GPU path</td><td class='n'>0.081</td><td class='n'>0.087</td><td class='n'>0.050</td><td class='n'>0.080</td><td class='n'>0.045</td></tr><tr><td>v4: production model self-trained on pass-3 labels · GPU path</td><td class='n'>0.079</td><td class='n'>0.087</td><td class='n'>0.050</td><td class='n'>0.081</td><td class='n'>0.045</td></tr><tr><td>v4: turbo full lr 5e-5, 4 ep · GPU path</td><td class='n'>0.079</td><td class='n'>0.089</td><td class='n'>0.053</td><td class='n'>0.082</td><td class='n'>0.046</td></tr><tr><td>v4: turbo full lr 4e-5, 4 ep · GPU path</td><td class='n'>0.084</td><td class='n'>0.090</td><td class='n'>0.050</td><td class='n'>0.088</td><td class='n'>0.048</td></tr><tr><td>v4: large-v3 lr 2e-5 model + pass-3 pseudo-labels · GPU path</td><td class='n'>0.080</td><td class='n'>0.089</td><td class='n'>0.050</td><td class='n'>0.085</td><td class='n'>0.047</td></tr><tr><td>v2: large-v3 full lr 2e-5, 3 ep · GPU path</td><td class='n'>0.077</td><td class='n'>0.083</td><td class='n'>0.048</td><td class='n'>0.082</td><td class='n'>0.047</td></tr><tr><td>v3: turbo lr 1e-5 model + 2 ep on real + pseudo · GPU path</td><td class='n'>0.079</td><td class='n'>0.090</td><td class='n'>0.051</td><td class='n'>0.082</td><td class='n'>0.046</td></tr><tr><td>v3: turbo lr 2e-5 model + 2 ep on real + pseudo · GPU path</td><td class='n'>0.080</td><td class='n'>0.090</td><td class='n'>0.052</td><td class='n'>0.084</td><td class='n'>0.046</td></tr><tr><td>v3: fresh turbo lr 2e-5, 2 ep on real + pseudo · GPU path</td><td class='n'>0.079</td><td class='n'>0.092</td><td class='n'>0.053</td><td class='n'>0.086</td><td class='n'>0.047</td></tr><tr><td>v2: continue turbo lr 2e-5 at lr 1e-5, 3 ep · GPU path</td><td class='n'>0.082</td><td class='n'>0.091</td><td class='n'>0.051</td><td class='n'>0.086</td><td class='n'>0.048</td></tr><tr><td>v2: large-v3 full lr 1e-5, 3 ep · GPU path</td><td class='n'>0.083</td><td class='n'>0.091</td><td class='n'>0.051</td><td class='n'>0.087</td><td class='n'>0.048</td></tr><tr><td>turbo full lr 2e-5 · GPU path (production 09-21)</td><td class='n'>0.080</td><td class='n'>0.093</td><td class='n'>0.052</td><td class='n'>0.088</td><td class='n'>0.048</td></tr><tr><td>turbo full lr 1e-5 · GPU path</td><td class='n'>0.088</td><td class='n'>0.098</td><td class='n'>0.053</td><td class='n'>0.093</td><td class='n'>0.050</td></tr><tr><td>turbo full lr 2e-5 · CT2 int8, quotes freed</td><td class='n'>0.082</td><td class='n'>0.095</td><td class='n'>0.053</td><td class='n'>0.124</td><td class='n'>0.081</td></tr><tr><td>turbo full lr 1e-5 · CT2 int8, quotes freed</td><td class='n'>0.093</td><td class='n'>0.101</td><td class='n'>0.057</td><td class='n'>0.121</td><td class='n'>0.075</td></tr><tr><td>turbo full lr 2e-5 · CT2 int8, default suppression</td><td class='n'>0.092</td><td class='n'>0.105</td><td class='n'>0.057</td><td class='n'>0.132</td><td class='n'>0.084</td></tr><tr><td>turbo full lr 1e-5 · CT2 default</td><td class='n'>0.100</td><td class='n'>0.110</td><td class='n'>0.060</td><td class='n'>0.128</td><td class='n'>0.076</td></tr><tr><td>turbo LoRA r64 · CT2 default</td><td class='n'>0.101</td><td class='n'>0.118</td><td class='n'>0.064</td><td class='n'>0.127</td><td class='n'>0.073</td></tr><tr><td>large-v3 full lr 1e-5, 1 ep · CT2 default</td><td class='n'>0.110</td><td class='n'>0.126</td><td class='n'>0.068</td><td class='n'>0.144</td><td class='n'>0.083</td></tr><tr><td>large-v3 LoRA r64, 1 ep · CT2 default</td><td class='n'>0.115</td><td class='n'>0.134</td><td class='n'>0.071</td><td class='n'>0.147</td><td class='n'>0.084</td></tr><tr><td>large-v3 frozen encoder · CT2 default</td><td class='n'>0.157</td><td class='n'>0.182</td><td class='n'>0.099</td><td class='n'>0.199</td><td class='n'>0.117</td></tr><tr><td>turbo frozen encoder lr 2e-5 · CT2 default</td><td class='n'>0.195</td><td class='n'>0.225</td><td class='n'>0.119</td><td class='n'>0.239</td><td class='n'>0.138</td></tr><tr><td>turbo frozen encoder lr 1e-5 · CT2 default</td><td class='n'>0.212</td><td class='n'>0.244</td><td class='n'>0.128</td><td class='n'>0.266</td><td class='n'>0.148</td></tr><tr><td>v0: frozen encoder, 1,000 steps, unfiltered data</td><td class='n'>0.254</td><td class='n'>0.284</td><td class='n'>0.147</td><td class='n'>0.305</td><td class='n'>0.168</td></tr><tr><td>baseline ivrit-ai yi-whisper-large-v3 (no fine-tuning)</td><td class='n'>0.496</td><td class='n'>0.531</td><td class='n'>0.274</td><td class='n'>0.534</td><td class='n'>0.275</td></tr><tr><td>baseline ivrit-ai yi-whisper-large-v3-turbo (no fine-tuning)</td><td class='n'>0.542</td><td class='n'>0.571</td><td class='n'>0.286</td><td class='n'>0.569</td><td class='n'>0.283</td></tr></table></div>
+
+
+<h2>Accuracy on the product years: the delivered transcripts against the hanachos</h2>
+<p>With the PDFs in hand, the 1,005 machine transcripts of 5778–5781 (third pass, production model) can be scored against the printed text for the first time. These are whole-file numbers over <i>all</i> days, including days whose printed text is a different sicha or a heavily edited one, so they are upper bounds; the fixed test set (0.081) sits in the same range.</p>
+<div class="tablewrap"><table><tr><th>year</th><th class="n">days</th><th class="n">reference words</th><th class="n">WER</th><th class="n">CER</th><th class="n">median day WER</th><th>reference text</th></tr><tr><td>5778</td><td class='n'>247</td><td class='n'>319,404</td><td class='n'>0.072</td><td class='n'>0.041</td><td class='n'>0.059</td><td>decoded PDF (David + bold crib)</td></tr><tr><td>5779</td><td class='n'>266</td><td class='n'>341,973</td><td class='n'>0.070</td><td class='n'>0.040</td><td class='n'>0.057</td><td>decoded PDF</td></tr><tr><td>5780</td><td class='n'>245</td><td class='n'>306,533</td><td class='n'>0.073</td><td class='n'>0.042</td><td class='n'>0.057</td><td>decoded PDF</td></tr><tr><td>5781</td><td class='n'>247</td><td class='n'>312,740</td><td class='n'>0.090</td><td class='n'>0.050</td><td class='n'>0.071</td><td>clean text layer; 0.080 without the 2 mismatched days</td></tr></table></div>
+<div class="callout"><p><b>A decoder failure the earlier audit missed.</b> Comparing word counts exposed 14 transcripts far shorter than their text: the silero voice-activity detector had kept 3 windows of a 638 s loud, clipped recording (31 words for 011 18-Tishrei 5781) and dropped 11–52% of the audio in 13 more files, while the "0 empty transcripts" check passed. Lower VAD thresholds recover little; decoding every gap as loud as the speech recovers it but hallucinates on gaps that are crowd noise or singing. The decoder now (1) falls back to fixed windows when the VAD covers under 30% of a recording and (2) by default adds loud gaps as extra windows and keeps each only when its decode is confident (mean token log-prob above −0.35 and at least 1 word/s). Validation: identical output on normal files (control set 0.0955 = 0.0955; the 20-day test set 0.0814 vs 0.0814), 0.231 → 0.135 on the 13 affected files. The ten truncated transcripts were replaced; the originals are kept in <code>output_superseded/</code>.</p></div>
+
+<h2>Where the errors are now</h2>
+<div class="keys"><span class="k-before">v1 turbo lr 1e-5, CT2 default suppression (test 0.110)</span><span class="k-train">v2 turbo lr 3e-5, GPU path (test 0.087)</span></div>
+<figure><svg viewBox="0 0 980 300" class="chart" role="img" aria-label="error rate of reference words by category" style="max-width:100%;height:auto">
+<line x1="56" x2="964" y1="244.0" y2="244.0" class="grid"/>
+<text x="48" y="248.0" class="ax" text-anchor="end">0</text>
+<line x1="56" x2="964" y1="168.7" y2="168.7" class="grid"/>
+<text x="48" y="172.7" class="ax" text-anchor="end">0.2</text>
+<line x1="56" x2="964" y1="93.3" y2="93.3" class="grid"/>
+<text x="48" y="97.3" class="ax" text-anchor="end">0.4</text>
+<line x1="56" x2="964" y1="18.0" y2="18.0" class="grid"/>
+<text x="48" y="22.0" class="ax" text-anchor="end">0.6</text>
+<text x="56" y="12" class="axlabel">error rate of reference words</text>
+<rect x="72.3" y="223.3" width="73.5" height="20.7" class="s-before"><title>seen 100+ times · v1 turbo lr 1e-5, CT2 default suppression: 0.055</title></rect>
+<text x="109.1" y="219.3" class="val" text-anchor="middle">0.055</text>
+<rect x="146.8" y="227.4" width="73.5" height="16.6" class="s-train"><title>seen 100+ times · v2 turbo lr 3e-5, GPU path: 0.044</title></rect>
+<text x="183.5" y="223.4" class="val" text-anchor="middle">0.044</text>
+<text x="146.8" y="260" class="ax" text-anchor="middle">seen 100+ times</text>
+<text x="146.8" y="274" class="ax sub" text-anchor="middle">82.5% of words</text>
+<rect x="253.9" y="186.4" width="73.5" height="57.6" class="s-before"><title>seen 10–99 · v1 turbo lr 1e-5, CT2 default suppression: 0.153</title></rect>
+<text x="290.7" y="182.4" class="val" text-anchor="middle">0.153</text>
+<rect x="328.4" y="201.1" width="73.5" height="42.9" class="s-train"><title>seen 10–99 · v2 turbo lr 3e-5, GPU path: 0.114</title></rect>
+<text x="365.1" y="197.1" class="val" text-anchor="middle">0.114</text>
+<text x="328.4" y="260" class="ax" text-anchor="middle">seen 10–99</text>
+<text x="328.4" y="274" class="ax sub" text-anchor="middle">12.5%</text>
+<rect x="435.5" y="114.8" width="73.5" height="129.2" class="s-before"><title>seen 1–9 · v1 turbo lr 1e-5, CT2 default suppression: 0.343</title></rect>
+<text x="472.3" y="110.8" class="val" text-anchor="middle">0.343</text>
+<rect x="510.0" y="140.8" width="73.5" height="103.2" class="s-train"><title>seen 1–9 · v2 turbo lr 3e-5, GPU path: 0.274</title></rect>
+<text x="546.7" y="136.8" class="val" text-anchor="middle">0.274</text>
+<text x="510.0" y="260" class="ax" text-anchor="middle">seen 1–9</text>
+<text x="510.0" y="274" class="ax sub" text-anchor="middle">3.8%</text>
+<rect x="617.1" y="51.1" width="73.5" height="192.9" class="s-before"><title>never seen (OOV) · v1 turbo lr 1e-5, CT2 default suppression: 0.512</title></rect>
+<text x="653.9" y="47.1" class="val" text-anchor="middle">0.512</text>
+<rect x="691.6" y="54.9" width="73.5" height="189.1" class="s-train"><title>never seen (OOV) · v2 turbo lr 3e-5, GPU path: 0.502</title></rect>
+<text x="728.3" y="50.9" class="val" text-anchor="middle">0.502</text>
+<text x="691.6" y="260" class="ax" text-anchor="middle">never seen (OOV)</text>
+<text x="691.6" y="274" class="ax sub" text-anchor="middle">1.2%</text>
+<rect x="798.7" y="129.9" width="73.5" height="114.1" class="s-before"><title>abbreviations (gershayim) · v1 turbo lr 1e-5, CT2 default suppression: 0.303</title></rect>
+<text x="835.5" y="125.9" class="val" text-anchor="middle">0.303</text>
+<rect x="873.2" y="178.1" width="73.5" height="65.9" class="s-train"><title>abbreviations (gershayim) · v2 turbo lr 3e-5, GPU path: 0.175</title></rect>
+<text x="909.9" y="174.1" class="val" text-anchor="middle">0.175</text>
+<text x="873.2" y="260" class="ax" text-anchor="middle">abbreviations (gershayim)</text>
+<text x="873.2" y="274" class="ax sub" text-anchor="middle">6.0% (overlaps)</text>
+<line x1="56" x2="964" y1="244.0" y2="244.0" class="axis"/>
+</svg><figcaption><b>Error rate of reference words by how often the word occurs in the clean training text</b> (substitutions + deletions on 42,368 dev+test words), plus abbreviations written with gershayim. Frequent words are right 95% of the time; words never seen in training are wrong half the time. The abbreviation class fell from 30% to 17.5% once the decoder could emit the quote and the model improved; what remains there is mostly abbreviation-vs-spelled-out variation that the references themselves are inconsistent about (עאכו"כ vs על אחת כמה וכמה, בנוגע vs בהנוגע). The single largest confusion is דער/די/דעם (gender and case of the article).</figcaption></figure>
+
+
+<h2>v5: the enlarged dataset and the runs on it (in progress)</h2>
+<p>Status at the snapshot: the fleet has aligned 5781 and is at 1,170 of the remaining 1,511 days (5775–5780, wave 2; ~6 days per minute). When it finishes, every node and this Mac rebuild the dataset from the same day records, the production model scans the train split, the filter drops clips with CER &gt; 0.6, and a guarded launcher starts the runs below unless the cleaned manifest is small or a year lost more than 25% of its clips. Rules kept: <code>data/splits.json</code> unchanged (the 20 dev and 20 test days stay in 5786–5787); the new years go to train only, except <b>test_b</b> = 20 evenly spaced 5781 days (clean text layer) that are never trained on and are reported next to the main test set from now on. Expected size: about 66,000 clips, ~370 h (30,212 clips / 168 h in v4).</p>
+<div class="tablewrap"><table><tr><th>run</th><th>node</th><th>recipe</th><th>why</th><th>expected</th></tr>
+<tr><td class="mono">turbo-full-v5-cont-lr1e5-2ep</td><td>bigmac01</td><td>production model continued 2 ep on all data, lr 1e-5</td><td>cheapest read of what the new years add</td><td>~12 h</td></tr>
+<tr><td class="mono">turbo-full-v5-lr3e5-2ep</td><td>bigmac02</td><td>production recipe from the base on all data, 2 ep, lr 3e-5</td><td>same optimizer steps as the 4-epoch v4 run on 2.5× the clips</td><td>~12 h</td></tr>
+<tr><td class="mono">large-full-v5-lr2e5-2ep</td><td>supermac01 (512 GB)</td><td>large-v3 from the base on all data, 2 ep, lr 2e-5</td><td>best clip model in v4 (0.083); the target model</td><td>~35 h on a Mac Studio; hours on the GB10 with CUDA/bf16</td></tr></table></div>
+<p class="note">v4 verdict, now complete: on the old data nothing beats the production recipe; the seed repeat (0.080 vs 0.081 whole-file) puts run-to-run noise at ~0.001, so table differences under 0.003 mean nothing. Higher learning rates (4e-5, 5e-5) are worse; self-training never wins. large-v3 at lr 3e-5 finished 05:21 and is being scored.</p>
+
+<h2>Next steps</h2>
+<ol>
+<li><b>Finish the v5 data (today).</b> Alignment wave 2 → dataset → production-model scan → filter. Read the per-year drop rate: a year above ~10% means a decode or alignment problem in that year's text, not bad audio.</li>
+<li><b>Train the three v5 runs (Thu–Sat)</b> and score each on the fixed test set through the GPU path (whole-file WER is the ranking metric) and on test_b. Decide by whole-file test WER; anything under 0.003 apart is a tie.</li>
+<li><b>If a v5 model wins:</b> a fourth Phase 7 pass with it and the auto windows over 5775–5781 (the project owner's go-ahead needed; the third pass stands until then), then the per-year drafts-vs-hanacha table again.</li>
+<li><b>Attack the remaining errors where they are:</b> half of the remaining word errors are words never seen in training (names, sources, loshon-kodesh); the text-only years (5768–5770, 5774, 5782: ~1.4 M words) are material for a spelling/normalization layer or decoder biasing, and for consistent abbreviation forms.</li>
+<li><b>Compute.</b> The large-v3 runs take 30+ h per Mac Studio; the GB10 (CUDA, bf16) would cut that to hours once its GPU memory and disk are freed. Fleet alignment should move from static shards to a shared queue (the tail idled the fleet ~1 h per wave).</li>
+<li><b>Product and review.</b> Synced subtitles (an SRT per file exists) are the preferred first deliverable; nothing is published or made searchable until Rabonim/Mashpi'im and the hanachos' author have reviewed; ask The Daily Sicha team for the 5782 recordings (text exists) and confirm the two 5781 days whose printed text does not match the audio (17 Kislev, 9 Teves).</li>
+<li><b>Housekeeping.</b> Report every number from the GPU path only (faster-whisper long-form loses ~3 points and suppresses the gershayim by default); keep <code>output_superseded/</code> and the windowing reports as the audit trail.</li>
+</ol>
+
+<h2>Reproducing any number on this page</h2>
+<div class="tablewrap"><table>
+<tr><th>artifact</th><th>path (under <code>Sichos/asr/</code>)</th><th>notes</th></tr>
+<tr><td>clip manifests</td><td><code>data/manifests/all.jsonl, train.jsonl, train.clean.jsonl, dev.jsonl, test.jsonl</code></td><td>one JSON row per clip: audio path, start/end, duration, text, text_raw, day, split, source_year, timing_source, anchor_rate</td></tr>
+<tr><td>pseudo-labels</td><td><code>data/manifests/train.pseudo.jsonl, train.clean_pseudo.jsonl</code></td><td>built by <code>build_pseudo_dataset.py</code> + <code>merge_pseudo_manifest.py</code></td></tr>
+<tr><td>splits</td><td><code>data/splits.json</code></td><td>rule text, day lists, per-day detail (publication year, month, source year)</td></tr>
+<tr><td>day records</td><td><code>data/days/&lt;year&gt;/*.json</code></td><td>API payload, offsets, site timings, own alignment (<code>sync_local</code>) with diagnostics</td></tr>
+<tr><td>clips</td><td><code>data/segments/&lt;year&gt;/&lt;day&gt;/NNN_&lt;start×100&gt;.flac</code></td><td>16 kHz mono FLAC, on every fleet node</td></tr>
+<tr><td>evaluation reports</td><td><code>reports/v1/, reports/aq/, reports/hf/, reports/sweep/</code></td><td>per-clip ref/hyp pairs; <code>compare_runs.py</code> recomputes every table from them</td></tr>
+<tr><td>training logs and configs</td><td><code>~/Sichos/asr/reports/train-&lt;run&gt;.log</code>, <code>runs/&lt;run&gt;/train_config.json</code> on the nodes</td><td>eval_wer every 500 steps</td></tr>
+<tr><td>hanachos from PDFs</td><td><code>data/pdf_text/&lt;year&gt;/NNN.json, _summary.json, _fontmap.json</code></td><td>decoded day texts, per-font maps and in-vocabulary shares; <code>reports/fleet/pdf-*.log</code></td></tr>
+<tr><td>drafts vs hanachos</td><td><code>reports/drafts-vs-pdf/by-year.md</code>, <code>reports/windowing/</code></td><td><code>score_drafts_vs_pdf.py</code>; the windowing comparison (summary.txt, replaced.json)</td></tr>
+<tr><td>error analysis</td><td><code>reports/error-analysis-*.md</code></td><td><code>pipeline/error_analysis.py</code></td></tr>
+<tr><td>narrative and decisions</td><td><code>AGENT_HANDOFF.md</code>, <code>README.md</code>, <code>cluster/README.md</code></td><td>dated log of every choice under CURRENT POSITION</td></tr>
+</table></div>
+<footer>Corpus statistics computed 2026-09-22 from the v4 manifests (the v5 manifests are being built); training curves read from the fleet logs on 2026-09-24 05:30 EDT; v1–v4 complete (large-v3 lr 3e-5 being scored), v5 alignment wave 2 running. The Daily Sicha audio and text are used under the project's agreement with the producers: nothing is published or made searchable.</footer>
+</div></body></html>

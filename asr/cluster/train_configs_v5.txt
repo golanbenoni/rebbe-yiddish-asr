@@ -1,0 +1,9 @@
+# v5 (2026-09-24): first runs on the enlarged data (5775-5781 hanachos PDFs + 5783-5787 site text; TRAIN_MANIFEST=train.clean.jsonl
+# rebuilt by cluster/v5_build_and_scan.sh; data/splits.json unchanged, data/splits_b.json = 20 held-out 5781 days).
+# Hosts in cluster/hosts_v5.txt order. Decision 2(g) of the 2026-09-23 20:00 entry: 2-3 runs only.
+# bigmac01: production model continued on all data (cheapest way to see what the new years add)
+turbo-full-v5-cont-lr1e5-2ep   | --init-from runs/turbo-full-lr3e5-4ep --base-model ivrit-ai/yi-whisper-large-v3-turbo --epochs 2 --lr 1e-5 --batch 8 --grad-accum 4 --gradient-checkpointing
+# bigmac02: the production recipe from the base on all data, 2 epochs (~2.5x the clips, so the same number of steps as the old 4-epoch run is 1.6 epochs)
+turbo-full-v5-lr3e5-2ep        | --base-model ivrit-ai/yi-whisper-large-v3-turbo --epochs 2 --lr 3e-5 --batch 8 --grad-accum 4 --gradient-checkpointing
+# supermac01 (512 GB, free after large-full-lr3e5-4ep ends ~06:00): the large model on all data
+large-full-v5-lr2e5-2ep        | --base-model ivrit-ai/yi-whisper-large-v3 --epochs 2 --lr 2e-5 --batch 8 --grad-accum 4 --gradient-checkpointing

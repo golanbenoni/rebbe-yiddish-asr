@@ -1,0 +1,4 @@
+# v4b part 1 (2026-09-22 20:10): supervised learning-rate axis, real data only (TRAIN_MANIFEST=train.clean.jsonl).
+# The 4-epoch turbo recipe improved monotonically 1e-5 -> 2e-5 -> 3e-5 (whole-file 0.093 -> 0.088 -> 0.081); probe higher.
+turbo-full-lr4e5-4ep   | --base-model ivrit-ai/yi-whisper-large-v3-turbo --epochs 4 --lr 4e-5 --batch 8 --grad-accum 4 --gradient-checkpointing
+turbo-full-lr5e5-4ep   | --base-model ivrit-ai/yi-whisper-large-v3-turbo --epochs 4 --lr 5e-5 --batch 8 --grad-accum 4 --gradient-checkpointing

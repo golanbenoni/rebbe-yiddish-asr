@@ -1,0 +1,9 @@
+# v4 wave (DRAFT 2026-09-22 13:10, finalize after the v3 harvest ~19:30). TRAIN_MANIFEST=train.clean_pseudo3.jsonl
+# (27,833 human-timed clips + pass-3 pseudo-labels from turbo-full-lr3e5-4ep, whole-file WER 0.081). One line per host
+# in cluster/hosts_v4.txt order. Init models must exist on the target node (stage with rsync from supermac01).
+# bigmac02: continue the new production model on real + pass-3 pseudo (self-training of the labeler)
+turbo-full-v4-lr3e5self-lr1e5-2ep   | --base-model ivrit-ai/yi-whisper-large-v3-turbo --init-from runs/turbo-full-lr3e5-4ep --epochs 2 --lr 1e-5 --warmup-steps 100 --batch 8 --grad-accum 4 --gradient-checkpointing
+# bigmac03: large-v3 lr2e5 (best clips) continued on real + pass-3 pseudo
+large-full-v4-cont-lr1e5-2ep        | --base-model ivrit-ai/yi-whisper-large-v3 --init-from runs/large-full-lr2e5-3ep --epochs 2 --lr 1e-5 --warmup-steps 100 --batch 8 --grad-accum 4 --gradient-checkpointing
+# bigmac05: continue the best v3 model (fill in after harvest: turbo-full-pseudo-cont-lr1e5-2ep or -self-) at a low rate on the fresher labels
+turbo-full-v4-bestv3-lr5e6-1ep      | --base-model ivrit-ai/yi-whisper-large-v3-turbo --init-from runs/BEST_V3_MODEL --epochs 1 --lr 5e-6 --warmup-steps 50 --batch 8 --grad-accum 4 --gradient-checkpointing

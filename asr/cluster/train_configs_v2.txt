@@ -1,0 +1,9 @@
+# v2 wave (2026-09-21): build on the v1 finding that full-encoder fine-tunes win. One line per host in
+# cluster/hosts_v2.txt order. All full/LoRA recipes use checkpointing + batch 8x4 (memory rules).
+# bigmac03: continue the best v1 model (turbo full lr2e-5, dev 0.0765) for 3 more epochs at a lower rate
+turbo-full-cont-lr1e5-3ep   | --base-model ivrit-ai/yi-whisper-large-v3-turbo --init-from runs/turbo-full-lr2e5-3ep --epochs 3 --lr 1e-5 --warmup-steps 100 --batch 8 --grad-accum 4 --gradient-checkpointing
+# supermac02/03: large-v3 full fine-tune for the full 3 epochs (v1 ran 1 epoch: dev 0.1025)
+large-full-lr1e5-3ep        | --base-model ivrit-ai/yi-whisper-large-v3 --epochs 3 --lr 1e-5 --batch 8 --grad-accum 4 --gradient-checkpointing
+large-full-lr2e5-3ep        | --base-model ivrit-ai/yi-whisper-large-v3 --epochs 3 --lr 2e-5 --batch 8 --grad-accum 4 --gradient-checkpointing
+# bigmac02: fresh turbo full at lr 3e-5, 4 epochs (lr 2e-5 beat 1e-5 in v1)
+turbo-full-lr3e5-4ep        | --base-model ivrit-ai/yi-whisper-large-v3-turbo --epochs 4 --lr 3e-5 --batch 8 --grad-accum 4 --gradient-checkpointing

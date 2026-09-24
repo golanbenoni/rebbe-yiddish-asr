@@ -1,0 +1,1 @@
+mlx-whisper        # stock OpenAI Whisper on the Apple GPU; used only for the stock baseline

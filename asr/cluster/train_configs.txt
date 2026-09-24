@@ -1,0 +1,11 @@
+# name | finetune.py arguments   (one line per node in cluster/hosts_train.txt order: supermac02, supermac03, bigmac01..05)
+# MPS fp32 (no --bf16). 256 GB nodes: full/LoRA recipes MUST use --gradient-checkpointing and batch 8 x 4
+# (fp32 activations at batch 16 need 200-250 GB and crashed two nodes). The full train split is ~29k clips; 3 epochs of large-v3 full FT is ~4 days on one Ultra,
+# so the large-v3 recipes here run 1 epoch as scouting runs; turbo recipes run 3 epochs (~1-2 days).
+large-full-lr1e5-1ep   | --base-model ivrit-ai/yi-whisper-large-v3 --epochs 1 --lr 1e-5 --batch 16 --grad-accum 2
+large-lora-r64-1ep     | --base-model ivrit-ai/yi-whisper-large-v3 --lora --lora-r 64 --epochs 1 --lr 1e-4 --batch 8 --grad-accum 4 --gradient-checkpointing
+large-frozen-enc-2ep   | --base-model ivrit-ai/yi-whisper-large-v3 --freeze-encoder --epochs 2 --lr 1e-5 --batch 16 --grad-accum 2
+turbo-full-lr1e5-3ep   | --base-model ivrit-ai/yi-whisper-large-v3-turbo --epochs 3 --lr 1e-5 --batch 8 --grad-accum 4 --gradient-checkpointing
+turbo-full-lr2e5-3ep   | --base-model ivrit-ai/yi-whisper-large-v3-turbo --epochs 3 --lr 2e-5 --batch 8 --grad-accum 4 --gradient-checkpointing
+turbo-lora-r64-3ep     | --base-model ivrit-ai/yi-whisper-large-v3-turbo --lora --lora-r 64 --epochs 3 --lr 1e-4 --batch 8 --grad-accum 4 --gradient-checkpointing
+turbo-frozen-lr2e5-4ep | --base-model ivrit-ai/yi-whisper-large-v3-turbo --freeze-encoder --epochs 4 --lr 2e-5 --batch 16 --grad-accum 2

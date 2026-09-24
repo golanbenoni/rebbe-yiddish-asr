@@ -1,0 +1,6 @@
+# v4a wave (2026-09-22 17:00). TRAIN_MANIFEST=train.clean_pseudo3.jsonl = 27,833 human-timed clips + 26,797 pass-3
+# pseudo-labeled clips (labels from turbo-full-lr3e5-4ep, whole-file WER 0.081). Hosts in cluster/hosts_v4a.txt order.
+# bigmac02: self-training of the production model on its own pass-3 labels
+turbo-full-v4-lr3e5self-lr1e5-2ep   | --base-model ivrit-ai/yi-whisper-large-v3-turbo --init-from runs/turbo-full-lr3e5-4ep --epochs 2 --lr 1e-5 --warmup-steps 100 --batch 8 --grad-accum 4 --gradient-checkpointing
+# supermac03: the large-v3 lr2e5 model (best clips) continued on real + pass-3 pseudo
+large-full-v4-cont-lr1e5-2ep        | --base-model ivrit-ai/yi-whisper-large-v3 --init-from runs/large-full-lr2e5-3ep --epochs 2 --lr 1e-5 --warmup-steps 100 --batch 8 --grad-accum 4 --gradient-checkpointing

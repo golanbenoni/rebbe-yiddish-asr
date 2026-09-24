@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 300" width="980" height="300" style="background:#fff"><style>
+.grid{stroke:#D6DBD8;stroke-width:1}.axis{stroke:#5C6664;stroke-width:1}.ax{font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;fill:#5C6664}.ax.sub{font-size:10px}.axlabel{font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;fill:#5C6664}
+.val{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;fill:#1B1F1E}.rowlab{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;font-size:12.5px;fill:#1B1F1E}.rowlab.prod{font-weight:600}.rowlab.base{fill:#5C6664}
+.ctitle{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;font-size:12.5px;font-weight:600;fill:#1B1F1E}.marker{stroke:#B5443A;stroke-width:1;stroke-dasharray:3 3}.marker-text{fill:#B5443A}.band{fill:rgba(36,87,166,.07)}
+.s-train{fill:#2457A6}.s-dev{fill:#C98B1F}.s-test{fill:#3E7D6E}.s-before{fill:#A9B2AE}.s-pseudo{fill:#7B8FB8}
+.line{stroke-width:1.8;fill:none}.line.s1{stroke:#2457A6}.line.s2{stroke:#C98B1F}.line.s3{stroke:#3E7D6E}.line.s4{stroke:#B5443A}.line.s5{stroke:#6B4FA3}.line.s6{stroke:#2A8A99}
+.dot.s1{fill:#2457A6}.dot.s2{fill:#C98B1F}.dot.s3{fill:#3E7D6E}.dot.s4{fill:#B5443A}.dot.s5{fill:#6B4FA3}.dot.s6{fill:#2A8A99}
+</style><rect x="0" y="0" width="980" height="300" fill="#ffffff"/>
+<line x1="56" x2="964" y1="244.0" y2="244.0" class="grid"/>
+<text x="48" y="248.0" class="ax" text-anchor="end">0</text>
+<line x1="56" x2="964" y1="168.7" y2="168.7" class="grid"/>
+<text x="48" y="172.7" class="ax" text-anchor="end">0.2</text>
+<line x1="56" x2="964" y1="93.3" y2="93.3" class="grid"/>
+<text x="48" y="97.3" class="ax" text-anchor="end">0.4</text>
+<line x1="56" x2="964" y1="18.0" y2="18.0" class="grid"/>
+<text x="48" y="22.0" class="ax" text-anchor="end">0.6</text>
+<text x="56" y="12" class="axlabel">error rate of reference words</text>
+<rect x="72.3" y="223.3" width="73.5" height="20.7" class="s-before"><title>seen 100+ times · v1 turbo lr 1e-5, CT2 default suppression: 0.055</title></rect>
+<text x="109.1" y="219.3" class="val" text-anchor="middle">0.055</text>
+<rect x="146.8" y="227.4" width="73.5" height="16.6" class="s-train"><title>seen 100+ times · v2 turbo lr 3e-5, GPU path: 0.044</title></rect>
+<text x="183.5" y="223.4" class="val" text-anchor="middle">0.044</text>
+<text x="146.8" y="260" class="ax" text-anchor="middle">seen 100+ times</text>
+<text x="146.8" y="274" class="ax sub" text-anchor="middle">82.5% of words</text>
+<rect x="253.9" y="186.4" width="73.5" height="57.6" class="s-before"><title>seen 10–99 · v1 turbo lr 1e-5, CT2 default suppression: 0.153</title></rect>
+<text x="290.7" y="182.4" class="val" text-anchor="middle">0.153</text>
+<rect x="328.4" y="201.1" width="73.5" height="42.9" class="s-train"><title>seen 10–99 · v2 turbo lr 3e-5, GPU path: 0.114</title></rect>
+<text x="365.1" y="197.1" class="val" text-anchor="middle">0.114</text>
+<text x="328.4" y="260" class="ax" text-anchor="middle">seen 10–99</text>
+<text x="328.4" y="274" class="ax sub" text-anchor="middle">12.5%</text>
+<rect x="435.5" y="114.8" width="73.5" height="129.2" class="s-before"><title>seen 1–9 · v1 turbo lr 1e-5, CT2 default suppression: 0.343</title></rect>
+<text x="472.3" y="110.8" class="val" text-anchor="middle">0.343</text>
+<rect x="510.0" y="140.8" width="73.5" height="103.2" class="s-train"><title>seen 1–9 · v2 turbo lr 3e-5, GPU path: 0.274</title></rect>
+<text x="546.7" y="136.8" class="val" text-anchor="middle">0.274</text>
+<text x="510.0" y="260" class="ax" text-anchor="middle">seen 1–9</text>
+<text x="510.0" y="274" class="ax sub" text-anchor="middle">3.8%</text>
+<rect x="617.1" y="51.1" width="73.5" height="192.9" class="s-before"><title>never seen (OOV) · v1 turbo lr 1e-5, CT2 default suppression: 0.512</title></rect>
+<text x="653.9" y="47.1" class="val" text-anchor="middle">0.512</text>
+<rect x="691.6" y="54.9" width="73.5" height="189.1" class="s-train"><title>never seen (OOV) · v2 turbo lr 3e-5, GPU path: 0.502</title></rect>
+<text x="728.3" y="50.9" class="val" text-anchor="middle">0.502</text>
+<text x="691.6" y="260" class="ax" text-anchor="middle">never seen (OOV)</text>
+<text x="691.6" y="274" class="ax sub" text-anchor="middle">1.2%</text>
+<rect x="798.7" y="129.9" width="73.5" height="114.1" class="s-before"><title>abbreviations (gershayim) · v1 turbo lr 1e-5, CT2 default suppression: 0.303</title></rect>
+<text x="835.5" y="125.9" class="val" text-anchor="middle">0.303</text>
+<rect x="873.2" y="178.1" width="73.5" height="65.9" class="s-train"><title>abbreviations (gershayim) · v2 turbo lr 3e-5, GPU path: 0.175</title></rect>
+<text x="909.9" y="174.1" class="val" text-anchor="middle">0.175</text>
+<text x="873.2" y="260" class="ax" text-anchor="middle">abbreviations (gershayim)</text>
+<text x="873.2" y="274" class="ax sub" text-anchor="middle">6.0% (overlaps)</text>
+<line x1="56" x2="964" y1="244.0" y2="244.0" class="axis"/>
+</svg>

@@ -1,0 +1,11 @@
+# v1 matrix on the corrected dataset (calibrated site timings), one recipe per node in cluster/hosts.txt order:
+# supermac01, supermac02, supermac03, bigmac01, bigmac02, bigmac03, bigmac04, bigmac05.  MPS fp32.
+# 256 GB nodes: full/LoRA recipes use --gradient-checkpointing with batch 8 x 4 (see cluster/README.md memory rules).
+turbo-frozen-lr1e5-4ep  | --base-model ivrit-ai/yi-whisper-large-v3-turbo --freeze-encoder --epochs 4 --lr 1e-5 --batch 16 --grad-accum 2
+large-full-lr1e5-1ep    | --base-model ivrit-ai/yi-whisper-large-v3 --epochs 1 --lr 1e-5 --batch 8 --grad-accum 4 --gradient-checkpointing
+large-lora-r64-1ep      | --base-model ivrit-ai/yi-whisper-large-v3 --lora --lora-r 64 --epochs 1 --lr 1e-4 --batch 8 --grad-accum 4 --gradient-checkpointing
+large-frozen-enc-2ep    | --base-model ivrit-ai/yi-whisper-large-v3 --freeze-encoder --epochs 2 --lr 1e-5 --batch 8 --grad-accum 4 --gradient-checkpointing --resume
+turbo-full-lr1e5-3ep    | --base-model ivrit-ai/yi-whisper-large-v3-turbo --epochs 3 --lr 1e-5 --batch 8 --grad-accum 4 --gradient-checkpointing
+turbo-full-lr2e5-3ep    | --base-model ivrit-ai/yi-whisper-large-v3-turbo --epochs 3 --lr 2e-5 --batch 8 --grad-accum 4 --gradient-checkpointing
+turbo-lora-r64-3ep      | --base-model ivrit-ai/yi-whisper-large-v3-turbo --lora --lora-r 64 --epochs 3 --lr 1e-4 --batch 8 --grad-accum 4 --gradient-checkpointing
+turbo-frozen-lr2e5-4ep  | --base-model ivrit-ai/yi-whisper-large-v3-turbo --freeze-encoder --epochs 4 --lr 2e-5 --batch 16 --grad-accum 2

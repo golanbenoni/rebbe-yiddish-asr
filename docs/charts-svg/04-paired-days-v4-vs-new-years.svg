@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 348" width="980" height="348" style="background:#fff"><style>
+.grid{stroke:#D6DBD8;stroke-width:1}.axis{stroke:#5C6664;stroke-width:1}.ax{font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;fill:#5C6664}.ax.sub{font-size:10px}.axlabel{font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;fill:#5C6664}
+.val{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;fill:#1B1F1E}.rowlab{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;font-size:12.5px;fill:#1B1F1E}.rowlab.prod{font-weight:600}.rowlab.base{fill:#5C6664}
+.ctitle{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;font-size:12.5px;font-weight:600;fill:#1B1F1E}.marker{stroke:#B5443A;stroke-width:1;stroke-dasharray:3 3}.marker-text{fill:#B5443A}.band{fill:rgba(36,87,166,.07)}
+.s-train{fill:#2457A6}.s-dev{fill:#C98B1F}.s-test{fill:#3E7D6E}.s-before{fill:#A9B2AE}.s-pseudo{fill:#7B8FB8}
+.line{stroke-width:1.8;fill:none}.line.s1{stroke:#2457A6}.line.s2{stroke:#C98B1F}.line.s3{stroke:#3E7D6E}.line.s4{stroke:#B5443A}.line.s5{stroke:#6B4FA3}.line.s6{stroke:#2A8A99}
+.dot.s1{fill:#2457A6}.dot.s2{fill:#C98B1F}.dot.s3{fill:#3E7D6E}.dot.s4{fill:#B5443A}.dot.s5{fill:#6B4FA3}.dot.s6{fill:#2A8A99}
+</style><rect x="0" y="0" width="980" height="348" fill="#ffffff"/>
+<line y1="20" y2="314" x1="360.0" x2="360.0" class="grid"/>
+<text y="330" x="360.0" class="ax" text-anchor="middle">0</text>
+<line y1="20" y2="314" x1="497.5" x2="497.5" class="grid"/>
+<text y="330" x="497.5" class="ax" text-anchor="middle">100</text>
+<line y1="20" y2="314" x1="635.0" x2="635.0" class="grid"/>
+<text y="330" x="635.0" class="ax" text-anchor="middle">200</text>
+<line y1="20" y2="314" x1="772.5" x2="772.5" class="grid"/>
+<text y="330" x="772.5" class="ax" text-anchor="middle">300</text>
+<line y1="20" y2="314" x1="910.0" x2="910.0" class="grid"/>
+<text y="330" x="910.0" class="ax" text-anchor="middle">400</text>
+<text x="910" y="344" class="axlabel" text-anchor="end">paired days per Daily Sicha publication year</text>
+<text x="350" y="42.0" class="rowlab " text-anchor="end">5775 · 42.5 h audio · 0.32 M words · decoded</text>
+<rect x="360" y="30.0" width="339.6" height="15.0" class="s-pseudo"><title>: 247.000</title></rect>
+<text x="704.6" y="41.5" class="val">247.000</text>
+<text x="350" y="66.0" class="rowlab " text-anchor="end">5776 · 46.5 h audio · 0.35 M words · decoded</text>
+<rect x="360" y="54.0" width="365.8" height="15.0" class="s-pseudo"><title>: 266.000</title></rect>
+<text x="730.8" y="65.5" class="val">266.000</text>
+<text x="350" y="90.0" class="rowlab " text-anchor="end">5777 · 42.3 h audio · 0.32 M words · decoded</text>
+<rect x="360" y="78.0" width="330.0" height="15.0" class="s-pseudo"><title>: 240.000</title></rect>
+<text x="695.0" y="89.5" class="val">240.000</text>
+<text x="350" y="114.0" class="rowlab " text-anchor="end">5778 · 43.4 h audio · 0.33 M words · decoded</text>
+<rect x="360" y="102.0" width="339.6" height="15.0" class="s-pseudo"><title>: 247.000</title></rect>
+<text x="704.6" y="113.5" class="val">247.000</text>
+<text x="350" y="138.0" class="rowlab " text-anchor="end">5779 · 46.6 h audio · 0.35 M words · decoded</text>
+<rect x="360" y="126.0" width="365.8" height="15.0" class="s-pseudo"><title>: 266.000</title></rect>
+<text x="730.8" y="137.5" class="val">266.000</text>
+<text x="350" y="162.0" class="rowlab " text-anchor="end">5780 · 42.1 h audio · 0.32 M words · decoded</text>
+<rect x="360" y="150.0" width="336.9" height="15.0" class="s-pseudo"><title>: 245.000</title></rect>
+<text x="701.9" y="161.5" class="val">245.000</text>
+<text x="350" y="186.0" class="rowlab " text-anchor="end">5781 · 43.1 h audio · 0.33 M words · clean text layer</text>
+<rect x="360" y="174.0" width="339.6" height="15.0" class="s-pseudo"><title>: 247.000</title></rect>
+<text x="704.6" y="185.5" class="val">247.000</text>
+<text x="350" y="210.0" class="rowlab " text-anchor="end">5783 · site text (v4 training data)</text>
+<rect x="360" y="198.0" width="332.8" height="15.0" class="s-train"><title>: 242.000</title></rect>
+<text x="697.8" y="209.5" class="val">242.000</text>
+<text x="350" y="234.0" class="rowlab " text-anchor="end">5784 · site text (v4 training data)</text>
+<rect x="360" y="222.0" width="437.2" height="15.0" class="s-train"><title>: 318.000</title></rect>
+<text x="802.2" y="233.5" class="val">318.000</text>
+<text x="350" y="258.0" class="rowlab " text-anchor="end">5785 · site text (v4 training data)</text>
+<rect x="360" y="246.0" width="398.8" height="15.0" class="s-train"><title>: 290.000</title></rect>
+<text x="763.8" y="257.5" class="val">290.000</text>
+<text x="350" y="282.0" class="rowlab " text-anchor="end">5786 · site text (v4 training data)</text>
+<rect x="360" y="270.0" width="400.1" height="15.0" class="s-train"><title>: 291.000</title></rect>
+<text x="765.1" y="281.5" class="val">291.000</text>
+<text x="350" y="306.0" class="rowlab " text-anchor="end">5787 · site text (v4 training data)</text>
+<rect x="360" y="294.0" width="438.6" height="15.0" class="s-train"><title>: 319.000</title></rect>
+<text x="803.6" y="305.5" class="val">319.000</text>
+</svg>

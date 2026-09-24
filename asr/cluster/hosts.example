@@ -1,0 +1,10 @@
+# one SSH host per line; the first line is the coordinator (also runs averaging/eval)
+# comment lines start with '#'. Example:
+studio-512-a
+studio-512-b
+studio-512-c
+studio-256-a
+studio-256-b
+studio-256-c
+studio-256-d
+studio-256-e

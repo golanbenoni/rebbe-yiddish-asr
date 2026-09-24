@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 260" width="480" height="260" style="background:#fff"><style>
+.grid{stroke:#D6DBD8;stroke-width:1}.axis{stroke:#5C6664;stroke-width:1}.ax{font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;fill:#5C6664}.ax.sub{font-size:10px}.axlabel{font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;fill:#5C6664}
+.val{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;fill:#1B1F1E}.rowlab{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;font-size:12.5px;fill:#1B1F1E}.rowlab.prod{font-weight:600}.rowlab.base{fill:#5C6664}
+.ctitle{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;font-size:12.5px;font-weight:600;fill:#1B1F1E}.marker{stroke:#B5443A;stroke-width:1;stroke-dasharray:3 3}.marker-text{fill:#B5443A}.band{fill:rgba(36,87,166,.07)}
+.s-train{fill:#2457A6}.s-dev{fill:#C98B1F}.s-test{fill:#3E7D6E}.s-before{fill:#A9B2AE}.s-pseudo{fill:#7B8FB8}
+.line{stroke-width:1.8;fill:none}.line.s1{stroke:#2457A6}.line.s2{stroke:#C98B1F}.line.s3{stroke:#3E7D6E}.line.s4{stroke:#B5443A}.line.s5{stroke:#6B4FA3}.line.s6{stroke:#2A8A99}
+.dot.s1{fill:#2457A6}.dot.s2{fill:#C98B1F}.dot.s3{fill:#3E7D6E}.dot.s4{fill:#B5443A}.dot.s5{fill:#6B4FA3}.dot.s6{fill:#2A8A99}
+</style><rect x="0" y="0" width="480" height="260" fill="#ffffff"/>
+<line x1="56" x2="464" y1="204.0" y2="204.0" class="grid"/>
+<text x="48" y="208.0" class="ax" text-anchor="end">0</text>
+<line x1="56" x2="464" y1="142.0" y2="142.0" class="grid"/>
+<text x="48" y="146.0" class="ax" text-anchor="end">10,000</text>
+<line x1="56" x2="464" y1="80.0" y2="80.0" class="grid"/>
+<text x="48" y="84.0" class="ax" text-anchor="end">20,000</text>
+<line x1="56" x2="464" y1="18.0" y2="18.0" class="grid"/>
+<text x="48" y="22.0" class="ax" text-anchor="end">30,000</text>
+<text x="56" y="12" class="axlabel">clips</text>
+<rect x="68.2" y="33.7" width="111.5" height="170.3" class="s-train"><title>train · own anchor alignment: 27,461</title></rect>
+<rect x="68.2" y="22.5" width="111.5" height="11.2" class="s-test"><title>train · site sync timings (offset-corrected): 1,812</title></rect>
+<text x="124.0" y="18.5" class="val" text-anchor="middle">29,273</text>
+<text x="124.0" y="220" class="ax" text-anchor="middle">train</text>
+<rect x="204.2" y="201.2" width="111.5" height="2.8" class="s-train"><title>dev · own anchor alignment: 451</title></rect>
+<rect x="204.2" y="201.2" width="111.5" height="0.0" class="s-test"><title>dev · site sync timings (offset-corrected): 0</title></rect>
+<text x="260.0" y="197.2" class="val" text-anchor="middle">451</text>
+<text x="260.0" y="220" class="ax" text-anchor="middle">dev</text>
+<rect x="340.2" y="204.0" width="111.5" height="0.0" class="s-train"><title>test · own anchor alignment: 0</title></rect>
+<rect x="340.2" y="201.0" width="111.5" height="3.0" class="s-test"><title>test · site sync timings (offset-corrected): 488</title></rect>
+<text x="396.0" y="197.0" class="val" text-anchor="middle">488</text>
+<text x="396.0" y="220" class="ax" text-anchor="middle">test</text>
+<line x1="56" x2="464" y1="204.0" y2="204.0" class="axis"/>
+</svg>

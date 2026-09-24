@@ -1,0 +1,6 @@
+# minimal environment for alignment / scoring / transcription nodes (no training)
+faster-whisper
+soundfile
+numpy
+jiwer
+pyluach

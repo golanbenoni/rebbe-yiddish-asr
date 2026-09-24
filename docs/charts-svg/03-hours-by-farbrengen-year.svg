@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 320" width="980" height="320" style="background:#fff"><style>
+.grid{stroke:#D6DBD8;stroke-width:1}.axis{stroke:#5C6664;stroke-width:1}.ax{font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;fill:#5C6664}.ax.sub{font-size:10px}.axlabel{font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;fill:#5C6664}
+.val{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;fill:#1B1F1E}.rowlab{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;font-size:12.5px;fill:#1B1F1E}.rowlab.prod{font-weight:600}.rowlab.base{fill:#5C6664}
+.ctitle{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;font-size:12.5px;font-weight:600;fill:#1B1F1E}.marker{stroke:#B5443A;stroke-width:1;stroke-dasharray:3 3}.marker-text{fill:#B5443A}.band{fill:rgba(36,87,166,.07)}
+.s-train{fill:#2457A6}.s-dev{fill:#C98B1F}.s-test{fill:#3E7D6E}.s-before{fill:#A9B2AE}.s-pseudo{fill:#7B8FB8}
+.line{stroke-width:1.8;fill:none}.line.s1{stroke:#2457A6}.line.s2{stroke:#C98B1F}.line.s3{stroke:#3E7D6E}.line.s4{stroke:#B5443A}.line.s5{stroke:#6B4FA3}.line.s6{stroke:#2A8A99}
+.dot.s1{fill:#2457A6}.dot.s2{fill:#C98B1F}.dot.s3{fill:#3E7D6E}.dot.s4{fill:#B5443A}.dot.s5{fill:#6B4FA3}.dot.s6{fill:#2A8A99}
+</style><rect x="0" y="0" width="980" height="320" fill="#ffffff"/>
+<line x1="56" x2="964" y1="264.0" y2="264.0" class="grid"/>
+<text x="48" y="268.0" class="ax" text-anchor="end">0</text>
+<line x1="56" x2="964" y1="214.8" y2="214.8" class="grid"/>
+<text x="48" y="218.8" class="ax" text-anchor="end">2.5</text>
+<line x1="56" x2="964" y1="165.6" y2="165.6" class="grid"/>
+<text x="48" y="169.6" class="ax" text-anchor="end">5</text>
+<line x1="56" x2="964" y1="116.4" y2="116.4" class="grid"/>
+<text x="48" y="120.4" class="ax" text-anchor="end">7.5</text>
+<line x1="56" x2="964" y1="67.2" y2="67.2" class="grid"/>
+<text x="48" y="71.2" class="ax" text-anchor="end">10</text>
+<line x1="56" x2="964" y1="18.0" y2="18.0" class="grid"/>
+<text x="48" y="22.0" class="ax" text-anchor="end">12.5</text>
+<text x="56" y="12" class="axlabel">hours of paired audio</text>
+<rect x="57.9" y="240.8" width="16.7" height="23.2" class="s-train"><title>5711 · hours: 1.18</title></rect>
+<text x="66.8" y="280" class="ax" text-anchor="middle"></text>
+<rect x="79.6" y="242.0" width="16.7" height="22.0" class="s-train"><title>5712 · hours: 1.12</title></rect>
+<text x="88.4" y="280" class="ax" text-anchor="middle">5712</text>
+<rect x="101.2" y="263.8" width="16.7" height="0.2" class="s-train"><title>5713 · hours: 0.01</title></rect>
+<text x="110.0" y="280" class="ax" text-anchor="middle"></text>
+<rect x="122.8" y="223.9" width="16.7" height="40.1" class="s-train"><title>5714 · hours: 2.04</title></rect>
+<text x="131.7" y="280" class="ax" text-anchor="middle"></text>
+<rect x="144.4" y="230.5" width="16.7" height="33.5" class="s-train"><title>5715 · hours: 1.7</title></rect>
+<text x="153.3" y="280" class="ax" text-anchor="middle">5715</text>
+<rect x="166.0" y="209.7" width="16.7" height="54.3" class="s-train"><title>5716 · hours: 2.76</title></rect>
+<text x="174.9" y="280" class="ax" text-anchor="middle"></text>
+<rect x="187.7" y="226.8" width="16.7" height="37.2" class="s-train"><title>5717 · hours: 1.89</title></rect>
+<text x="196.5" y="280" class="ax" text-anchor="middle"></text>
+<rect x="209.3" y="220.5" width="16.7" height="43.5" class="s-train"><title>5718 · hours: 2.21</title></rect>
+<text x="218.1" y="280" class="ax" text-anchor="middle">5718</text>
+<rect x="230.9" y="234.9" width="16.7" height="29.1" class="s-train"><title>5719 · hours: 1.48</title></rect>
+<text x="239.8" y="280" class="ax" text-anchor="middle"></text>
+<rect x="252.5" y="219.3" width="16.7" height="44.7" class="s-train"><title>5720 · hours: 2.27</title></rect>
+<text x="261.4" y="280" class="ax" text-anchor="middle"></text>
+<rect x="274.1" y="223.1" width="16.7" height="40.9" class="s-train"><title>5721 · hours: 2.08</title></rect>
+<text x="283.0" y="280" class="ax" text-anchor="middle">5721</text>
+<rect x="295.8" y="201.6" width="16.7" height="62.4" class="s-train"><title>5722 · hours: 3.17</title></rect>
+<text x="304.6" y="280" class="ax" text-anchor="middle"></text>
+<rect x="317.4" y="223.7" width="16.7" height="40.3" class="s-train"><title>5723 · hours: 2.05</title></rect>
+<text x="326.2" y="280" class="ax" text-anchor="middle"></text>
+<rect x="339.0" y="222.1" width="16.7" height="41.9" class="s-train"><title>5724 · hours: 2.13</title></rect>
+<text x="347.9" y="280" class="ax" text-anchor="middle">5724</text>
+<rect x="360.6" y="198.9" width="16.7" height="65.1" class="s-train"><title>5725 · hours: 3.31</title></rect>
+<text x="369.5" y="280" class="ax" text-anchor="middle"></text>
+<rect x="382.2" y="228.6" width="16.7" height="35.4" class="s-train"><title>5726 · hours: 1.8</title></rect>
+<text x="391.1" y="280" class="ax" text-anchor="middle"></text>
+<rect x="403.9" y="227.2" width="16.7" height="36.8" class="s-train"><title>5727 · hours: 1.87</title></rect>
+<text x="412.7" y="280" class="ax" text-anchor="middle">5727</text>
+<rect x="425.5" y="214.8" width="16.7" height="49.2" class="s-train"><title>5728 · hours: 2.5</title></rect>
+<text x="434.3" y="280" class="ax" text-anchor="middle"></text>
+<rect x="447.1" y="215.8" width="16.7" height="48.2" class="s-train"><title>5729 · hours: 2.45</title></rect>
+<text x="456.0" y="280" class="ax" text-anchor="middle"></text>
+<rect x="468.7" y="233.3" width="16.7" height="30.7" class="s-train"><title>5730 · hours: 1.56</title></rect>
+<text x="477.6" y="280" class="ax" text-anchor="middle">5730</text>
+<rect x="490.3" y="217.4" width="16.7" height="46.6" class="s-train"><title>5731 · hours: 2.37</title></rect>
+<text x="499.2" y="280" class="ax" text-anchor="middle"></text>
+<rect x="511.9" y="211.8" width="16.7" height="52.2" class="s-train"><title>5732 · hours: 2.65</title></rect>
+<text x="520.8" y="280" class="ax" text-anchor="middle"></text>
+<rect x="533.6" y="215.6" width="16.7" height="48.4" class="s-train"><title>5733 · hours: 2.46</title></rect>
+<text x="542.4" y="280" class="ax" text-anchor="middle">5733</text>
+<rect x="555.2" y="190.8" width="16.7" height="73.2" class="s-train"><title>5734 · hours: 3.72</title></rect>
+<text x="564.0" y="280" class="ax" text-anchor="middle"></text>
+<rect x="576.8" y="169.5" width="16.7" height="94.5" class="s-train"><title>5735 · hours: 4.8</title></rect>
+<text x="585.7" y="280" class="ax" text-anchor="middle"></text>
+<rect x="598.4" y="126.4" width="16.7" height="137.6" class="s-train"><title>5736 · hours: 6.99</title></rect>
+<text x="607.3" y="280" class="ax" text-anchor="middle">5736</text>
+<rect x="620.0" y="172.1" width="16.7" height="91.9" class="s-train"><title>5737 · hours: 4.67</title></rect>
+<text x="628.9" y="280" class="ax" text-anchor="middle"></text>
+<rect x="641.7" y="109.3" width="16.7" height="154.7" class="s-train"><title>5738 · hours: 7.86</title></rect>
+<text x="650.5" y="280" class="ax" text-anchor="middle"></text>
+<rect x="663.3" y="31.6" width="16.7" height="232.4" class="s-train"><title>5739 · hours: 11.81</title></rect>
+<text x="672.1" y="280" class="ax" text-anchor="middle">5739</text>
+<rect x="684.9" y="87.1" width="16.7" height="176.9" class="s-train"><title>5740 · hours: 8.99</title></rect>
+<text x="693.8" y="280" class="ax" text-anchor="middle"></text>
+<rect x="706.5" y="115.0" width="16.7" height="149.0" class="s-train"><title>5741 · hours: 7.57</title></rect>
+<text x="715.4" y="280" class="ax" text-anchor="middle"></text>
+<rect x="728.1" y="137.1" width="16.7" height="126.9" class="s-train"><title>5742 · hours: 6.45</title></rect>
+<text x="737.0" y="280" class="ax" text-anchor="middle">5742</text>
+<rect x="749.8" y="89.0" width="16.7" height="175.0" class="s-train"><title>5743 · hours: 8.89</title></rect>
+<text x="758.6" y="280" class="ax" text-anchor="middle"></text>
+<rect x="771.4" y="112.9" width="16.7" height="151.1" class="s-train"><title>5744 · hours: 7.68</title></rect>
+<text x="780.2" y="280" class="ax" text-anchor="middle"></text>
+<rect x="793.0" y="79.2" width="16.7" height="184.8" class="s-train"><title>5745 · hours: 9.39</title></rect>
+<text x="801.9" y="280" class="ax" text-anchor="middle">5745</text>
+<rect x="814.6" y="96.1" width="16.7" height="167.9" class="s-train"><title>5746 · hours: 8.53</title></rect>
+<text x="823.5" y="280" class="ax" text-anchor="middle"></text>
+<rect x="836.2" y="145.3" width="16.7" height="118.7" class="s-train"><title>5747 · hours: 6.03</title></rect>
+<text x="845.1" y="280" class="ax" text-anchor="middle"></text>
+<rect x="857.9" y="190.0" width="16.7" height="74.0" class="s-train"><title>5748 · hours: 3.76</title></rect>
+<text x="866.7" y="280" class="ax" text-anchor="middle">5748</text>
+<rect x="879.5" y="165.2" width="16.7" height="98.8" class="s-train"><title>5749 · hours: 5.02</title></rect>
+<text x="888.3" y="280" class="ax" text-anchor="middle"></text>
+<rect x="901.1" y="232.7" width="16.7" height="31.3" class="s-train"><title>5750 · hours: 1.59</title></rect>
+<text x="910.0" y="280" class="ax" text-anchor="middle"></text>
+<rect x="922.7" y="233.3" width="16.7" height="30.7" class="s-train"><title>5751 · hours: 1.56</title></rect>
+<text x="931.6" y="280" class="ax" text-anchor="middle">5751</text>
+<rect x="944.3" y="227.4" width="16.7" height="36.6" class="s-train"><title>5752 · hours: 1.86</title></rect>
+<text x="953.2" y="280" class="ax" text-anchor="middle"></text>
+<line x1="56" x2="964" y1="264.0" y2="264.0" class="axis"/>
+<rect x="661.3" y="18" width="302.7" height="246" class="band"/><text x="667.3" y="32" class="ax">5739 and later (the years R. Notik asked for)</text>
+</svg>

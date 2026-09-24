@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 260" width="480" height="260" style="background:#fff"><style>
+.grid{stroke:#D6DBD8;stroke-width:1}.axis{stroke:#5C6664;stroke-width:1}.ax{font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;fill:#5C6664}.ax.sub{font-size:10px}.axlabel{font-family:'IBM Plex Mono',Menlo,monospace;font-size:11px;fill:#5C6664}
+.val{font-family:'IBM Plex Mono',Menlo,monospace;font-size:10.5px;fill:#1B1F1E}.rowlab{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;font-size:12.5px;fill:#1B1F1E}.rowlab.prod{font-weight:600}.rowlab.base{fill:#5C6664}
+.ctitle{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;font-size:12.5px;font-weight:600;fill:#1B1F1E}.marker{stroke:#B5443A;stroke-width:1;stroke-dasharray:3 3}.marker-text{fill:#B5443A}.band{fill:rgba(36,87,166,.07)}
+.s-train{fill:#2457A6}.s-dev{fill:#C98B1F}.s-test{fill:#3E7D6E}.s-before{fill:#A9B2AE}.s-pseudo{fill:#7B8FB8}
+.line{stroke-width:1.8;fill:none}.line.s1{stroke:#2457A6}.line.s2{stroke:#C98B1F}.line.s3{stroke:#3E7D6E}.line.s4{stroke:#B5443A}.line.s5{stroke:#6B4FA3}.line.s6{stroke:#2A8A99}
+.dot.s1{fill:#2457A6}.dot.s2{fill:#C98B1F}.dot.s3{fill:#3E7D6E}.dot.s4{fill:#B5443A}.dot.s5{fill:#6B4FA3}.dot.s6{fill:#2A8A99}
+</style><rect x="0" y="0" width="480" height="260" fill="#ffffff"/>
+<line x1="56" x2="464" y1="204.0" y2="204.0" class="grid"/>
+<text x="48" y="208.0" class="ax" text-anchor="end">0</text>
+<line x1="56" x2="464" y1="166.8" y2="166.8" class="grid"/>
+<text x="48" y="170.8" class="ax" text-anchor="end">10</text>
+<line x1="56" x2="464" y1="129.6" y2="129.6" class="grid"/>
+<text x="48" y="133.6" class="ax" text-anchor="end">20</text>
+<line x1="56" x2="464" y1="92.4" y2="92.4" class="grid"/>
+<text x="48" y="96.4" class="ax" text-anchor="end">30</text>
+<line x1="56" x2="464" y1="55.2" y2="55.2" class="grid"/>
+<text x="48" y="59.2" class="ax" text-anchor="end">40</text>
+<line x1="56" x2="464" y1="18.0" y2="18.0" class="grid"/>
+<text x="48" y="22.0" class="ax" text-anchor="end">50</text>
+<text x="56" y="12" class="axlabel">hours of pseudo-labeled clips</text>
+<rect x="65.2" y="47.8" width="82.6" height="156.2" class="s-pseudo"><title>DS 5778 · hours: 42</title></rect>
+<text x="106.5" y="43.8" class="val" text-anchor="middle">42</text>
+<text x="107.0" y="220" class="ax" text-anchor="middle">DS 5778</text>
+<text x="107.0" y="234" class="ax sub" text-anchor="middle">247 files · 6,687 clips</text>
+<rect x="167.2" y="37.0" width="82.6" height="167.0" class="s-pseudo"><title>Sicha Yomis 5779 · hours: 44.9</title></rect>
+<text x="208.5" y="33.0" class="val" text-anchor="middle">44.9</text>
+<text x="209.0" y="220" class="ax" text-anchor="middle">Sicha Yomis 5779</text>
+<text x="209.0" y="234" class="ax sub" text-anchor="middle">266 files · 7,089 clips</text>
+<rect x="269.2" y="52.6" width="82.6" height="151.4" class="s-pseudo"><title>Sicha Yomis 5780 · hours: 40.7</title></rect>
+<text x="310.5" y="48.6" class="val" text-anchor="middle">40.7</text>
+<text x="311.0" y="220" class="ax" text-anchor="middle">Sicha Yomis 5780</text>
+<text x="311.0" y="234" class="ax sub" text-anchor="middle">245 files · 6,446 clips</text>
+<rect x="371.2" y="49.2" width="82.6" height="154.8" class="s-pseudo"><title>Sicha Yomis 5781 · hours: 41.6</title></rect>
+<text x="412.5" y="45.2" class="val" text-anchor="middle">41.6</text>
+<text x="413.0" y="220" class="ax" text-anchor="middle">Sicha Yomis 5781</text>
+<text x="413.0" y="234" class="ax sub" text-anchor="middle">247 files · 6,556 clips</text>
+<line x1="56" x2="464" y1="204.0" y2="204.0" class="axis"/>
+</svg>

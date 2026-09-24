@@ -1,0 +1,9 @@
+# name | finetune.py arguments   (one line per node, assigned in hosts order; PyTorch on MPS, fp32)
+large-full-lr1e5   | --base-model ivrit-ai/yi-whisper-large-v3 --epochs 3 --lr 1e-5 --batch 8 --grad-accum 4 --gradient-checkpointing
+large-full-lr5e6   | --base-model ivrit-ai/yi-whisper-large-v3 --epochs 3 --lr 5e-6 --batch 8 --grad-accum 4 --gradient-checkpointing
+large-lora-r64     | --base-model ivrit-ai/yi-whisper-large-v3 --lora --lora-r 64 --epochs 3 --lr 1e-4 --batch 8 --grad-accum 4
+large-frozen-enc   | --base-model ivrit-ai/yi-whisper-large-v3 --freeze-encoder --epochs 3 --lr 1e-5 --batch 8 --grad-accum 4
+turbo-full-lr1e5   | --base-model ivrit-ai/yi-whisper-large-v3-turbo --epochs 3 --lr 1e-5 --batch 16 --grad-accum 2
+turbo-full-lr2e5   | --base-model ivrit-ai/yi-whisper-large-v3-turbo --epochs 3 --lr 2e-5 --batch 16 --grad-accum 2
+turbo-frozen-enc   | --base-model ivrit-ai/yi-whisper-large-v3-turbo --freeze-encoder --epochs 4 --lr 1e-5 --batch 16 --grad-accum 2
+turbo-lora-r64     | --base-model ivrit-ai/yi-whisper-large-v3-turbo --lora --lora-r 64 --epochs 3 --lr 1e-4 --batch 16 --grad-accum 2

@@ -1,0 +1,18 @@
+# ASR pipeline for the Rebbe's Yiddish sichos (Python 3.11)
+# macOS decodes with the built-in afconvert; Linux needs ffmpeg (apt-get install ffmpeg).
+# Mac-only extras (stock-Whisper baseline on the Apple GPU): pip install -r requirements-mac.txt
+faster-whisper     # CTranslate2 inference for evaluate.py (CPU int8 or CUDA)
+soundfile
+numpy
+jiwer
+pyluach            # Hebrew-date to civil-date resolution for filenames
+pymupdf            # transcript PDF extraction
+cryptography       # encrypted PDFs
+pypdf
+torch
+torchaudio
+transformers
+datasets
+accelerate
+peft
+evaluate
